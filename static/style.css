@@ -7,9 +7,13 @@
 }
 
 body {
-    font-family: 'Rubik', sans-serif;
+    font-family: 'Segoe UI', sans-serif;
     background: #f0f2f5;
     color: #333;
+}
+
+h1, h2, h3 {
+    color: #004085;
 }
 
 .hero {
