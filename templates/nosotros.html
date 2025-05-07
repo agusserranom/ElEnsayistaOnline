@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Nosotros{% endblock %}
+{% block content %}
+
+<section class="hero">
+  <h1>¿Quiénes Somos?</h1>
+  <p>Somos un equipo comprometido con la educación gratuita y de calidad para quienes se preparan para la PAES.</p>
+</section>
+
+<section class="about-grid">
+  <div class="about-text">
+    <h2>Nuestra Historia</h2>
+    <p>Fundamos El Ensayista Online con la misión de apoyar a estudiantes de todo Chile. Nuestro equipo está formado por docentes, tutores y desarrolladores apasionados por la educación pública.</p>
+  </div>
+  <div class="about-img">
+    <img src="{{ url_for('static', filename='img/equipo.jpg') }}" alt="Equipo Ensayista Online">
+  </div>
+</section>
+
+<section class="cards-row">
+  <div class="card">
+    <h3>🎯 Misión</h3>
+    <p>Brindar acceso gratuito y de calidad a material de estudio PAES, para todos los estudiantes sin distinción.</p>
+  </div>
+  <div class="card">
+    <h3>👁️ Visión</h3>
+    <p>Convertirnos en la plataforma educativa más confiable para preparar la PAES en Chile.</p>
+  </div>
+</section>
+
+{% endblock %}
+

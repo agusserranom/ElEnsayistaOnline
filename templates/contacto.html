@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Contacto{% endblock %}
+{% block content %}
+
+<section class="hero">
+  <h1>📨 Contáctanos</h1>
+  <p>Página en construcción🛠️<br>¿Tienes dudas, sugerencias o necesitas ayuda? ¡Escríbenos!</p>
+</section>
+
+<section class="contact-form container">
+  <form action="/contacto" method="post" class="form">
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" required>
+
+    <label for="correo">Correo electrónico:</label>
+    <input type="email" id="correo" name="correo" required>
+
+    <label for="mensaje">Mensaje:</label>
+    <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+
+    <button type="submit" class="btn-primary">Enviar Mensaje</button>
+  </form>
+</section>
+
+{% endblock %}
