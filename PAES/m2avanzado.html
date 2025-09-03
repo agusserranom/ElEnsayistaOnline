@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ensayo de Matemáticas PAES M2 - 65 Preguntas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Tipografía y base */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(120deg, #f093fb 0%, #f5576c 100%);
+            color: #fff;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: white !important;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .logo-img {
+            height: 100px;
+            width: auto;
+        }
+
+        .logo a {
+            text-decoration: none;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #ffffffdd;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffeb3b;
+        }
+
+        /* Hero principal */
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+            color: white;
+            border-radius: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-primary {
+            background-color: white;
+            color: #a18cd1;
+            padding: 0.8rem 1.6rem;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* Sección de tarjetas */
+        main {
+            padding: 3rem 1rem;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .question-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 1.2rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3), 0 0 10px rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            width: min(100%, 420px);
+            text-align: center;
+            color: #fff;
+            transition: transform 0.3s ease;
+            flex: 1 1 100px;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .question-title {
+            font-weight: 600;
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .options-list label {
+            display: block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #fff;
+            position: relative;
+        }
+
+        .options-list label:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .options-list input[type="radio"] {
+            margin-right: 0.75rem;
+        }
+
+        .btn-submit {
+            background-color: white;
+            color: #f5576c;
+            padding: 0.8rem 1.6rem;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+            display: block;
+            width: fit-content;
+            margin: 2rem auto 0;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-submit:hover {
+            background-color: #f0f0f0;
+        }
+
+        .results-section {
+            padding: 2rem;
+            border-top: 2px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            margin-top: 2rem;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 1.2rem;
+        }
+
+        .correct {
+            background-color: #d1f7c4 !important;
+            color: #333 !important;
+        }
+
+        .incorrect {
+            background-color: #f7d1d1 !important;
+            color: #333 !important;
+        }
+        
+        .correct-checkmark {
+            position: relative;
+            background-color: transparent !important;
+            padding-right: 2.5rem;
+        }
+        
+        .correct-checkmark::after {
+            content: '✓';
+            color: #4CAF50;
+            font-size: 1.5rem;
+            font-weight: bold;
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: rgba(0, 0, 0, 0.15);
+            font-size: 0.95rem;
+            color: #fff;
+            margin-top: 3rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                align-items: flex-end;
+            }
+
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {inlineMath: [['$$','$$'], ['\\(','\\)']]}
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="#">
+                    <h2 style="color:white; margin: 0;">El Ensayista Online</h2>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="cursos.html">Cursos</a></li>
+                <li><a href="nosotros.html">Nosotros</a></li>
+                <li><a href="profesores.html">Profesores</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Ensayo de Matemáticas PAES M2</h1>
+            <p>65 preguntas de nivel avanzado para que lleves tu preparación al máximo nivel. ¡Asegura los 1.000 puntos!</p>
+        </section>
+
+        <section class="quiz-container">
+            <form id="quiz-form">
+            </form>
+            <button type="button" id="submit-btn" class="btn-submit">Revisar Respuestas</button>
+            <div id="results" class="results-section hidden">
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 El Ensayista Online®</p>
+    </footer>
+
+    <script>
+        const questions = [
+            { question: "1. Si $$a \\in \\mathbb{R}, a \\ne 0$$, ¿cuál es el valor de $$\\frac{(2a^2)^3}{4a^5}$$?", options: ["A) $$2a$$", "B) $$4a$$", "C) $$2a^6$$", "D) $$a^6$$"], correctAnswer: "A" },
+            { question: "2. Una valla publicitaria rectangular tiene un área de 80 m² y su largo es 2 metros más que su ancho. ¿Cuál es el perímetro de la valla?", options: ["A) 36 m", "B) 40 m", "C) 32 m", "D) 44 m"], correctAnswer: "A" },
+            { question: "3. La solución de la inecuación $$\\frac{x-1}{x+2} \\ge 2$$ es:", options: ["A) $$x \\in (-5, -2)$$", "B) $$x \\in (-\\infty, -5] \\cup (-2, \\infty)$$", "C) $$x \\in [-5, -2)$$", "D) $$x \\in (-5, -2]$$"], correctAnswer: "C" },
+            { question: "4. Si $$f(x) = 3x^2 - 1$$ y $$g(x) = 2x+5$$, entonces $$(f \\circ g)(x)$$ es igual a:", options: ["A) $$12x^2+60x+74$$", "B) $$12x^2+30x+24$$", "C) $$6x^2+4$$", "D) $$9x^2+30x+24$$"], correctAnswer: "A" },
+            { question: "5. En un curso de 40 estudiantes, el promedio de las notas de 25 de ellos es 5,8. Si el promedio de todo el curso es 6,0, ¿cuál es el promedio de las notas de los estudiantes restantes?", options: ["A) 6,2", "B) 6,3", "C) 6,4", "D) 6,5"], correctAnswer: "B" },
+            { question: "6. Un triángulo rectángulo isósceles tiene un área de 32 cm². ¿Cuál es la longitud de su hipotenusa?", options: ["A) $$4\\sqrt{2} \\text{ cm}$$", "B) $$8\\sqrt{2} \\text{ cm}$$", "C) $$8 \\text{ cm}$$", "D) $$16 \\text{ cm}$$"], correctAnswer: "B" },
+            { question: "7. Si el logaritmo de 2 en base 10 es 0,301, ¿cuál es el valor de $$\\log_{10}(128)$$?", options: ["A) 2,107", "B) 2,408", "C) 2,709", "D) 3,010"], correctAnswer: "A" },
+            { question: "8. El 20% de un número es igual al 30% de otro número. Si la suma de ambos números es 150, ¿cuál es el valor del número mayor?", options: ["A) 60", "B) 75", "C) 90", "D) 100"], correctAnswer: "C" },
+            { question: "9. La función inversa de $$f(x) = \\frac{x-2}{3x+1}$$ es:", options: ["A) $$f^{-1}(x) = \\frac{2x+1}{1-3x}$$", "B) $$f^{-1}(x) = \\frac{x+2}{1-3x}$$", "C) $$f^{-1}(x) = \\frac{2x+1}{3x-1}$$", "D) $$f^{-1}(x) = \\frac{x-2}{3x-1}$$"], correctAnswer: "B" },
+            { question: "10. ¿Cuántos números de 3 dígitos se pueden formar con los dígitos 1, 2, 3, 4 y 5, si no se permite la repetición?", options: ["A) 60", "B) 80", "C) 100", "D) 120"], correctAnswer: "A" },
+            { question: "11. Si la media aritmética de los números 12, 18, 20, 25 y x es 21, ¿cuál es el valor de x?", options: ["A) 28", "B) 30", "C) 32", "D) 35"], correctAnswer: "B" },
+            { question: "12. Si el área de un sector circular de un círculo de radio 6 es $$3\\pi$$, ¿cuál es la medida del ángulo central en radianes?", options: ["A) $$\\frac{\\pi}{4}$$", "B) $$\\frac{\\pi}{3}$$", "C) $$\\frac{2\\pi}{3}$$", "D) $$\\frac{\\pi}{6}$$"], correctAnswer: "A" },
+            { question: "13. La suma de los primeros 15 términos de una progresión aritmética es 300. Si el primer término es 5, ¿cuál es la diferencia común?", options: ["A) 2", "B) 3", "C) 4", "D) 5"], correctAnswer: "B" },
+            { question: "14. La pendiente de la recta que pasa por los puntos $$A(-2, 5)$$ y $$B(4, -1)$$ es:", options: ["A) -1", "B) 1", "C) -2", "D) 2"], correctAnswer: "A" },
+            { question: "15. ¿Cuál es el dominio de la función $$f(x) = \\frac{\\sqrt{x-3}}{x-5}$$?", options: ["A) $$[3, \\infty)$$", "B) $$[3, 5) \\cup (5, \\infty)$$", "C) $$(5, \\infty)$$", "D) $$[3, 5]$$"], correctAnswer: "B" },
+            { question: "16. ¿Cuál es la probabilidad de que al lanzar un dado dos veces, la suma de los resultados sea 8?", options: ["A) $$\\frac{5}{36}$$", "B) $$\\frac{1}{6}$$", "C) $$\\frac{1}{9}$$", "D) $$\\frac{7}{36}$$"], correctAnswer: "A" },
+            { question: "17. Si $$z = 2-i$$, ¿cuál es el valor de $$z \\cdot \\bar{z}$$?", options: ["A) 3", "B) 5", "C) $$4-i$$", "D) $$2+i$$"], correctAnswer: "B" },
+            { question: "18. ¿Cuál es la ecuación de la circunferencia con centro en $$(3, -4)$$ y radio 5?", options: ["A) $$(x-3)^2 + (y+4)^2 = 5$$", "B) $$(x+3)^2 + (y-4)^2 = 25$$", "C) $$(x-3)^2 + (y+4)^2 = 25$$", "D) $$(x-3)^2 + (y+4)^2 = 10$$"], correctAnswer: "C" },
+            { question: "19. ¿Cuál es el valor de $$x$$ en la ecuación $$3^{2x-1} = 27$$?", options: ["A) 1", "B) 2", "C) 3", "D) 4"], correctAnswer: "B" },
+            { question: "20. La edad de una madre es el triple de la de su hijo. Dentro de 10 años, la suma de sus edades será 68. ¿Cuál es la edad actual de la madre?", options: ["A) 36", "B) 39", "C) 42", "D) 45"], correctAnswer: "B" },
+            { question: "21. El área de un hexágono regular inscrito en una circunferencia de radio 4 es:", options: ["A) $$16\\sqrt{3}$$", "B) $$24\\sqrt{3}$$", "C) $$32\\sqrt{3}$$", "D) $$48\\sqrt{3}$$"], correctAnswer: "B" },
+            { question: "22. Si $$a$$ y $$b$$ son números reales tales que $$a < 0 < b$$, ¿cuál de las siguientes expresiones es siempre positiva?", options: ["A) $$a-b$$", "B) $$ab$$", "C) $$\\frac{a}{b}$$", "D) $$b-a$$"], correctAnswer: "D" },
+            { question: "23. En la siguiente tabla se muestran las notas de un grupo de estudiantes. ¿Cuál es la mediana de las notas? <br> Notas: 5, 6, 4, 7, 5, 8, 9, 6, 5", options: ["A) 5", "B) 5,5", "C) 6", "D) 7"], correctAnswer: "C" },
+            { question: "24. Si $$A = \\begin{pmatrix} 2 & 1 \\ 3 & -1 \\end{pmatrix}$$ y $$B = \\begin{pmatrix} 0 & 2 \\ 1 & 5 \\end{pmatrix}$$, ¿cuál es el resultado de $$A+B$$?", options: ["A) $$\\begin{pmatrix} 2 & 3 \\ 4 & 4 \\end{pmatrix}$$", "B) $$\\begin{pmatrix} 2 & 3 \\ 4 & 6 \\end{pmatrix}$$", "C) $$\\begin{pmatrix} 2 & 3 \\ 4 & -6 \\end{pmatrix}$$", "D) $$\\begin{pmatrix} 2 & 1 \\ 3 & -1 \\end{pmatrix}$$"], correctAnswer: "A" },
+            { question: "25. Un cono recto tiene una altura de 12 cm y un radio de base de 5 cm. ¿Cuál es el área lateral del cono?", options: ["A) $$30\\pi$$", "B) $$60\\pi$$", "C) $$65\\pi$$", "D) $$100\\pi$$"], correctAnswer: "C" },
+            { question: "26. ¿Para qué valor de $$k$$ la ecuación $$x^2 - 4x + k = 0$$ tiene una única solución real?", options: ["A) -4", "B) 0", "C) 2", "D) 4"], correctAnswer: "D" },
+            { question: "27. Si $$f(x) = ax+b$$, $$f(1)=5$$ y $$f(2)=8$$, ¿cuál es el valor de $$f(3)$$?", options: ["A) 9", "B) 10", "C) 11", "D) 12"], correctAnswer: "C" },
+            { question: "28. Un número complejo es $$z = a+bi$$ con $$a,b \\in \\mathbb{R}$$. ¿Cuál es el módulo del número complejo $$w = 3+4i$$?", options: ["A) 3", "B) 4", "C) 5", "D) 7"], correctAnswer: "C" },
+            { question: "29. ¿Cuál es la ecuación de la parábola con vértice en $$(0,0)$$ y foco en $$(0, 3)$$?", options: ["A) $$y^2=12x$$", "B) $$x^2=12y$$", "C) $$y^2=6x$$", "D) $$x^2=6y$$"], correctAnswer: "B" },
+            { question: "30. La suma de las edades de dos hermanos es 30. El mayor tiene 6 años más que el menor. ¿Cuál es la edad del menor?", options: ["A) 12", "B) 15", "C) 18", "D) 21"], correctAnswer: "A" },
+            { question: "31. Si se lanzan dos monedas, ¿cuál es la probabilidad de que caigan dos sellos?", options: ["A) $$\\frac{1}{2}$$", "B) $$\\frac{1}{4}$$", "C) $$\\frac{3}{4}$$", "D) 1"], correctAnswer: "B" },
+            { question: "32. Un comerciante compró un artículo en $50.000. Si lo vende con una ganancia del 20%, ¿en cuánto lo vendió?", options: ["A) $55.000", "B) $60.000", "C) $65.000", "D) $70.000"], correctAnswer: "B" },
+            { question: "33. ¿Cuál es la distancia entre los puntos $$A(3, 2)$$ y $$B(-1, 5)$$?", options: ["A) 3", "B) 4", "C) 5", "D) $$\\sqrt{41}$$"], correctAnswer: "C" },
+            { question: "34. Un colegio tiene 1200 estudiantes. Si el 35% de ellos son mujeres, ¿cuántos hombres hay en el colegio?", options: ["A) 420", "B) 600", "C) 780", "D) 840"], correctAnswer: "C" },
+            { question: "35. La media de 5 números es 8. Si a la media de 2 de esos números es 6, ¿cuál es la media de los 3 números restantes?", options: ["A) 9", "B) 10", "C) 12", "D) 15"], correctAnswer: "B" },
+            { question: "36. La suma de dos números es 21. La diferencia de sus cuadrados es 63. ¿Cuáles son los números?", options: ["A) 10 y 11", "B) 12 y 9", "C) 13 y 8", "D) 15 y 6"], correctAnswer: "B" },
+            { question: "37. Si $$\\sqrt{x+4} = x-2$$, ¿cuál es el valor de $$x$$?", options: ["A) 0", "B) 5", "C) 0 y 5", "D) No tiene solución"], correctAnswer: "B" },
+            { question: "38. ¿Cuál es el resultado de $$\\sin(30^{\\circ}) + \\cos(60^{\\circ})$$?", options: ["A) 1", "B) $$\\frac{1}{2}$$", "C) $$\\sqrt{3}$$", "D) $$\\frac{\\sqrt{3}}{2}$$"], correctAnswer: "A" },
+            { question: "39. La ecuación de la recta que pasa por el punto $$(2, 3)$$ y es paralela a la recta $$y = 2x - 1$$ es:", options: ["A) $$y=2x-1$$", "B) $$y=2x-4$$", "C) $$y=-2x+7$$", "D) $$y=2x+1$$"], correctAnswer: "B" },
+            { question: "40. ¿Cuántos anagramas se pueden formar con la palabra 'MATEMATICAS'?", options: ["A) $$11!$$", "B) $$\\frac{11!}{2!2!2!}$$", "C) $$\\frac{11!}{2!3!}$$", "D) $$\\frac{11!}{2!2!}$$"], correctAnswer: "D" },
+            { question: "41. El 30% del 40% de 2000 es:", options: ["A) 240", "B) 300", "C) 400", "D) 500"], correctAnswer: "A" },
+            { question: "42. La función $$f(x) = x^2 - 4x + 3$$ tiene su vértice en:", options: ["A) $$(2, -1)$$", "B) $$(-2, -1)$$", "C) $$(1, 0)$$", "D) $$(2, 0)$$"], correctAnswer: "A" },
+            { question: "43. El valor de $$\\log_2(8) + \\log_3(9)$$ es:", options: ["A) 5", "B) 6", "C) 8", "D) 10"], correctAnswer: "A" },
+            { question: "44. Un auto viaja a 80 km/h durante 3 horas. ¿Qué distancia recorrió?", options: ["A) 240 km", "B) 200 km", "C) 160 km", "D) 120 km"], correctAnswer: "A" },
+            { question: "45. La suma de los ángulos interiores de un polígono regular es 1800°. ¿Cuántos lados tiene el polígono?", options: ["A) 10", "B) 11", "C) 12", "D) 14"], correctAnswer: "C" },
+            { question: "46. La moda de los siguientes datos es: 5, 8, 3, 5, 9, 8, 5, 3", options: ["A) 3", "B) 5", "C) 8", "D) 9"], correctAnswer: "B" },
+            { question: "47. Si $$x^2-y^2=24$$ y $$x-y=4$$, ¿cuál es el valor de $$x+y$$?", options: ["A) 2", "B) 4", "C) 6", "D) 8"], correctAnswer: "C" },
+            { question: "48. El volumen de una pirámide de base cuadrada de lado 6 cm y altura 8 cm es:", options: ["A) 96 cm³", "B) 120 cm³", "C) 144 cm³", "D) 160 cm³"], correctAnswer: "A" },
+            { question: "49. ¿Cuál es el valor de $$x$$ en la ecuación $$\\frac{x-2}{3} + \\frac{x+1}{2} = 5$$?", options: ["A) 5", "B) 6", "C) 7", "D) 8"], correctAnswer: "C" },
+            { question: "50. El área de un romboide con base 10 cm y altura 5 cm es:", options: ["A) 25 cm²", "B) 50 cm²", "C) 75 cm²", "D) 100 cm²"], correctAnswer: "B" },
+            { question: "51. Si $$a$$ es un número par y $$b$$ es un número impar, ¿cuál de las siguientes expresiones es siempre un número par?", options: ["A) $$a+b$$", "B) $$a-b$$", "C) $$ab$$", "D) $$a^2+b^2$$"], correctAnswer: "C" },
+            { question: "52. ¿Cuántas diagonales tiene un decágono?", options: ["A) 25", "B) 30", "C) 35", "D) 40"], correctAnswer: "C" },
+            { question: "53. Si el perímetro de un cuadrado es 36 cm, ¿cuál es su área?", options: ["A) 64 cm²", "B) 81 cm²", "C) 100 cm²", "D) 121 cm²"], correctAnswer: "B" },
+            { question: "54. ¿Cuál es el resultado de $$\\sqrt{12} + \\sqrt{27}$$?", options: ["A) $$3\\sqrt{3}$$", "B) $$4\\sqrt{3}$$", "C) $$5\\sqrt{3}$$", "D) $$6\\sqrt{3}$$"], correctAnswer: "C" },
+            { question: "55. Un recipiente cilíndrico tiene un radio de 4 cm y una altura de 10 cm. Si se llena con agua hasta la mitad, ¿cuál es el volumen de agua?", options: ["A) $$40\\pi$$ cm³", "B) $$80\\pi$$ cm³", "C) $$160\\pi$$ cm³", "D) $$200\\pi$$ cm³"], correctAnswer: "A" },
+            { question: "56. Si $$f(x) = x^2+1$$ y $$g(x) = \\sqrt{x-1}$$, el dominio de $$(g \\circ f)(x)$$ es:", options: ["A) $$x \\in \\mathbb{R}$$", "B) $$x \\ge 0$$", "C) $$x \\in [0, \\infty)$$", "D) $$x \\in \\mathbb{R}, x \\ne 0$$"], correctAnswer: "A" },
+            { question: "57. En un triángulo rectángulo, si la hipotenusa mide 13 cm y uno de los catetos mide 5 cm, ¿cuánto mide el otro cateto?", options: ["A) 8 cm", "B) 10 cm", "C) 12 cm", "D) 14 cm"], correctAnswer: "C" },
+            { question: "58. ¿Cuál es el valor de $$x$$ en la ecuación $$|2x-3|=5$$?", options: ["A) $$x=4$$", "B) $$x=-1$$", "C) $$x=4 \\text{ o } x=-1$$", "D) $$x=4 \\text{ y } x=-1$$"], correctAnswer: "C" },
+            { question: "59. La media, la mediana y la moda de los datos: 2, 4, 4, 6, 8, 8, 8 son, respectivamente:", options: ["A) 6, 6, 8", "B) 6, 8, 6", "C) 6, 6, 6", "D) 8, 6, 8"], correctAnswer: "A" },
+            { question: "60. Si se lanza un par de dados, ¿cuál es la probabilidad de que la suma sea mayor o igual a 10?", options: ["A) $$\\frac{1}{12}$$", "B) $$\\frac{1}{6}$$", "C) $$\\frac{5}{36}$$", "D) $$\\frac{1}{4}$$"], correctAnswer: "B" },
+            { question: "61. El 25% de un número es 12. ¿Cuál es el número?", options: ["A) 36", "B) 48", "C) 60", "D) 72"], correctAnswer: "B" },
+            { question: "62. La ecuación de la recta que pasa por los puntos $$(0, 5)$$ y $$(2, 9)$$ es:", options: ["A) $$y=2x+5$$", "B) $$y=2x-5$$", "C) $$y=2x+9$$", "D) $$y=4x+5$$"], correctAnswer: "A" },
+            { question: "63. Si el área de un círculo es $$49\\pi$$ cm², ¿cuál es su perímetro?", options: ["A) $$7\\pi$$ cm", "B) $$14\\pi$$ cm", "C) $$49\\pi$$ cm", "D) $$98\\pi$$ cm"], correctAnswer: "B" },
+            { question: "64. La solución del sistema de ecuaciones $$x+y=10$$ y $$2x-y=5$$ es:", options: ["A) $$x=4, y=6$$", "B) $$x=5, y=5$$", "C) $$x=5, y=4$$", "D) $$x=5, y=3$$"], correctAnswer: "B" },
+            { question: "65. ¿Cuál es el valor de $$\\log_{10}(1000) - \\log_{10}(100)$$?", options: ["A) 1", "B) 2", "C) 3", "D) 10"], correctAnswer: "A" }
+        ];
+
+        function renderQuiz() {
+            const quizForm = document.getElementById('quiz-form');
+            quizForm.innerHTML = questions.map((q, index) => `
+                <div class="question-card" id="question-${index}">
+                    <div class="question-title">${q.question}</div>
+                    <div class="options-list" data-correct-answer="${q.correctAnswer}">
+                        ${q.options.map(option => `
+                            <label class="block">
+                                <input type="radio" name="q${index}" value="${option.charAt(0)}">
+                                ${option}
+                            </label>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function checkAnswers() {
+            let correctCount = 0;
+            const quizForm = document.getElementById('quiz-form');
+            const formElements = quizForm.elements;
+            const resultsDiv = document.getElementById('results');
+
+            questions.forEach((q, index) => {
+                const questionCard = document.getElementById(`question-${index}`);
+                const selectedOption = formElements[`q${index}`].value;
+                const optionsList = questionCard.querySelector('.options-list');
+                const allLabels = optionsList.querySelectorAll('label');
+
+                questionCard.classList.remove('correct', 'incorrect');
+                allLabels.forEach(label => label.classList.remove('correct-checkmark'));
+
+                if (selectedOption === q.correctAnswer) {
+                    correctCount++;
+                    questionCard.classList.add('correct');
+                } else {
+                    questionCard.classList.add('incorrect');
+                    const correctLabel = Array.from(allLabels).find(label => label.textContent.trim().startsWith(q.correctAnswer + ')'));
+                    if (correctLabel) {
+                        correctLabel.classList.add('correct-checkmark');
+                    }
+                }
+            });
+
+            const totalQuestions = questions.length;
+            const paesScore = Math.round((correctCount / totalQuestions) * 1000);
+
+            resultsDiv.innerHTML = `
+                <h2 class="text-2xl font-bold mb-4">Resultados</h2>
+                <p class="text-lg">Respuestas correctas: ${correctCount} de ${totalQuestions}</p>
+                <p class="text-3xl font-bold mt-4">Puntaje: ${paesScore} puntos</p>
+            `;
+            resultsDiv.classList.remove('hidden');
+        }
+
+        document.addEventListener('DOMContentLoaded', renderQuiz);
+        document.getElementById('submit-btn').addEventListener('click', checkAnswers);
+    </script>
+</body>
+</html>

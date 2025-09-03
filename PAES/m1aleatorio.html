@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ensayo de Matemáticas PAES Nivel M1 - Aleatorio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Tipografía y base */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(120deg, #f093fb 0%, #f5576c 100%);
+            color: #fff;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: white !important;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .logo-img {
+            height: 100px;
+            width: auto;
+        }
+
+        .logo a {
+            text-decoration: none;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #ffffffdd;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffeb3b;
+        }
+
+        /* Hero principal */
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #007BFF, #00C6FF);
+            color: white;
+            border-radius: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-primary {
+            background-color: white;
+            color: #007BFF;
+            padding: 0.8rem 1.6rem;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* Sección de tarjetas */
+        main {
+            padding: 3rem 1rem;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .question-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 1.2rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3), 0 0 10px rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            width: min(100%, 420px);
+            text-align: center;
+            color: #fff;
+            transition: transform 0.3s ease;
+            flex: 1 1 100px;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .question-title {
+            font-weight: 600;
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .options-list label {
+            display: block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #fff;
+            position: relative;
+        }
+
+        .options-list label:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .options-list input[type="radio"] {
+            margin-right: 0.75rem;
+        }
+
+        .btn-submit {
+            background-color: white;
+            color: #007BFF;
+            padding: 0.8rem 1.6rem;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+            display: block;
+            width: fit-content;
+            margin: 2rem auto 0;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-submit:hover {
+            background-color: #f0f0f0;
+        }
+
+        .results-section {
+            padding: 2rem;
+            border-top: 2px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            margin-top: 2rem;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 1.2rem;
+        }
+
+        .correct {
+            background-color: #d1f7c4 !important;
+            color: #333 !important;
+        }
+
+        .incorrect {
+            background-color: #f7d1d1 !important;
+            color: #333 !important;
+        }
+
+        /* New styles for the checkmark */
+        .correct-checkmark {
+            position: relative;
+            background-color: transparent !important;
+            padding-right: 2.5rem;
+        }
+        
+        .correct-checkmark::after {
+            content: '✓';
+            color: #4CAF50;
+            font-size: 1.5rem;
+            font-weight: bold;
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: rgba(0, 0, 0, 0.15);
+            font-size: 0.95rem;
+            color: #fff;
+            margin-top: 3rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                align-items: flex-end;
+            }
+
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="#">
+                    <img src="static/img/logo.png" alt="El Ensayista Online" class="logo-img" />
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="cursos.html">Cursos</a></li>
+                <li><a href="nosotros.html">Nosotros</a></li>
+                <li><a href="profesores.html">Profesores</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Ensayo de Matemáticas PAES Nivel M1</h1>
+            <p>Pon a prueba tus conocimientos con 65 preguntas de álgebra, geometría, probabilidad y estadística.</p>
+        </section>
+
+        <section class="quiz-container">
+            <form id="quiz-form">
+            </form>
+            <button type="button" id="submit-btn" class="btn-submit">Revisar Respuestas</button>
+            <div id="results" class="results-section hidden">
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 El Ensayista Online®</p>
+    </footer>
+
+    <script>
+        const questions = [
+            // Álgebra
+            { question: "1. Si 2x - 5 = 11, ¿cuál es el valor de x?", options: ["A) 3", "B) 5", "C) 8", "D) 10", "E) 16"], correctAnswer: "C" },
+            { question: "2. La expresión (a+b)^2 es igual a:", options: ["A) a^2+b^2", "B) a^2-b^2", "C) a^2+2ab+b^2", "D) a^2-2ab+b^2", "E) a^2+ab+b^2"], correctAnswer: "C" },
+            { question: "3. ¿Cuál es la solución de la inecuación 3x + 2 > 14?", options: ["A) x > 4", "B) x < 4", "C) x > 12", "D) x < 12", "E) x > 16"], correctAnswer: "A" },
+            { question: "4. Si f(x) = 2x - 3, ¿cuál es el valor de f(5)?", options: ["A) 7", "B) 10", "C) 12", "D) 13", "E) 15"], correctAnswer: "A" },
+            { question: "5. La factorización de x^2 - 9 es:", options: ["A) (x-3)(x-3)", "B) (x+3)(x+3)", "C) (x-9)(x+9)", "D) (x-3)(x+3)", "E) (x-1)(x-9)"], correctAnswer: "D" },
+            { question: "6. Si 4^x = 64, ¿cuál es el valor de x?", options: ["A) 2", "B) 3", "C) 4", "D) 8", "E) 16"], correctAnswer: "B" },
+            { question: "7. ¿Cuál de las siguientes expresiones es un binomio?", options: ["A) x^2 + 2x + 1", "B) x^3", "C) 4x - 5", "D) x^4 + 3x - 2", "E) x^2y"], correctAnswer: "C" },
+            { question: "8. El logaritmo de 100 en base 10 es:", options: ["A) 1", "B) 2", "C) 10", "D) 20", "E) 100"], correctAnswer: "B" },
+            { question: "9. Si x/3 + 1 = 5, ¿cuál es el valor de x?", options: ["A) 4", "B) 6", "C) 12", "D) 15", "E) 18"], correctAnswer: "C" },
+            { question: "10. La solución del sistema de ecuaciones x+y=7 y x-y=3 es:", options: ["A) x=4, y=3", "B) x=5, y=2", "C) x=3, y=4", "D) x=5, y=-2", "E) x=2, y=5"], correctAnswer: "B" },
+            { question: "11. ¿Cuál es el producto de (2x+1)(x-3)?", options: ["A) 2x^2 - 3", "B) 2x^2 - 5x - 3", "C) 2x^2 + 7x - 3", "D) 2x^2 - 7x - 3", "E) 2x^2 + 5x - 3"], correctAnswer: "B" },
+            { question: "12. Si 3(x-2) = 12, ¿cuál es el valor de x?", options: ["A) 2", "B) 4", "C) 6", "D) 8", "E) 14"], correctAnswer: "C" },
+            { question: "13. ¿Cuál es el valor de 4 x 10^3?", options: ["A) 40", "B) 400", "C) 4.000", "D) 40.000", "E) 400.000"], correctAnswer: "C" },
+            { question: "14. La pendiente de la recta y = -2x + 5 es:", options: ["A) 5", "B) -5", "C) 2", "D) -2", "E) 3"], correctAnswer: "D" },
+            { question: "15. ¿Cuál es el dominio de la función f(x) = sqrt(x-4)?", options: ["A) x >= 4", "B) x > 4", "C) x >= -4", "D) x > -4", "E) Todos los números reales"], correctAnswer: "A" },
+            { question: "16. La expresión (x^2-16)/(x-4) es igual a:", options: ["A) x+4", "B) x-4", "C) x", "D) 4", "E) 16"], correctAnswer: "A" },
+            { question: "17. Si el área de un cuadrado es de 36 cm^2, ¿cuánto mide su lado?", options: ["A) 4 cm", "B) 6 cm", "C) 9 cm", "D) 12 cm", "E) 18 cm"], correctAnswer: "B" },
+            { question: "18. ¿Cuál es el valor de 2^3 x 2^5?", options: ["A) 2^8", "B) 2^15", "C) 4^8", "D) 4^15", "E) 2^2"], correctAnswer: "A" },
+            { question: "19. El valor absoluto de -7 es:", options: ["A) -7", "B) 0", "C) 7", "D) -1", "E) 1"], correctAnswer: "C" },
+            { question: "20. El valor de 15% de 200 es:", options: ["A) 15", "B) 20", "C) 30", "D) 40", "E) 50"], correctAnswer: "C" },
+            // Geometría
+            { question: "21. El perímetro de un rectángulo con lados de 5 cm y 8 cm es:", options: ["A) 13 cm", "B) 26 cm", "C) 40 cm", "D) 32 cm", "E) 16 cm"], correctAnswer: "B" },
+            { question: "22. Si un triángulo tiene lados de 3, 4 y 5 unidades, es un triángulo:", options: ["A) Isósceles", "B) Equilátero", "C) Obtusángulo", "D) Rectángulo", "E) Escaleno"], correctAnswer: "D" },
+            { question: "23. El volumen de un cubo de lado 3 cm es:", options: ["A) 9 cm^3", "B) 12 cm^3", "C) 18 cm^3", "D) 27 cm^3", "E) 36 cm^3"], correctAnswer: "D" },
+            { question: "24. El área de un círculo con radio de 2 cm es:", options: ["A) 2pi cm^2", "B) 4pi cm^2", "C) 8pi cm^2", "D) 16pi cm^2", "E) pi cm^2"], correctAnswer: "B" },
+            { question: "25. La distancia entre los puntos (1, 2) y (4, 6) en el plano cartesiano es:", options: ["A) 3", "B) 4", "C) 5", "D) 7", "E) 9"], correctAnswer: "C" },
+            { question: "26. Un polígono de 6 lados se llama:", options: ["A) Pentágono", "B) Heptágono", "C) Hexágono", "D) Octágono", "E) Decágono"], correctAnswer: "C" },
+            { question: "27. Si dos figuras son congruentes, significa que:", options: ["A) Tienen la misma forma, pero diferente tamaño", "B) Tienen la misma forma y el mismo tamaño", "C) Son simétricas", "D) Son opuestas", "E) No tienen ninguna relación"], correctAnswer: "B" },
+            { question: "28. La suma de los ángulos internos de un triángulo es:", options: ["A) 90 grados", "B) 180 grados", "C) 270 grados", "D) 360 grados", "E) 45 grados"], correctAnswer: "B" },
+            { question: "29. ¿Qué tipo de transformación es un giro?", options: ["A) Traslación", "B) Reflexión", "C) Rotación", "D) Simetría", "E) Homotecia"], correctAnswer: "C" },
+            { question: "30. La fórmula para el área de un triángulo es:", options: ["A) b x h", "B) 1/2 b x h", "C) 2b + 2h", "D) 4 x lado", "E) pi x r^2"], correctAnswer: "B" },
+            { question: "31. ¿Cuántos vértices tiene un cono?", options: ["A) 0", "B) 1", "C) 2", "D) 3", "E) 4"], correctAnswer: "B" },
+            { question: "32. Un ángulo agudo mide:", options: ["A) Menos de 90 grados", "B) 90 grados", "C) Más de 90 grados", "D) 180 grados", "E) 360 grados"], correctAnswer: "A" },
+            { question: "33. La circunferencia de un círculo es su:", options: ["A) Área", "B) Radio", "C) Diámetro", "D) Perímetro", "E) Volumen"], correctAnswer: "D" },
+            { question: "34. ¿Qué es una mediatriz en un triángulo?", options: ["A) La bisectriz de un ángulo", "B) La altura desde un vértice", "C) La mediana de un lado", "D) La recta perpendicular a un lado en su punto medio", "E) La recta que une dos vértices"], correctAnswer: "D" },
+            { question: "35. La suma de los ángulos de un cuadrilátero es:", options: ["A) 90 grados", "B) 180 grados", "C) 270 grados", "D) 360 grados", "E) 540 grados"], correctAnswer: "D" },
+            // Probabilidad y Estadística
+            { question: "36. En el conjunto de datos {2, 3, 5, 2, 8}, ¿cuál es la moda?", options: ["A) 2", "B) 3", "C) 4", "D) 5", "E) 8"], correctAnswer: "A" },
+            { question: "37. ¿Cuál es la probabilidad de que al lanzar un dado de 6 caras salga un número par?", options: ["A) 1/6", "B) 1/3", "C) 1/2", "D) 2/3", "E) 5/6"], correctAnswer: "C" },
+            { question: "38. La media aritmética del conjunto de datos {10, 20, 30, 40} es:", options: ["A) 10", "B) 20", "C) 25", "D) 30", "E) 40"], correctAnswer: "C" },
+            { question: "39. En un mazo de 52 cartas, ¿cuál es la probabilidad de sacar una carta de corazón?", options: ["A) 1/4", "B) 1/13", "C) 1/26", "D) 1/52", "E) 1/2"], correctAnswer: "A" },
+            { question: "40. ¿Qué medida de tendencia central es la que más se ve afectada por valores extremos?", options: ["A) Media", "B) Mediana", "C) Moda", "D) Rango", "E) Varianza"], correctAnswer: "A" },
+            { question: "41. Si en una urna hay 3 bolas rojas y 7 bolas azules, ¿cuál es la probabilidad de sacar una bola roja?", options: ["A) 3/7", "B) 7/10", "C) 3/10", "D) 10/3", "E) 7/3"], correctAnswer: "C" },
+            { question: "42. ¿Cuál es la mediana del conjunto de datos {1, 3, 5, 8, 10}?", options: ["A) 1", "B) 3", "C) 5", "D) 8", "E) 10"], correctAnswer: "C" },
+            { question: "43. La probabilidad de un evento imposible es:", options: ["A) 0", "B) 1", "C) 0.5", "D) -1", "E) No se puede determinar"], correctAnswer: "A" },
+            { question: "44. Un histograma se utiliza para representar:", options: ["A) La relación entre dos variables", "B) Datos cualitativos", "C) La frecuencia de datos agrupados", "D) Datos circulares", "E) Datos de series de tiempo"], correctAnswer: "C" },
+            { question: "45. En una baraja de 52 cartas, ¿cuál es la probabilidad de sacar un As?", options: ["A) 1/4", "B) 1/13", "C) 1/26", "D) 4/52", "E) 1/52"], correctAnswer: "B" },
+            { question: "46. La medida de dispersión que indica la diferencia entre el valor máximo y el mínimo de un conjunto de datos es el:", options: ["A) Rango", "B) Varianza", "C) Desviación estándar", "D) Mediana", "E) Moda"], correctAnswer: "A" },
+            { question: "47. La probabilidad de que un evento ocurra es de 0,4. ¿Cuál es la probabilidad de que no ocurra?", options: ["A) 0,4", "B) 0,6", "C) 1", "D) 0,2", "E) -0,4"], correctAnswer: "B" },
+            { question: "48. En el lanzamiento de dos monedas, ¿cuántos resultados posibles hay?", options: ["A) 1", "B) 2", "C) 3", "D) 4", "E) 8"], correctAnswer: "D" },
+            { question: "49. Si se lanza una moneda y un dado, ¿cuántos resultados posibles hay?", options: ["A) 6", "B) 8", "C) 10", "D) 12", "E) 24"], correctAnswer: "D" },
+            { question: "50. Un diagrama de árbol se utiliza para calcular probabilidades en eventos:", options: ["A) Simples", "B) Compuestos", "C) Independientes", "D) Dependientes", "E) Imposibles"], correctAnswer: "B" },
+            // Números y Operaciones
+            { question: "51. El resultado de 3 + 4 x 2 es:", options: ["A) 10", "B) 11", "C) 14", "D) 24", "E) 7"], correctAnswer: "B" },
+            { question: "52. ¿Cuál es el valor de 1/2 + 1/4?", options: ["A) 1/6", "B) 1/8", "C) 2/6", "D) 3/4", "E) 1"], correctAnswer: "D" },
+            { question: "53. El resultado de 2,5 x 10 es:", options: ["A) 0,25", "B) 2,5", "C) 25", "D) 250", "E) 2500"], correctAnswer: "C" },
+            { question: "54. ¿Cuál de los siguientes es un número primo?", options: ["A) 1", "B) 4", "C) 7", "D) 9", "E) 15"], correctAnswer: "C" },
+            { question: "55. El 25% de 1000 es:", options: ["A) 25", "B) 250", "C) 500", "D) 750", "E) 1000"], correctAnswer: "B" },
+            { question: "56. El número 3/5 es igual a:", options: ["A) 0,3", "B) 0,5", "C) 0,6", "D) 0,8", "E) 1,5"], correctAnswer: "C" },
+            { question: "57. ¿Cuál es el resultado de (-2)^3?", options: ["A) -8", "B) 8", "C) -6", "D) 6", "E) 1"], correctAnswer: "A" },
+            { question: "58. El valor de 120 / 6 es:", options: ["A) 10", "B) 12", "C) 20", "D) 30", "E) 60"], correctAnswer: "C" },
+            { question: "59. ¿Cuál es el mínimo común múltiplo (mcm) de 4 y 6?", options: ["A) 2", "B) 4", "C) 6", "D) 12", "E) 24"], correctAnswer: "D" },
+            { question: "60. La notación científica de 0,0005 es:", options: ["A) 5 x 10^-3", "B) 5 x 10^-4", "C) 5 x 10^3", "D) 5 x 10^4", "E) 0,5 x 10^-3"], correctAnswer: "B" },
+            { question: "61. El valor de la raíz cuadrada de 49 es:", options: ["A) 6", "B) 7", "C) 8", "D) 9", "E) 10"], correctAnswer: "B" },
+            { question: "62. ¿Cuál es el resultado de 1 - 0,3?", options: ["A) 0,7", "B) 0,3", "C) 1,3", "D) -0,3", "E) 1"], correctAnswer: "A" },
+            { question: "63. El valor de 5 x (3 + 2) - 1 es:", options: ["A) 10", "B) 14", "C) 24", "D) 26", "E) 30"], correctAnswer: "C" },
+            { question: "64. ¿Cuántos décimos hay en la unidad?", options: ["A) 1", "B) 5", "C) 10", "D) 100", "E) 1000"], correctAnswer: "C" },
+            { question: "65. ¿Qué tipo de número es -4?", options: ["A) Natural", "B) Racional", "C) Irracional", "D) Entero", "E) Complejo"], correctAnswer: "D" }
+        ];
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function renderQuiz() {
+            const quizForm = document.getElementById('quiz-form');
+            const shuffledQuestions = shuffle([...questions]); // Barajar una copia del array
+            
+            quizForm.innerHTML = shuffledQuestions.map((q, index) => `
+                <div class="question-card" id="question-${index}">
+                    <div class="question-title">${index + 1}. ${q.question}</div>
+                    <div class="options-list" data-correct-answer="${q.correctAnswer}">
+                        ${q.options.map(option => `
+                            <label class="block">
+                                <input type="radio" name="q${index}" value="${option.charAt(0)}">
+                                ${option}
+                            </label>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+            
+            // Reasignar la variable questions para que checkAnswers use el orden barajado
+            window.currentQuestions = shuffledQuestions;
+        }
+
+        function checkAnswers() {
+            let correctCount = 0;
+            const quizForm = document.getElementById('quiz-form');
+            const formElements = quizForm.elements;
+            const resultsDiv = document.getElementById('results');
+
+            window.currentQuestions.forEach((q, index) => {
+                const questionCard = document.getElementById(`question-${index}`);
+                const selectedOption = formElements[`q${index}`].value;
+                const optionsList = questionCard.querySelector('.options-list');
+                const allLabels = optionsList.querySelectorAll('label');
+
+                // Remove previous classes
+                questionCard.classList.remove('correct', 'incorrect');
+                allLabels.forEach(label => label.classList.remove('correct-checkmark'));
+
+                if (selectedOption === q.correctAnswer) {
+                    correctCount++;
+                    questionCard.classList.add('correct');
+                } else {
+                    questionCard.classList.add('incorrect');
+                    const correctLabel = Array.from(allLabels).find(label => label.textContent.trim().startsWith(q.correctAnswer + ')'));
+                    if (correctLabel) {
+                        correctLabel.classList.add('correct-checkmark');
+                    }
+                }
+            });
+
+            const totalQuestions = window.currentQuestions.length;
+            const paesScore = Math.round((correctCount / totalQuestions) * 1000);
+
+            resultsDiv.innerHTML = `
+                <h2 class="text-2xl font-bold mb-4">Resultados</h2>
+                <p class="text-lg">Respuestas correctas: ${correctCount} de ${totalQuestions}</p>
+                <p class="text-3xl font-bold mt-4">Puntaje: ${paesScore} puntos</p>
+            `;
+            resultsDiv.classList.remove('hidden');
+        }
+
+        document.addEventListener('DOMContentLoaded', renderQuiz);
+        document.getElementById('submit-btn').addEventListener('click', checkAnswers);
+    </script>
+</body>
+</html>

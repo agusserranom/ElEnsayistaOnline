@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Ensayo de Ciencias PAES - El Ensayista Online</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Tipografía y base */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(120deg, #f093fb 0%, #f5576c 100%);
+            color: #fff;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: white !important;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .logo-img {
+            height: 100px;
+            width: auto;
+        }
+
+        .logo a {
+            text-decoration: none;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #ffffffdd;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffeb3b;
+        }
+
+        /* Hero principal */
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #007BFF, #00C6FF);
+            color: white;
+            border-radius: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-primary {
+            background-color: white;
+            color: #007BFF;
+            padding: 0.8rem 1.6rem;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* Sección de tarjetas */
+        main {
+            padding: 3rem 1rem;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        /* New card style for each question to match the provided CSS */
+        .question-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 1.2rem;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3), 0 0 10px rgba(255,255,255,0.1);
+            padding: 2rem;
+            width: min(100%, 420px);
+            text-align: center;
+            color: #fff;
+            transition: transform 0.3s ease;
+            flex: 1 1 100px;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .question-title {
+            font-weight: 600;
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+        
+        .options-list label {
+            display: block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #fff;
+        }
+        
+        .options-list label:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .options-list input[type="radio"] {
+            margin-right: 0.75rem;
+        }
+        
+        /* Submit button updated to match the btn-primary style */
+        .btn-submit {
+            background-color: white;
+            color: #007BFF;
+            padding: 0.8rem 1.6rem;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: background-color 0.3s;
+            display: block;
+            width: fit-content;
+            margin: 2rem auto 0;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-submit:hover {
+            background-color: #f0f0f0;
+        }
+        
+        .results-section {
+            padding: 2rem;
+            border-top: 2px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            margin-top: 2rem;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 1.2rem;
+        }
+        
+        .correct {
+            background-color: #d1f7c4 !important; /* Green for correct answers */
+            color: #333 !important; /* Adjust text color for contrast */
+        }
+        
+        .incorrect {
+            background-color: #f7d1d1 !important; /* Red for incorrect answers */
+            color: #333 !important; /* Adjust text color for contrast */
+        }
+        
+        .correct-answer-highlight {
+            background-color: #81c784 !important; /* A slightly darker green to highlight the correct answer in case of wrong selection */
+            color: #333 !important;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: rgba(0, 0, 0, 0.15);
+            font-size: 0.95rem;
+            color: #fff;
+            margin-top: 3rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                align-items: flex-end;
+            }
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        /* Removed grid style from main as it's not applicable to the quiz layout */
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="#">
+                    <!-- URL del logo ajustada según tu directorio -->
+                    <img src="static/img/logo.png" alt="El Ensayista Online" class="logo-img">
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="cursos.html">Cursos</a></li>
+                <li><a href="nosotros.html">Nosotros</a></li>
+                <li><a href="profesores.html">Profesores</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Ensayo de Ciencias PAES</h1>
+            <p>Pon a prueba tus conocimientos con 65 preguntas de física, química y biología.</p>
+        </section>
+
+        <section class="quiz-container">
+            <form id="quiz-form">
+                <!-- Questions will be dynamically injected here by JavaScript -->
+            </form>
+            <button type="button" id="submit-btn" class="btn-submit">Revisar Respuestas</button>
+            <div id="results" class="results-section hidden">
+                <!-- Results will be displayed here -->
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 El Ensayista Online®</p>
+    </footer>
+
+    <script>
+        // Use an array of objects to store questions, options, and correct answers
+        const questions = [
+            // Física
+            { question: "1. ¿Cuál es la unidad del Sistema Internacional (SI) para la fuerza?", options: ["A) Kilogramo", "B) Metro", "C) Segundo", "D) Newton", "E) Joule"], correctAnswer: "D" },
+            { question: "2. Si la velocidad de un objeto es constante, su aceleración es:", options: ["A) Positiva", "B) Negativa", "C) Nula", "D) Creciente", "E) Decreciente"], correctAnswer: "C" },
+            { question: "3. La ley de conservación de la energía establece que la energía:", options: ["A) Se crea y se destruye", "B) Se transforma, pero no se crea ni se destruye", "C) Se crea pero no se destruye", "D) Se destruye pero no se crea", "E) Es siempre constante en forma cinética"], correctAnswer: "B" },
+            { question: "4. La fórmula de la segunda ley de Newton es:", options: ["A) F = m x a", "B) E = m x c2", "C) p = m x v", "D) W = F x d", "E) I = V / R"], correctAnswer: "A" },
+            { question: "5. ¿Qué fenómeno ocurre cuando la luz cambia de dirección al pasar de un medio a otro?", options: ["A) Reflexión", "B) Refracción", "C) Difracción", "D) Interferencia", "E) Polarización"], correctAnswer: "B" },
+            { question: "6. El trabajo realizado por una fuerza es el producto de la fuerza por:", options: ["A) La masa", "B) La aceleración", "C) El tiempo", "D) La distancia recorrida", "E) La potencia"], correctAnswer: "D" },
+            { question: "7. ¿Cuál es la unidad de la potencia en el SI?", options: ["A) Joule", "B) Newton", "C) Vatio (Watt)", "D) Kilowatt-hora", "E) Amperio"], correctAnswer: "C" },
+            { question: "8. Un objeto que se mueve en círculo a velocidad constante experimenta una aceleración:", options: ["A) Tangencial", "B) Nula", "C) Centrípeta", "D) Positiva", "E) Negativa"], correctAnswer: "C" },
+            { question: "9. La energía potencial gravitatoria de un objeto depende de su masa, la gravedad y:", options: ["A) Su velocidad", "B) Su altura", "C) Su aceleración", "D) Su volumen", "E) Su temperatura"], correctAnswer: "B" },
+            { question: "10. La corriente eléctrica se mide en:", options: ["A) Voltios", "B) Ohmios", "C) Amperios", "D) Vatios", "E) Coulombios"], correctAnswer: "C" },
+            { question: "11. ¿Qué tipo de onda no necesita un medio material para propagarse?", options: ["A) Sonora", "B) Sísmica", "C) Electromagnética", "D) de agua", "E) Mecánica"], correctAnswer: "C" },
+            { question: "12. Un cuerpo está en equilibrio cuando la suma de las fuerzas que actúan sobre él es:", options: ["A) Positiva", "B) Negativa", "C) Mayor que cero", "D) Menor que cero", "E) Cero"], correctAnswer: "E" },
+            { question: "13. La ley de Ohm relaciona el voltaje, la corriente y:", options: ["A) La potencia", "B) La resistencia", "C) La energía", "D) El tiempo", "E) La carga"], correctAnswer: "B" },
+            { question: "14. La frecuencia de una onda se mide en:", options: ["A) Metros", "B) Segundos", "C) Hertz (Hz)", "D) Kilómetros", "E) Amperios"], correctAnswer: "C" },
+            { question: "15. ¿Cuál de las siguientes es una magnitud escalar?", options: ["A) Fuerza", "B) Velocidad", "C) Desplazamiento", "D) Aceleración", "E) Temperatura"], correctAnswer: "E" },
+            { question: "16. La energía de un cuerpo en movimiento se conoce como energía:", options: ["A) Potencial", "B) Eléctrica", "C) Térmica", "D) Cinética", "E) Química"], correctAnswer: "D" },
+            { question: "17. ¿Qué principio explica por qué los barcos flotan?", options: ["A) Principio de Pascal", "B) Principio de Arquímedes", "C) Ley de Boyle", "D) Ley de Charles", "E) Ley de la Gravitación Universal"], correctAnswer: "B" },
+            { question: "18. Un imán tiene dos polos, que se denominan:", options: ["A) Positivo y negativo", "B) Fuerte y débil", "C) Norte y Sur", "D) Magnético y no magnético", "E) Atractivo y repulsivo"], correctAnswer: "C" },
+            { question: "19. La unidad de medida de la presión es el:", options: ["A) Newton", "B) Pascal", "C) Vatio", "D) Joule", "E) Hertz"], correctAnswer: "B" },
+            { question: "20. En un circuito en serie, la corriente eléctrica es:", options: ["A) Mayor al principio", "B) Menor al final", "C) La misma en todos los puntos", "D) Variable", "E) Nula"], correctAnswer: "C" },
+            { question: "21. El sonido se propaga más rápidamente en:", options: ["A) El vacío", "B) El agua", "C) El aire", "D) Un sólido", "E) Un gas"], correctAnswer: "D" },
+            { question: "22. La fórmula para el área de un círculo es A = π x r2. ¿Qué representa r?", options: ["A) El diámetro", "B) El radio", "C) La circunferencia", "D) La masa", "E) El volumen"], correctAnswer: "B" },
+            
+            // Química
+            { question: "23. Un átomo neutro tiene un número igual de protones y:", options: ["A) Neutrones", "B) Electrones", "C) Iones", "D) Isótopos", "E) Moléculas"], correctAnswer: "B" },
+            { question: "24. El agua pura (H2O) es un ejemplo de:", options: ["A) Un elemento", "B) Un compuesto", "C) Una mezcla homogénea", "D) Una mezcla heterogénea", "E) Un ion"], correctAnswer: "B" },
+            { question: "25. En la tabla periódica, los elementos de la misma columna tienen propiedades químicas similares porque tienen el mismo número de:", options: ["A) Protones", "B) Neutrones", "C) Electrones de valencia", "D) Masa atómica", "E) Nivel de energía"], correctAnswer: "C" },
+            { question: "26. ¿Cuál de los siguientes es un gas noble?", options: ["A) Oxígeno", "B) Nitrógeno", "C) Helio", "D) Hidrógeno", "E) Carbono"], correctAnswer: "C" },
+            { question: "27. La combustión es un ejemplo de una reacción:", options: ["A) Endotérmica", "B) Isotérmica", "C) Exotérmica", "D) Anabólica", "E) Catabólica"], correctAnswer: "C" },
+            { question: "28. Un ácido, según la teoría de Arrhenius, es una sustancia que en agua libera iones:", options: ["A) OH-", "B) H+", "C) Na+", "D) Cl-", "E) K+"], correctAnswer: "B" },
+            { question: "29. ¿Qué estado de la materia tiene forma y volumen definidos?", options: ["A) Sólido", "B) Líquido", "C) Gaseoso", "D) Plasma", "E) Condensado de Bose-Einstein"], correctAnswer: "A" },
+            { question: "30. El proceso por el cual un sólido pasa directamente a estado gaseoso se llama:", options: ["A) Fusión", "B) Evaporación", "C) Sublimación", "D) Condensación", "E) Licuefacción"], correctAnswer: "C" },
+            { question: "31. La masa atómica de un elemento se calcula sumando el número de protones y:", options: ["A) Electrones", "B) Neutrones", "C) Iones", "D) Positrones", "E) Moléculas"], correctAnswer: "B" },
+            { question: "32. Un pH de 7 indica que una solución es:", options: ["A) Ácida", "B) Básica", "C) Neutra", "D) Salina", "E) Gaseosa"], correctAnswer: "C" },
+            { question: "33. ¿Cuál es el principal componente del aire que respiramos?", options: ["A) Oxígeno", "B) Dióxido de carbono", "C) Nitrógeno", "D) Argón", "E) Vapor de agua"], correctAnswer: "C" },
+            { question: "34. Una reacción química que absorbe energía en forma de calor se conoce como:", options: ["A) Exotérmica", "B) Endotérmica", "C) Combustión", "D) Neutralización", "E) Polimerización"], correctAnswer: "B" },
+            { question: "35. La fórmula química del dióxido de carbono es:", options: ["A) CO", "B) CO2", "C) H2O", "D) O2", "E) CH4"], correctAnswer: "B" },
+            { question: "36. ¿Qué tipo de enlace se forma cuando un metal transfiere electrones a un no metal?", options: ["A) Covalente", "B) Metálico", "C) Iónico", "D) de hidrógeno", "E) de Van der Waals"], correctAnswer: "C" },
+            { question: "37. El número de Avogadro se utiliza para relacionar la cantidad de sustancia con el número de:", options: ["A) Gramos", "B) Kilogramos", "C) Átomos o moléculas", "D) Litros", "E) Carga"], correctAnswer: "C" },
+            { question: "38. ¿Qué es un catalizador en una reacción química?", options: ["A) Un reactivo que se consume", "B) Un producto de la reacción", "C) Una sustancia que aumenta la velocidad de la reacción", "D) Una sustancia que disminuye la velocidad de la reacción", "E) Un solvente"], correctAnswer: "C" },
+            { question: "39. La oxidación de un metal es un proceso de:", options: ["A) Ganancia de electrones", "B) Pérdida de electrones", "C) Neutralización", "D) Reducción", "E) Disolución"], correctAnswer: "B" },
+            { question: "40. El peso molecular de una molécula se mide en:", options: ["A) Gramos", "B) Litros", "C) Unidades de masa atómica (uma)", "D) Moléculas", "E) Kilogramos"], correctAnswer: "C" },
+            { question: "41. ¿Cuál es la fórmula para el peróxido de hidrógeno?", options: ["A) HO", "B) H2O", "C) H2O2", "D) H3O", "E) HO2"], correctAnswer: "C" },
+            { question: "42. ¿Qué fenómeno físico-químico ocurre cuando una sustancia se disuelve en un solvente?", options: ["A) Fusión", "B) Evaporación", "C) Disociación", "D) Disolución", "E) Decantación"], correctAnswer: "D" },
+            { question: "43. La principal función de las proteínas en el cuerpo es:", options: ["A) Proporcionar energía inmediata", "B) Almacenar energía a largo plazo", "C) Formar estructuras y enzimas", "D) Aislar el calor", "E) Proteger contra enfermedades"], correctAnswer: "C" },
+            { question: "44. La unidad básica de la vida es:", options: ["A) La célula", "B) El átomo", "C) La molécula", "D) El gen", "E) El tejido"], correctAnswer: "A" },
+
+            // Biología
+            { question: "45. La fotosíntesis es el proceso mediante el cual las plantas convierten la luz solar en:", options: ["A) Agua", "B) Oxígeno", "C) Dióxido de carbono", "D) Glucosa", "E) Clorofila"], correctAnswer: "D" },
+            { question: "46. ¿Qué orgánulo celular es conocido como la 'central energética' de la célula?", options: ["A) Núcleo", "B) Ribosoma", "C) Mitocondria", "D) Cloroplasto", "E) Retículo endoplasmático"], correctAnswer: "C" },
+            { question: "47. Los genes se encuentran en el núcleo de las células, específicamente en los:", options: ["A) Ribosomas", "B) Cloroplastos", "C) Cromosomas", "D) Citoplasmas", "E) Lisosomas"], correctAnswer: "C" },
+            { question: "48. La diferencia principal entre una célula procariota y una eucariota es la ausencia de:", options: ["A) ADN", "B) Pared celular", "C) Membrana plasmática", "D) Núcleo definido", "E) Ribosomas"], correctAnswer: "D" },
+            { question: "49. ¿Cuál es el proceso por el cual un organismo unicelular se divide para formar dos células hijas?", options: ["A) Meiosis", "B) Mitosis", "C) Fisión binaria", "D) Fertilización", "E) Mutación"], correctAnswer: "C" },
+            { question: "50. El sistema circulatorio tiene como función principal:", options: ["A) La respiración", "B) El transporte de nutrientes y gases", "C) La digestión", "D) La reproducción", "E) El movimiento"], correctAnswer: "B" },
+            { question: "51. La estructura que controla qué sustancias entran y salen de la célula es:", options: ["A) El citoplasma", "B) La pared celular", "C) La membrana plasmática", "D) El núcleo", "E) La vacuola"], correctAnswer: "C" },
+            { question: "52. ¿Qué tipo de célula es un glóbulo rojo?", options: ["A) Una célula vegetal", "B) Una célula muscular", "C) Una célula nerviosa", "D) Una célula sanguínea", "E) Una célula ósea"], correctAnswer: "D" },
+            { question: "53. La teoría de la evolución por selección natural fue propuesta por:", options: ["A) Gregor Mendel", "B) Louis Pasteur", "C) Charles Darwin", "D) Albert Einstein", "E) Isaac Newton"], correctAnswer: "C" },
+            { question: "54. ¿Qué parte de una planta se encarga de absorber el agua y los minerales del suelo?", options: ["A) Las hojas", "B) El tallo", "C) Las flores", "D) La raíz", "E) Los frutos"], correctAnswer: "D" },
+            { question: "55. El proceso de replicación del ADN se lleva a cabo en la fase de la mitosis llamada:", options: ["A) Profase", "B) Metafase", "C) Anafase", "D) Interfase", "E) Telofase"], correctAnswer: "D" },
+            { question: "56. El grupo sanguíneo universal donante es:", options: ["A) A", "B) B", "C) AB", "D) O", "E) No hay donante universal"], correctAnswer: "D" },
+            { question: "57. ¿Qué es un ecosistema?", options: ["A) Una comunidad de organismos", "B) Un hábitat", "C) Una población de una especie", "D) Una comunidad de organismos y su ambiente físico", "E) Un bioma"], correctAnswer: "D" },
+            { question: "58. La respiración celular ocurre en las mitocondrias y produce:", options: ["A) Glucosa", "B) Dióxido de carbono y agua", "C) Clorofila", "D) Luz solar", "E) Oxígeno"], correctAnswer: "B" },
+            { question: "59. ¿Cuál de los siguientes es un ejemplo de un órgano vestigial en humanos?", options: ["A) El corazón", "B) El apéndice", "C) El cerebro", "D) El pulmón", "E) El estómago"], correctAnswer: "B" },
+            { question: "60. Un virus es considerado un organismo:", options: ["A) Vivo", "B) No vivo", "C) Parcialmente vivo", "D) Bacteriano", "E) Vegetal"], correctAnswer: "B" },
+            { question: "61. El proceso de digestión comienza en:", options: ["A) El estómago", "B) El intestino delgado", "C) La boca", "D) El esófago", "E) El intestino grueso"], correctAnswer: "C" },
+            { question: "62. La polinización es un proceso crucial para la reproducción de:", options: ["A) Los mamíferos", "B) Los reptiles", "C) Las aves", "D) Las plantas con flores", "E) Los peces"], correctAnswer: "D" },
+            { question: "63. ¿Qué vitamina es esencial para la coagulación de la sangre?", options: ["A) Vitamina A", "B) Vitamina C", "C) Vitamina D", "D) Vitamina K", "E) Vitamina B12"], correctAnswer: "D" },
+            { question: "64. El esqueleto humano está compuesto principalmente por:", options: ["A) Cartílago", "B) Músculos", "C) Huesos", "D) Tendones", "E) Nervios"], correctAnswer: "C" },
+            { question: "65. La excreción en animales es el proceso de eliminación de:", options: ["A) Alimentos", "B) Nutrientes", "C) Productos de desecho", "D) Oxígeno", "E) Glucosa"], correctAnswer: "C" }
+        ];
+
+        // Get elements from the DOM
+        const quizForm = document.getElementById('quiz-form');
+        const submitButton = document.getElementById('submit-btn');
+        const resultsDiv = document.getElementById('results');
+
+        // Function to render the quiz questions
+        function renderQuiz() {
+            // Map over the questions array to create HTML for each question
+            quizForm.innerHTML = questions.map((q, index) => `
+                <div class="question-card" id="question-${index}">
+                    <div class="question-title">${q.question}</div>
+                    <div class="options-list" data-correct-answer="${q.correctAnswer}">
+                        ${q.options.map(option => `
+                            <label class="block">
+                                <input type="radio" name="q${index}" value="${option.charAt(0)}">
+                                ${option}
+                            </label>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Function to check the answers and calculate the score
+        function checkAnswers(event) {
+            let correctCount = 0;
+            const formElements = quizForm.elements;
+
+            questions.forEach((q, index) => {
+                const questionCard = document.getElementById(`question-${index}`);
+                const selectedOption = formElements[`q${index}`].value;
+                const optionsList = questionCard.querySelector('.options-list');
+
+                // Remove previous classes for re-testing
+                questionCard.classList.remove('correct', 'incorrect');
+                
+                // Find all labels to clear previous highlights
+                const allLabels = optionsList.querySelectorAll('label');
+                allLabels.forEach(label => label.classList.remove('correct-answer-highlight'));
+
+                // Check if the selected answer is correct
+                if (selectedOption === q.correctAnswer) {
+                    correctCount++;
+                    questionCard.classList.add('correct');
+                } else {
+                    questionCard.classList.add('incorrect');
+                    // Find and highlight the correct answer
+                    const correctLabel = Array.from(allLabels).find(label => label.textContent.trim().startsWith(q.correctAnswer + ')'));
+                    if (correctLabel) {
+                        correctLabel.classList.add('correct-answer-highlight');
+                    }
+                }
+            });
+
+            // Calculate the score on a 1000-point scale
+            const totalQuestions = questions.length;
+            const paesScore = Math.round((correctCount / totalQuestions) * 1000);
+
+            // Display results
+            resultsDiv.innerHTML = `
+                <h2 class="text-2xl font-bold mb-4">Resultados</h2>
+                <p class="text-lg">Respuestas correctas: ${correctCount} de ${totalQuestions}</p>
+                <p class="text-3xl font-bold mt-4">Puntaje: ${paesScore} puntos</p>
+            `;
+            // Show the results section
+            resultsDiv.classList.remove('hidden');
+        }
+
+        // Add event listeners
+        document.addEventListener('DOMContentLoaded', renderQuiz);
+        submitButton.addEventListener('click', checkAnswers);
+    </script>
+</body>
+</html>

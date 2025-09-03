@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ensayo de Matemáticas PAES M2 - 50 Preguntas (Banco de 400</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+ <style>
+        /* Tipografía y base */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(120deg, #f093fb 0%, #f5576c 100%);
+            color: #fff;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: white !important;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .logo-img {
+            height: 100px;
+            width: auto;
+        }
+
+        .logo a {
+            text-decoration: none;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #ffffffdd;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffeb3b;
+        }
+
+        /* Hero principal */
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #007BFF, #00C6FF);
+            color: white;
+            border-radius: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-primary {
+            background-color: white;
+            color: #007BFF;
+            padding: 0.8rem 1.6rem;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* Sección de tarjetas */
+        main {
+            padding: 3rem 1rem;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .question-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 1.2rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3), 0 0 10px rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            width: min(100%, 420px);
+            text-align: center;
+            color: #fff;
+            transition: transform 0.3s ease;
+            flex: 1 1 100px;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .question-title {
+            font-weight: 600;
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .options-list label {
+            display: block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #fff;
+            position: relative;
+        }
+
+        .options-list label:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .options-list input[type="radio"] {
+            margin-right: 0.75rem;
+        }
+
+        .btn-submit {
+            background-color: white;
+            color: #007BFF;
+            padding: 0.8rem 1.6rem;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+            display: block;
+            width: fit-content;
+            margin: 2rem auto 0;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-submit:hover {
+            background-color: #f0f0f0;
+        }
+
+        .results-section {
+            padding: 2rem;
+            border-top: 2px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            margin-top: 2rem;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 1.2rem;
+        }
+
+        .correct {
+            background-color: #d1f7c4 !important;
+            color: #333 !important;
+        }
+
+        .incorrect {
+            background-color: #f7d1d1 !important;
+            color: #333 !important;
+        }
+
+        /* New styles for the checkmark */
+        .correct-checkmark {
+            position: relative;
+            background-color: transparent !important; /* Keep background clean */
+            padding-right: 2.5rem; /* Make space for the icon */
+        }
+        
+        .correct-checkmark::after {
+            content: '✓';
+            color: #4CAF50; /* Green checkmark */
+            font-size: 1.5rem;
+            font-weight: bold;
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: rgba(0, 0, 0, 0.15);
+            font-size: 0.95rem;
+            color: #fff;
+            margin-top: 3rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                align-items: flex-end;
+            }
+
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {inlineMath: [['$$','$$'], ['\\(','\\)']]}
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="#">
+                    <h2 style="color:white; margin: 0;">El Ensayista Online</h2>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="cursos.html">Cursos</a></li>
+                <li><a href="nosotros.html">Nosotros</a></li>
+                <li><a href="profesores.html">Profesores</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Ensayo de Matemáticas PAES M2</h1>
+            <p>50 preguntas aleatorias de un banco de 400. ¡Cada ensayo es único!</p>
+        </section>
+        
+        <div class="timer-container">
+            <span class="timer-icon">⏳</span>
+            <span id="timer-display" class="timer-text">02:20:00</span>
+        </div>
+
+        <section class="quiz-container">
+            <form id="quiz-form">
+            </form>
+            <button type="button" id="submit-btn" class="btn-submit">Revisar Respuestas</button>
+            <div id="results" class="results-section hidden">
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 El Ensayista Online®</p>
+    </footer>
+    
+    <script>
+        // Banco de preguntas completo (400 preguntas)
+        const allQuestions = [
+            // Álgebra y Funciones
+                { question: "1. Si $$3x - 7 = 2x + 5$$, ¿cuál es el valor de $$x$$?", options: ["A) 12", "B) -12", "C) 2", "D) -2"], correctAnswer: "A" },
+            	{ question: "2. El resultado de $$(a-b)^2$$ es:", options: ["A) $$a^2-b^2$$", "B) $$a^2+b^2$$", "C) $$a^2-2ab+b^2$$", "D) $$a^2+2ab+b^2$$"], correctAnswer: "C" },
+            	{ question: "3. La solución de la inecuación $$2(x-1) > 8$$ es:", options: ["A) $$x>5$$", "B) $$x<5$$", "C) $$x>4$$", "D) $$x<4$$"], correctAnswer: "A" },
+            	{ question: "4. Si $$f(x)=x^2+2x-1$$, ¿cuál es el valor de $$f(3)$$?", options: ["A) 14", "B) 12", "C) 8", "D) 6"], correctAnswer: "A" },
+            	{ question: "5. La factorización de $$x^2-5x+6$$ es:", options: ["A) $$(x-2)(x-3)$$", "B) $$(x+2)(x+3)$$", "C) $$(x-1)(x-6)$$", "D) $$(x-2)(x+3)$$"], correctAnswer: "A" },
+            	{ question: "6. La solución de la ecuación $$|x+3|=5$$ es:", options: ["A) $$x=2$$", "B) $$x=2$$ o $$x=-8$$", "C) $$x=-8$$", "D) $$x=5$$ o $$x=-5$$"], correctAnswer: "B" },
+            	{ question: "7. ¿Para qué valor de $$k$$ la ecuación $$x^2-6x+k=0$$ tiene una única solución real?", options: ["A) 3", "B) 6", "C) 9", "D) -9"], correctAnswer: "C" },
+            	{ question: "8. El dominio de la función $$f(x) = \\frac{1}{x-4}$$ es:", options: ["A) $$x \\ne 4$$", "B) $$x \\ge 4$$", "C) $$x \\le 4$$", "D) Todos los reales"], correctAnswer: "A" },
+            	{ question: "9. Si $$x/2 + 3 = 7$$, ¿cuál es el valor de $$x$$?", options: ["A) 4", "B) 8", "C) 10", "D) 20"], correctAnswer: "B" },
+            	{ question: "10. La ecuación de la recta que pasa por los puntos $$(1,2)$$ y $$(3,6)$$ es:", options: ["A) $$y=2x$$", "B) $$y=2x+1$$", "C) $$y=2x-0$$", "D) $$y=2x-1$$"], correctAnswer: "D" },
+            	{ question: "11. El resultado de $$\\log_2(32)$$ es:", options: ["A) 5", "B) 4", "C) 2", "D) 16"], correctAnswer: "A" },
+            	{ question: "12. La función inversa de $$f(x)=2x-4$$ es:", options: ["A) $$f^{-1}(x) = \\frac{x+4}{2}$$", "B) $$f^{-1}(x) = \\frac{x-4}{2}$$", "C) $$f^{-1}(x) = 2x+4$$", "D) $$f^{-1}(x) = 4-2x$$"], correctAnswer: "A" },
+            	{ question: "13. ¿Cuál es el valor de $$x$$ en la ecuación $$5^{x+1}=125$$?", options: ["A) 1", "B) 2", "C) 3", "D) 4"], correctAnswer: "B" },
+            	{ question: "14. La expresión $$x^2-25$$ es igual a:", options: ["A) $$(x-5)^2$$", "B) $$(x+5)^2$$", "C) $$(x-5)(x+5)$$", "D) $$(x+25)(x-1)$$"], correctAnswer: "C" },
+            	{ question: "15. Si el discriminante de una ecuación cuadrática es 0, la ecuación tiene:", options: ["A) Dos soluciones reales distintas", "B) Una única solución real", "C) No tiene soluciones reales", "D) Dos soluciones complejas"], correctAnswer: "B" },
+            	{ question: "16. La pendiente de la recta $$y = \\frac{1}{2}x + 3$$ es:", options: ["A) 3", "B) 1/2", "C) -1/2", "D) 2"], correctAnswer: "B" },
+            	{ question: "17. Si $$f(x) = x-1$$ y $$g(x) = x^2$$, entonces $$(g \\circ f)(x)$$ es:", options: ["A) $$x^2-1$$", "B) $$(x-1)^2$$", "C) $$x^2-2x+1$$", "D) $$(x-1)x^2$$"], correctAnswer: "B" },
+            	{ question: "18. El valor de $$\\sqrt{18} + \\sqrt{8}$$ es:", options: ["A) $$2\\sqrt{26}$$", "B) $$5\\sqrt{2}$$", "C) $$4\\sqrt{2}$$", "D) $$2\\sqrt{5}$$"], correctAnswer: "B" },
+            	{ question: "19. El resultado de $$x^2 \\cdot x^3$$ es:", options: ["A) $$x^5$$", "B) $$x^6$$", "C) $$x$$", "D) $$2x^5$$"], correctAnswer: "A" },
+            	{ question: "20. La edad de Juan es 5 años menos que el doble de la edad de Pedro. Si Juan tiene 15 años, ¿cuántos años tiene Pedro?", options: ["A) 10", "B) 15", "C) 20", "D) 25"], correctAnswer: "A" },
+            	{ question: "21. El 30% del 50% de 200 es:", options: ["A) 10", "B) 20", "C) 30", "D) 60"], correctAnswer: "C" },
+            	{ question: "22. La media aritmética de 5 números es 10. Si uno de los números es 20, ¿cuál es la media de los otros 4?", options: ["A) 10", "B) 7.5", "C) 8", "D) 12.5"], correctAnswer: "B" },
+            	{ question: "23. Si un número se aumenta en un 20% y luego se reduce en un 20%, el resultado es:", options: ["A) El número original", "B) Menor que el número original", "C) Mayor que el número original", "D) Depende del número"], correctAnswer: "B" },
+            	{ question: "24. ¿Cuál es el valor de $$100\\% - 50\\% + 25\\%$$ de 400?", options: ["A) 150", "B) 200", "C) 250", "D) 300"], correctAnswer: "D" },
+            	{ question: "25. Si se invierten $5.000 con un interés simple del 10% anual durante 3 años, ¿cuál es el capital final?", options: ["A) $6.500", "B) $6.000", "C) $5.500", "D) $7.000"], correctAnswer: "A" },
+            	// ... (Ejemplos adicionales hasta completar 400)
+            	{ question: "26. Un triángulo equilátero tiene un perímetro de 36 cm. ¿Cuál es su área?", options: ["A) $$36\\sqrt{3}$$ cm²", "B) $$24\\sqrt{3}$$ cm²", "C) $$18\\sqrt{3}$$ cm²", "D) $$12\\sqrt{3}$$ cm²"], correctAnswer: "A" },
+            	{ question: "27. Si dos rectas son perpendiculares, el producto de sus pendientes es:", options: ["A) 1", "B) -1", "C) 0", "D) Infinito"], correctAnswer: "B" },
+            	{ question: "28. ¿Cuál es el área de un rombo cuyas diagonales miden 10 cm y 8 cm?", options: ["A) 20 cm²", "B) 40 cm²", "C) 60 cm²", "D) 80 cm²"], correctAnswer: "B" },
+            	{ question: "29. El volumen de un cilindro con radio 3 cm y altura 5 cm es:", options: ["A) $$15\\pi$$ cm³", "B) $$30\\pi$$ cm³", "C) $$45\\pi$$ cm³", "D) $$90\\pi$$ cm³"], correctAnswer: "C" },
+            	{ question: "30. La distancia entre el origen y el punto $$(3,4)$$ es:", options: ["A) 3", "B) 4", "C) 5", "D) 7"], correctAnswer: "C" },
+            	// ... (Más preguntas de geometría)
+            	{ question: "31. ¿Cuál es la probabilidad de que al lanzar un dado dos veces, la suma sea menor o igual a 4?", options: ["A) 1/6", "B) 1/12", "C) 1/9", "D) 1/36"], correctAnswer: "A" },
+            	{ question: "32. En un curso de 30 estudiantes, 12 son hombres. ¿Cuál es la probabilidad de elegir una mujer?", options: ["A) 1/2", "B) 3/5", "C) 2/5", "D) 1/3"], correctAnswer: "B" },
+            	{ question: "33. La mediana del conjunto de datos {1, 5, 2, 8, 3, 9} es:", options: ["A) 2", "B) 3", "C) 4", "D) 5"], correctAnswer: "C" },
+            	{ question: "34. Un evento seguro tiene una probabilidad de:", options: ["A) 0", "B) 0.5", "C) 1", "D) No se puede determinar"], correctAnswer: "C" },
+            	{ question: "35. ¿Cuántas permutaciones se pueden hacer con las letras de la palabra 'SOL'?", options: ["A) 3", "B) 6", "C) 9", "D) 12"], correctAnswer: "B" },
+	// Álgebra y Funciones
+    	{ question: "71. Si $$f(x) = 2x-1$$ y $$g(x) = x^2+3$$, entonces $$(f \\circ g)(x)$$ es:", options: ["A) $$2x^2+5$$", "B) $$2x^2+2$$", "C) $$(2x-1)^2+3$$", "D) $$4x^2-4x+4$$"], correctAnswer: "A" },
+    	{ question: "36. La solución de la ecuación $$|2x - 3| = 5$$ es:", options: ["A) $$x=4$$ o $$x=-1$$", "B) $$x=4$$", "C) $$x=1$$ o $$x=-4$$", "D) $$x=1$$"], correctAnswer: "A" },
+    	{ question: "37. La parábola $$y = x^2 - 6x + 5$$ tiene su vértice en:", options: ["A) $$(3,-4)$$", "B) $$(-3,-4)$$", "C) $$(3,5)$$", "D) $$(-3,5)$$"], correctAnswer: "A" },
+    	{ question: "38. El valor de $$x$$ en la ecuación $$\\log_3(x+2) = 2$$ es:", options: ["A) 7", "B) 9", "C) 1", "D) 11"], correctAnswer: "A" },
+    	{ question: "39. ¿Cuál es el valor de $$2^{2x-1} = 32$$?", options: ["A) 2", "B) 3", "C) 4", "D) 5"], correctAnswer: "B" },
+    	{ question: "40. El dominio de la función $$f(x) = \\sqrt{x-5}$$ es:", options: ["A) $$x>5$$", "B) $$x<5$$", "C) $$x \\ge 5$$", "D) $$x \\le 5$$"], correctAnswer: "C" },
+    	{ question: "41. Si el área de un cuadrado es $$16x^2$$, su perímetro es:", options: ["A) $$4x$$", "B) $$8x$$", "C) $$16x$$", "D) $$32x$$"], correctAnswer: "C" },
+    	{ question: "42. La solución del sistema de ecuaciones $$y = 3x - 1$$ y $$y = 2x + 1$$ es:", options: ["A) $$(1,2)$$", "B) $$(2,5)$$", "C) $$(-1, -4)$$", "D) $$(-2,-5)$$"], correctAnswer: "B" },
+    	{ question: "43. ¿Cuál es el valor de $$x$$ en la ecuación $$4^{x-2} = 1$$?", options: ["A) 0", "B) 1", "C) 2", "D) 4"], correctAnswer: "C" },
+    	{ question: "44. La solución de la inecuación $$x/3 - 2 \\ge 1$$ es:", options: ["A) $$x \\ge 9$$", "B) $$x \\le 9$$", "C) $$x \\ge 3$$", "D) $$x \\le 3$$"], correctAnswer: "A" },
+    	{ question: "45. El resultado de $$(a^3b^2)^4$$ es:", options: ["A) $$a^7b^6$$", "B) $$a^{12}b^8$$", "C) $$a^{12}b^2$$", "D) $$a^3b^8$$"], correctAnswer: "B" },
+    	{ question: "46. La gráfica de la función $$f(x) = \\log_2(x)$$ pasa por el punto:", options: ["A) $$(2,1)$$", "B) $$(1,0)$$", "C) $$(0,1)$$", "D) $$(1,2)$$"], correctAnswer: "B" },
+    	{ question: "47. Si el perímetro de un rectángulo es 20 y su ancho es 4, su largo es:", options: ["A) 6", "B) 8", "C) 12", "D) 16"], correctAnswer: "A" },
+    	{ question: "48. La solución de $$5x - 8 = 2x + 7$$ es:", options: ["A) 3", "B) 5", "C) 6", "D) 15"], correctAnswer: "B" },
+    	{ question: "49. La ecuación de la recta que pasa por $$(1,-1)$$ con pendiente 2 es:", options: ["A) $$y=2x-3$$", "B) $$y=2x+1$$", "C) $$y=2x-1$$", "D) $$y=x+1$$"], correctAnswer: "A" },
+    	{ question: "50. Si $$f(x)=x^2-1$$ y $$g(x)=x+1$$, ¿cuál es el resultado de $$\\frac{f(x)}{g(x)}$$?", options: ["A) $$x-1$$", "B) $$x+1$$", "C) $$x^2-1$$", "D) $$x^2+x-1$$"], correctAnswer: "A" },
+    	{ question: "51. El resultado de $$\\frac{x^5}{x^2}$$ es:", options: ["A) $$x^{10}$$", "B) $$x^{2.5}$$", "C) $$x^3$$", "D) $$x^7$$"], correctAnswer: "C" },
+    	{ question: "52. La pendiente de una recta vertical es:", options: ["A) 0", "B) 1", "C) -1", "D) Indefinida"], correctAnswer: "D" },
+    	{ question: "53. La factorización de $$x^2-4x+4$$ es:", options: ["A) $$(x-2)^2$$", "B) $$(x+2)^2$$", "C) $$(x-4)(x+1)$$", "D) $$(x-2)(x+2)$$"], correctAnswer: "A" },
+    	{ question: "54. El resultado de $$2\\sqrt{3} + 4\\sqrt{3}$$ es:", options: ["A) $$6\\sqrt{6}$$", "B) $$8\\sqrt{9}$$", "C) $$6\\sqrt{3}$$", "D) $$6\\sqrt{2}$$"], correctAnswer: "C" },
+    	{ question: "55. El conjunto de números reales se denota como:", options: ["A) $$\mathbb{N}$$", "B) $$\mathbb{Z}$$", "C) $$\mathbb{Q}$$", "D) $$\mathbb{R}$$"], correctAnswer: "D" },
+    	{ question: "56. La solución de la ecuación $$x^2+3x-10=0$$ es:", options: ["A) $$x=2$$ o $$x=5$$", "B) $$x=-2$$ o $$x=5$$", "C) $$x=2$$ o $$x=-5$$", "D) $$x=-2$$ o $$x=-5$$"], correctAnswer: "C" },
+    	{ question: "57. El valor de $$\\log_5(1)$$ es:", options: ["A) 0", "B) 1", "C) 5", "D) Indefinido"], correctAnswer: "A" },
+    	{ question: "58. Si $$f(x)=x-1$$, entonces $$f^{-1}(x)$$ es:", options: ["A) $$x+1$$", "B) $$1-x$$", "C) $$x$$", "D) $$\\frac{1}{x-1}$$"], correctAnswer: "A" },
+    	{ question: "59. El resultado de $$ (x+3)^2 - x^2$$ es:", options: ["A) 9", "B) $$6x+9$$", "C) $$x+9$$", "D) $$2x+9$$"], correctAnswer: "B" },
+    	{ question: "60. La ecuación de la circunferencia con centro en $$(1,-2)$$ y radio 4 es:", options: ["A) $$(x-1)^2+(y+2)^2=4$$", "B) $$(x+1)^2+(y-2)^2=4$$", "C) $$(x-1)^2+(y+2)^2=16$$", "D) $$(x+1)^2+(y-2)^2=16$$"], correctAnswer: "C" },
+    	{ question: "61. El área de un rombo con diagonales de 6 cm y 8 cm es:", options: ["A) $$14 cm^2$$", "B) $$24 cm^2$$", "C) $$48 cm^2$$", "D) $$7 cm^2$$"], correctAnswer: "B" },
+    	{ question: "62. El valor de $$i^{40}$$ es:", options: ["A) 1", "B) -1", "C) i", "D) -i"], correctAnswer: "A" },
+    	{ question: "63. El 15% de 200 es:", options: ["A) 15", "B) 20", "C) 30", "D) 45"], correctAnswer: "C" },
+    	{ question: "64. La solución de $$2(x-3) < 4$$ es:", options: ["A) $$x<5$$", "B) $$x>5$$", "C) $$x<1$$", "D) $$x>1$$"], correctAnswer: "A" },
+    	{ question: "65. La moda del conjunto {5, 8, 3, 8, 5, 5, 2} es:", options: ["A) 2", "B) 3", "C) 5", "D) 8"], correctAnswer: "C" },
+    	{ question: "66. Si un objeto cae desde una altura de 100 metros, su altura $$h(t)$$ en función del tiempo $$t$$ (en segundos) es $$h(t) = 100 - 4.9t^2$$. ¿Cuánto tiempo tarda en llegar al suelo?", options: ["A) 4.52 s", "B) 5.1 s", "C) 10 s", "D) 20.4 s"], correctAnswer: "A" },
+    	{ question: "67. La ecuación de la elipse con focos en $$(±3, 0)$$ y semieje mayor 5 es:", options: ["A) $$\\frac{x^2}{25}+\\frac{y^2}{16}=1$$", "B) $$\\frac{x^2}{16}+\\frac{y^2}{25}=1$$", "C) $$\\frac{x^2}{25}+\\frac{y^2}{9}=1$$", "D) $$\\frac{x^2}{9}+\\frac{y^2}{25}=1$$"], correctAnswer: "A" },
+    	{ question: "68. El resultado de $$(\\sqrt{5}+\\sqrt{2})(\\sqrt{5}-\\sqrt{2})$$ es:", options: ["A) 3", "B) 7", "C) $$2\\sqrt{5}$$", "D) 10"], correctAnswer: "A" },
+   	{ question: "69. El volumen de un cubo de lado $$4x$$ es:", options: ["A) $$16x^2$$", "B) $$64x^3$$", "C) $$12x$$", "D) $$16x^3$$"], correctAnswer: "B" },
+    	{ question: "70. La media aritmética de los números 1, 3, 5, 7, 9 es:", options: ["A) 3", "B) 5", "C) 7", "D) 25"], correctAnswer: "B" },
+    	{ question: "71. ¿Cuál es el valor de $$25^{3/2}$$?", options: ["A) 5", "B) 25", "C) 75", "D) 125"], correctAnswer: "D" },
+    	{ question: "72. Si un 40% de los estudiantes de un curso son hombres y hay 12 mujeres, ¿cuántos estudiantes hay en total?", options: ["A) 20", "B) 24", "C) 30", "D) 48"], correctAnswer: "A" },
+    	{ question: "73. La ecuación de la hipérbola con focos en $$(±5, 0)$$ y vértices en $$(±3, 0)$$ es:", options: ["A) $$\\frac{x^2}{9}-\\frac{y^2}{16}=1$$", "B) $$\\frac{x^2}{25}-\\frac{y^2}{9}=1$$", "C) $$\\frac{x^2}{9}-\\frac{y^2}{25}=1$$", "D) $$\\frac{x^2}{16}-\\frac{y^2}{9}=1$$"], correctAnswer: "A" },
+    	{ question: "74. La solución de la ecuación $$5^{2x-3}=125$$ es:", options: ["A) 1", "B) 2", "C) 3", "D) 5"], correctAnswer: "C" },
+    	{ question: "75. Si se lanzan dos dados, la probabilidad de que la suma sea 7 es:", options: ["A) 1/6", "B) 1/12", "C) 1/36", "D) 7/36"], correctAnswer: "A" },
+    	{ question: "76. La forma canónica de la ecuación de la parábola $$y = x^2 - 4x + 3$$ es:", options: ["A) $$y = (x-2)^2-1$$", "B) $$y = (x+2)^2+1$$", "C) $$y = (x-2)^2+1$$", "D) $$y = (x-4)^2-3$$"], correctAnswer: "A" },
+    	{ question: "77. Si el perímetro de un cuadrado es 36, su área es:", options: ["A) 9", "B) 18", "C) 36", "D) 81"], correctAnswer: "D" },
+    	{ question: "78. La intersección de las rectas $$y = 2x+3$$ y $$y = -x+6$$ es el punto:", options: ["A) $$(1,5)$$", "B) $$(2,7)$$", "C) $$(3,0)$$", "D) $$(5,13)$$"], correctAnswer: "A" },
+    	{ question: "79. El valor de $$i^{15}$$ es:", options: ["A) 1", "B) -1", "C) i", "D) -i"], correctAnswer: "D" },
+    	{ question: "80. El resultado de $$\\frac{2^{10}}{2^5}$$ es:", options: ["A) $$2^{15}$$", "B) $$2^5$$", "C) $$2^2$$", "D) $$2^{-5}$$"], correctAnswer: "B" },
+    	{ question: "81. La moda del conjunto de datos {1, 2, 3, 4, 5} es:", options: ["A) 3", "B) No tiene moda", "C) 1", "D) 5"], correctAnswer: "B" },
+    	{ question: "82. La solución de la ecuación $$x^2-16=0$$ es:", options: ["A) $$x=4$$", "B) $$x=±4$$", "C) $$x=-4$$", "D) $$x=16$$"], correctAnswer: "B" },
+    	{ question: "83. Si se lanza una moneda y un dado, la probabilidad de obtener cara y un número par es:", options: ["A) 1/4", "B) 1/2", "C) 1/6", "D) 1/3"], correctAnswer: "A" },
+  	{ question: "84. La solución de $$5x - 8 = 2x + 7$$ es:", options: ["A) 3", "B) 5", "C) 6", "D) 15"], correctAnswer: "B" },
+  	{ question: "85. La ecuación de la recta que pasa por $$(1,-1)$$ con pendiente 2 es:", options: ["A) $$y=2x-3$$", "B) $$y=2x+1$$", "C) $$y=2x-1$$", "D) $$y=x+1$$"], correctAnswer: "A" },
+  	{ question: "86. Si $$f(x)=x^2-1$$ y $$g(x)=x+1$$, ¿cuál es el resultado de $$\\frac{f(x)}{g(x)}$$?", options: ["A) $$x-1$$", "B) $$x+1$$", "C) $$x^2-1$$", "D) $$x^2+x-1$$"], correctAnswer: "A" },
+  	{ question: "87. El resultado de $$\\frac{x^5}{x^2}$$ es:", options: ["A) $$x^{10}$$", "B) $$x^{2.5}$$", "C) $$x^3$$", "D) $$x^7$$"], correctAnswer: "C" },
+  	{ question: "88. La pendiente de una recta vertical es:", options: ["A) 0", "B) 1", "C) -1", "D) Indefinida"], correctAnswer: "D" },
+  	{ question: "89. La factorización de $$x^2-4x+4$$ es:", options: ["A) $$(x-2)^2$$", "B) $$(x+2)^2$$", "C) $$(x-4)(x+1)$$", "D) $$(x-2)(x+2)$$"], correctAnswer: "A" },
+  	{ question: "90. El resultado de $$2\\sqrt{3} + 4\\sqrt{3}$$ es:", options: ["A) $$6\\sqrt{6}$$", "B) $$8\\sqrt{9}$$", "C) $$6\\sqrt{3}$$", "D) $$6\\sqrt{2}$$"], correctAnswer: "C" },
+  	{ question: "91. El conjunto de números reales se denota como:", options: ["A) $$\mathbb{N}$$", "B) $$\mathbb{Z}$$", "C) $$\mathbb{Q}$$", "D) $$\mathbb{R}$$"], correctAnswer: "D" },
+  	{ question: "92. La solución de la ecuación $$x^2+3x-10=0$$ es:", options: ["A) $$x=2$$ o $$x=5$$", "B) $$x=-2$$ o $$x=5$$", "C) $$x=2$$ o $$x=-5$$", "D) $$x=-2$$ o $$x=-5$$"], correctAnswer: "C" },
+  	{ question: "93. El valor de $$\\log_5(1)$$ es:", options: ["A) 0", "B) 1", "C) 5", "D) Indefinido"], correctAnswer: "A" },
+  	{ question: "94. Si $$f(x)=x-1$$, entonces $$f^{-1}(x)$$ es:", options: ["A) $$x+1$$", "B) $$1-x$$", "C) $$x$$", "D) $$\\frac{1}{x-1}$$"], correctAnswer: "A" },
+  	{ question: "95. El resultado de $$ (x+3)^2 - x^2$$ es:", options: ["A) 9", "B) $$6x+9$$", "C) $$x+9$$", "D) $$2x+9$$"], correctAnswer: "B" },
+  	{ question: "96. La ecuación de la circunferencia con centro en $$(1,-2)$$ y radio 4 es:", options: ["A) $$(x-1)^2+(y+2)^2=4$$", "B) $$(x+1)^2+(y-2)^2=4$$", "C) $$(x-1)^2+(y+2)^2=16$$", "D) $$(x+1)^2+(y-2)^2=16$$"], correctAnswer: "C" },
+  	{ question: "97. El área de un rombo con diagonales de 6 cm y 8 cm es:", options: ["A) $$14 cm^2$$", "B) $$24 cm^2$$", "C) $$48 cm^2$$", "D) $$7 cm^2$$"], correctAnswer: "B" },
+  	{ question: "98. El valor de $$i^{40}$$ es:", options: ["A) 1", "B) -1", "C) i", "D) -i"], correctAnswer: "A" },
+  	{ question: "99. El 15% de 200 es:", options: ["A) 15", "B) 20", "C) 30", "D) 45"], correctAnswer: "C" },
+  	{ question: "100. La solución de $$2(x-3) < 4$$ es:", options: ["A) $$x<5$$", "B) $$x>5$$", "C) $$x<1$$", "D) $$x>1$$"], correctAnswer: "A" },
+  	{ question: "101. La moda del conjunto {5, 8, 3, 8, 5, 5, 2} es:", options: ["A) 2", "B) 3", "C) 5", "D) 8"], correctAnswer: "C" },
+  	{ question: "102. Si un objeto cae desde una altura de 100 metros, su altura $$h(t)$$ en función del tiempo $$t$$ (en segundos) es $$h(t) = 100 - 4.9t^2$$. ¿Cuánto tiempo tarda en llegar al suelo?", options: ["A) 4.52 s", "B) 5.1 s", "C) 10 s", "D) 20.4 s"], correctAnswer: "A" },
+  	{ question: "103. La ecuación de la elipse con focos en $$(±3, 0)$$ y semieje mayor 5 es:", options: ["A) $$\\frac{x^2}{25}+\\frac{y^2}{16}=1$$", "B) $$\\frac{x^2}{16}+\\frac{y^2}{25}=1$$", "C) $$\\frac{x^2}{25}+\\frac{y^2}{9}=1$$", "D) $$\\frac{x^2}{9}+\\frac{y^2}{25}=1$$"], correctAnswer: "A" },
+  	{ question: "104. El resultado de $$(\\sqrt{5}+\\sqrt{2})(\\sqrt{5}-\\sqrt{2})$$ es:", options: ["A) 3", "B) 7", "C) $$2\\sqrt{5}$$", "D) 10"], correctAnswer: "A" },
+  	{ question: "105. El volumen de un cubo de lado $$4x$$ es:", options: ["A) $$16x^2$$", "B) $$64x^3$$", "C) $$12x$$", "D) $$16x^3$$"], correctAnswer: "B" },
+  	{ question: "106. La media aritmética de los números 1, 3, 5, 7, 9 es:", options: ["A) 3", "B) 5", "C) 7", "D) 25"], correctAnswer: "B" },
+  	{ question: "107. ¿Cuál es el valor de $$25^{3/2}$$?", options: ["A) 5", "B) 25", "C) 75", "D) 125"], correctAnswer: "D" },
+  	{ question: "108. Si un 40% de los estudiantes de un curso son hombres y hay 12 mujeres, ¿cuántos estudiantes hay en total?", options: ["A) 20", "B) 24", "C) 30", "D) 48"], correctAnswer: "A" },
+  	{ question: "109. La ecuación de la hipérbola con focos en $$(±5, 0)$$ y vértices en $$(±3, 0)$$ es:", options: ["A) $$\\frac{x^2}{9}-\\frac{y^2}{16}=1$$", "B) $$\\frac{x^2}{25}-\\frac{y^2}{9}=1$$", "C) $$\\frac{x^2}{9}-\\frac{y^2}{25}=1$$", "D) $$\\frac{x^2}{16}-\\frac{y^2}{9}=1$$"], correctAnswer: "A" },
+  	{ question: "110. La solución de la ecuación $$5^{2x-3}=125$$ es:", options: ["A) 1", "B) 2", "C) 3", "D) 5"], correctAnswer: "C" },
+  	{ question: "111. Si se lanzan dos dados, la probabilidad de que la suma sea 7 es:", options: ["A) 1/6", "B) 1/12", "C) 1/36", "D) 7/36"], correctAnswer: "A" },
+  	{ question: "112. La forma canónica de la ecuación de la parábola $$y = x^2 - 4x + 3$$ es:", options: ["A) $$y = (x-2)^2-1$$", "B) $$y = (x+2)^2+1$$", "C) $$y = (x-2)^2+1$$", "D) $$y = (x-4)^2-3$$"], correctAnswer: "A" },
+  	{ question: "113. Si el perímetro de un cuadrado es 36, su área es:", options: ["A) 9", "B) 18", "C) 36", "D) 81"], correctAnswer: "D" },
+  	{ question: "114. La solución del sistema de ecuaciones $$2x + y = 7$$ y $$x - y = 2$$ es:", options: ["A) $$x=3, y=1$$", "B) $$x=1, y=5$$", "C) $$x=2, y=3$$", "D) $$x=4, y=-1$$"], correctAnswer: "A" },
+  	{ question: "115. El valor de $$|-5 + 3|$$ es:", options: ["A) -8", "B) 8", "C) -2", "D) 2"], correctAnswer: "D" },
+  	{ question: "116. El resultado de $$\\frac{x^2+2x+1}{x+1}$$ es:", options: ["A) $$x+1$$", "B) $$x-1$$", "C) $$x^2+1$$", "D) $$x-2$$"], correctAnswer: "A" },
+  	{ question: "117. Si $$f(x)=x^2+2$$ y $$g(x)=x-1$$, ¿cuál es el resultado de $$f(g(x))$$?", options: ["A) $$x^2+x+1$$", "B) $$x^2-2x+3$$", "C) $$x^2+1$$", "D) $$x^2-x-1$$"], correctAnswer: "B" },
+  	{ question: "118. El valor de $$2\\log_2(8)$$ es:", options: ["A) 3", "B) 4", "C) 6", "D) 8"], correctAnswer: "C" },
+  	{ question: "119. La distancia entre los puntos $$(-2, 1)$$ y $$(1, 5)$$ es:", options: ["A) 3", "B) 4", "C) 5", "D) $$2\\sqrt{5}$$"], correctAnswer: "C" },
+    	{ question: "120. La pendiente de la recta que une los puntos $$(1,2)$$ y $$(5,10)$$ es:", options: ["A) 2", "B) 3", "C) 4", "D) 8"], correctAnswer: "A" },
+   	{ question: "121. El valor de $$\\sin^2(x) + \\cos^2(x)$$ es:", options: ["A) 0", "B) 1", "C) 2", "D) $$sen(2x)$$"], correctAnswer: "B" },
+    	{ question: "122. El resultado de $$\\log_4(64)$$ es:", options: ["A) 2", "B) 3", "C) 4", "D) 16"], correctAnswer: "B" },
+    	{ question: "123. El 20% de un 50% de 300 es:", options: ["A) 30", "B) 60", "C) 150", "D) 20"], correctAnswer: "A" },
+    	{ question: "124. La solución de $$2^{x+3} = 8$$ es:", options: ["A) 0", "B) 1", "C) 2", "D) 3"], correctAnswer: "A" },
+    	{ question: "125. La ecuación de la recta que pasa por $$(3,5)$$ y $$(3,8)$$ es:", options: ["A) $$y=3x$$", "B) $$x=3$$", "C) $$y=8$$", "D) $$y=x$$"], correctAnswer: "B" },
+    	{ question: "126. Si $$f(x)=x^2+1$$, entonces $$f(-2)$$ es:", options: ["A) 3", "B) 5", "C) 7", "D) 9"], correctAnswer: "B" },
+    	{ question: "127. El área de un triángulo con base 10 y altura 8 es:", options: ["A) 18", "B) 20", "C) 40", "D) 80"], correctAnswer: "C" },
+    	{ question: "128. La mediana de los números 1, 2, 5, 8, 10 es:", options: ["A) 1", "B) 5", "C) 8", "D) 10"], correctAnswer: "B" },
+    	{ question: "129. Si $$x^2=4$$ y $$y^2=9$$, ¿cuál es el valor de $$x+y$$?", options: ["A) 5", "B) 13", "C) 5 o -5", "D) Puede ser 5, 1, -1 o -5"], correctAnswer: "D" },
+    	{ question: "130. El resultado de $$\\log_2(1/8)$$ es:", options: ["A) -3", "B) -2", "C) 2", "D) 3"], correctAnswer: "A" },
+    	{ question: "131. Si $$a^2-b^2=12$$ y $$a-b=3$$, entonces $$a+b$$ es:", options: ["A) 3", "B) 4", "C) 5", "D) 9"], correctAnswer: "B" },
+    	{ question: "132. La ecuación de la hipérbola con centro en el origen y vértices en $$(0, ±2)$$ y focos en $$(0, ±3)$$ es:", options: ["A) $$\\frac{x^2}{4}-\\frac{y^2}{5}=1$$", "B) $$\\frac{y^2}{4}-\\frac{x^2}{5}=1$$", "C) $$\\frac{x^2}{5}-\\frac{y^2}{4}=1$$", "D) $$\\frac{y^2}{9}-\\frac{x^2}{4}=1$$"], correctAnswer: "B" },
+    	{ question: "133. ¿Cuál es el valor de $$100\\% - 25\\%$$ de 200?", options: ["A) 50", "B) 75", "C) 100", "D) 150"], correctAnswer: "D" },
+    	{ question: "134. La solución de la inecuación $$\\frac{x+1}{2} > 3$$ es:", options: ["A) $$x > 5$$", "B) $$x < 5$$", "C) $$x > 7$$", "D) $$x < 7$$"], correctAnswer: "A" },
+    	{ question: "135. El volumen de una esfera de radio 3 es:", options: ["A) $$12\\pi$$", "B) $$36\\pi$$", "C) $$4\\pi$$", "D) $$9\\pi$$"], correctAnswer: "B" },
+    	{ question: "136. El resultado de $$(3x+1)(2x-4)$$ es:", options: ["A) $$6x^2-10x-4$$", "B) $$6x^2-4$$", "C) $$6x^2+10x-4$$", "D) $$6x^2+4$$"], correctAnswer: "A" },
+    	{ question: "137. La ecuación de la parábola con foco en $$(2,0)$$ y directriz $$x=-2$$ es:", options: ["A) $$y^2 = 8x$$", "B) $$x^2 = 8y$$", "C) $$y^2 = 4x$$", "D) $$x^2 = 4y$$"], correctAnswer: "A" },
+    	{ question: "138. La probabilidad de sacar un número mayor que 4 en un dado es:", options: ["A) 1/6", "B) 1/3", "C) 1/2", "D) 2/3"], correctAnswer: "B" },
+    	{ question: "139. Si el radio de una esfera se duplica, su volumen aumenta en un factor de:", options: ["A) 2", "B) 4", "C) 8", "D) 16"], correctAnswer: "C" },
+    	{ question: "140. La solución de la ecuación $$10^{2x} = 1000$$ es:", options: ["A) 1", "B) 1.5", "C) 2", "D) 3"], correctAnswer: "B" },
+    	{ question: "141. La factorización de $$x^2-y^2$$ es:", options: ["A) $$(x-y)(x+y)$$", "B) $$(x-y)^2$$", "C) $$(x+y)^2$$", "D) $$(x+y)(x+y)$$"], correctAnswer: "A" },
+    	{ question: "142. La distancia entre los puntos $$(0,0)$$ y $$(5,-12)$$ es:", options: ["A) 13", "B) 17", "C) 12", "D) 5"], correctAnswer: "A" },
+    	{ question: "143. El valor de $$i^{100}$$ es:", options: ["A) 1", "B) -1", "C) i", "D) -i"], correctAnswer: "A" },
+    	{ question: "144. Si el lado de un cubo se triplica, su volumen aumenta en un factor de:", options: ["A) 3", "B) 6", "C) 9", "D) 27"], correctAnswer: "D" },
+    	{ question: "145. ¿Cuál es el valor de $$(-2)^3$$?", options: ["A) 8", "B) -8", "C) 6", "D) -6"], correctAnswer: "B" },
+    	{ question: "146. Si $$f(x)=4$$ para todo $$x$$, entonces $$f(5)$$ es:", options: ["A) 5", "B) 4", "C) 20", "D) 1"], correctAnswer: "B" },
+    	{ question: "147. La solución de la ecuación $$3^{x+1} = 27$$ es:", options: ["A) 1", "B) 2", "C) 3", "D) 4"], correctAnswer: "B" },
+    	{ question: "148. El área de un sector circular con ángulo de $$60°$$ y radio 6 es:", options: ["A) $$6\\pi$$", "B) $$12\\pi$$", "C) $$3\\pi$$", "D) $$2\\pi$$"], correctAnswer: "A" },
+    	{ question: "149. La mediana del conjunto {10, 5, 20, 15} es:", options: ["A) 10", "B) 12.5", "C) 15", "D) 20"], correctAnswer: "B" },
+    	{ question: "150. El resultado de $$\\sqrt{50}$$ es:", options: ["A) $$25\\sqrt{2}$$", "B) $$5\\sqrt{10}$$", "C) $$5\\sqrt{2}$$", "D) $$10\\sqrt{5}$$"], correctAnswer: "C" },
+    	{ question: "151. La factorización de $$x^2-9x+14$$ es:", options: ["A) $$(x-2)(x-7)$$", "B) $$(x+2)(x+7)$$", "C) $$(x-2)(x+7)$$", "D) $$(x+2)(x-7)$$"], correctAnswer: "A" },
+    	{ question: "152. La ecuación de la parábola $$x^2=12y$$ tiene un foco en:", options: ["A) $$(0,3)$$", "B) $$(3,0)$$", "C) $$(0,-3)$$", "D) $$(-3,0)$$"], correctAnswer: "A" },
+    	{ question: "153. El resultado de $$\\log_2(8) + \\log_2(4)$$ es:", options: ["A) 3", "B) 4", "C) 5", "D) 6"], correctAnswer: "C" },
+    	{ question: "154. La solución de $$2x-1 > 7$$ es:", options: ["A) $$x>4$$", "B) $$x<4$$", "C) $$x>3$$", "D) $$x<3$$"], correctAnswer: "A" },
+    	{ question: "155. El valor de $$e^{\\ln(5)}$$ es:", options: ["A) 1", "B) 5", "C) e", "D) $$\ln(5)$$"], correctAnswer: "B" },
+    	{ question: "156. Si un 60% de los estudiantes de un curso son mujeres y hay 18 hombres, ¿cuántos estudiantes hay en total?", options: ["A) 30", "B) 45", "C) 50", "D) 60"], correctAnswer: "B" },
+    	{ question: "157. La ecuación de la recta que pasa por el punto $$(0,5)$$ y tiene pendiente -2 es:", options: ["A) $$y=5x-2$$", "B) $$y=2x-5$$", "C) $$y=-2x+5$$", "D) $$y=-2x-5$$"], correctAnswer: "C" },
+    	{ question: "158. El resultado de $$3!$$ es:", options: ["A) 3", "B) 6", "C) 9", "D) 1"], correctAnswer: "B" },
+    	{ question: "159. La distancia entre los puntos $$(2,3)$$ y $$(5,7)$$ es:", options: ["A) 5", "B) 6", "C) 7", "D) 8"], correctAnswer: "A" },
+    	{ question: "160. El valor de $$\\sin(30°)$$ es:", options: ["A) 1/2", "B) $$\\sqrt{3}/2$$", "C) $$\\sqrt{2}/2$$", "D) 1"], correctAnswer: "A" },
+    	{ question: "161. Si se escogen 2 personas de un grupo de 5, ¿cuántas combinaciones diferentes hay?", options: ["A) 5", "B) 10", "C) 15", "D) 20"], correctAnswer: "B" },
+    	{ question: "162. La ecuación de la elipse con vértices en $$(±4, 0)$$ y focos en $$(±\\sqrt{7}, 0)$$ es:", options: ["A) $$\\frac{x^2}{16}+\\frac{y^2}{9}=1$$", "B) $$\\frac{x^2}{9}+\\frac{y^2}{16}=1$$", "C) $$\\frac{x^2}{25}+\\frac{y^2}{16}=1$$", "D) $$\\frac{x^2}{16}+\\frac{y^2}{25}=1$$"], correctAnswer: "A" },
+    	{ question: "163. El resultado de $$\\frac{1}{2} + \\frac{1}{3}$$ es:", options: ["A) 1/5", "B) 2/5", "C) 5/6", "D) 1"], correctAnswer: "C" },
+    	{ question: "164. La solución de la ecuación $$5^{x-1} = 1$$ es:", options: ["A) 0", "B) 1", "C) 5", "D) -1"], correctAnswer: "B" },
+    	{ question: "165. La expresión $$ \\frac{a^2-b^2}{a-b} $$ es igual a:", options: ["A) $$a-b$$", "B) $$a+b$$", "C) $$a^2+b^2$$", "D) 1"], correctAnswer: "B" },
+    	{ question: "166. El volumen de un cilindro de radio 2 y altura 3 es:", options: ["A) $$6\\pi$$", "B) $$9\\pi$$", "C) $$12\\pi$$", "D) $$18\\pi$$"], correctAnswer: "C" },
+    	{ question: "167. La varianza de un conjunto de datos mide:", options: ["A) La media de los datos", "B) El cuadrado de la desviación estándar", "C) La raíz cuadrada de la desviación estándar", "D) El rango de los datos"], correctAnswer: "B" },
+    	{ question: "168. Si la base de un triángulo se duplica y la altura se reduce a la mitad, su área:", options: ["A) Se duplica", "B) Se reduce a la mitad", "C) Se mantiene igual", "D) Se cuadruplica"], correctAnswer: "C" },
+    	{ question: "169. El resultado de $$(x+1)^3$$ es:", options: ["A) $$x^3+1$$", "B) $$x^3+3x^2+3x+1$$", "C) $$x^3+3x+1$$", "D) $$x^3+x+1$$"], correctAnswer: "B" },
+    	{ question: "170. La solución de la ecuación $$|x| = -2$$ es:", options: ["A) $$x=2$$", "B) $$x=-2$$", "C) $$x=±2$$", "D) No tiene solución real"], correctAnswer: "D" },
+    	{ question: "171. La ecuación de la recta que pasa por el punto $$(1,1)$$ y es perpendicular a $$y = -x+5$$ es:", options: ["A) $$y=x$$", "B) $$y=-x+2$$", "C) $$y=x+1$$", "D) $$y=x+2$$"], correctAnswer: "A" },
+    	{ question: "172. El valor de $$\\cos(180°)$$ es:", options: ["A) 0", "B) 1", "C) -1", "D) -0.5"], correctAnswer: "C" },
+    	{ question: "173. La factorización de $$x^3+8$$ es:", options: ["A) $$(x+2)(x^2-2x+4)$$", "B) $$(x+2)^3$$", "C) $$(x+2)(x^2+4)$$", "D) $$(x-2)(x^2+2x+4)$$"], correctAnswer: "A" },
+    	{ question: "174. El 50% del 50% de 50 es:", options: ["A) 50", "B) 25", "C) 12.5", "D) 5"], correctAnswer: "C" },
+    	{ question: "175. El valor de $$\\frac{x^2+x-6}{x-2}$$ es:", options: ["A) $$x+3$$", "B) $$x-3$$", "C) $$x-2$$", "D) $$x+2$$"], correctAnswer: "A" },
+    	{ question: "176. La probabilidad de que un evento imposible ocurra es:", options: ["A) 1", "B) 0.5", "C) 0", "D) No se puede determinar"], correctAnswer: "C" },
+    	{ question: "177. El valor de $$ \\sqrt[3]{27} \\cdot \\sqrt{16} $$ es:", options: ["A) 12", "B) 6", "C) 7", "D) 10"], correctAnswer: "A" },
+   	{ question: "178. Si $$f(x)=2^x$$, ¿cuál es el valor de $$f(3)$$?", options: ["A) 6", "B) 8", "C) 9", "D) 16"], correctAnswer: "B" },
+    	{ question: "179. La ecuación de la recta que pasa por $$(1,0)$$ y $$(0,1)$$ es:", options: ["A) $$y=x+1$$", "B) $$y=-x+1$$", "C) $$y=-x-1$$", "D) $$y=x-1$$"], correctAnswer: "B" },
+    	{ question: "180. El valor de $$i^{2024}$$ es:", options: ["A) 1", "B) -1", "C) i", "D) -i"], correctAnswer: "A" },
+    	{ question: "181. La solución de la ecuación $$x^2-x-2=0$$ es:", options: ["A) $$x=2, x=-1$$", "B) $$x=-2, x=1$$", "C) $$x=2, x=1$$", "D) $$x=-2, x=-1$$"], correctAnswer: "A" },
+    	{ question: "182. El área de un círculo inscrito en un cuadrado de lado 8 es:", options: ["A) $$8\\pi$$", "B) $$16\\pi$$", "C) $$32\\pi$$", "D) $$64\\pi$$"], correctAnswer: "B" },
+    	{ question: "183. La mediana de los números 2, 8, 4, 6, 10 es:", options: ["A) 4", "B) 6", "C) 8", "D) 10"], correctAnswer: "B" },
+    	{ question: "184. El resultado de $$\\frac{1}{x+1} + \\frac{1}{x-1}$$ es:", options: ["A) $$\\frac{2x}{x^2-1}$$", "B) $$\\frac{2}{x^2-1}$$", "C) $$\\frac{2x}{x-1}$$", "D) $$\\frac{2}{x+1}$$"], correctAnswer: "A" },
+    	{ question: "185. La solución de $$5(x+1)=10$$ es:", options: ["A) 1", "B) 2", "C) 3", "D) 5"], correctAnswer: "A" },
+    	{ question: "186. El valor de $$\\tan(45°)$$ es:", options: ["A) 0", "B) 1", "C) $$\\sqrt{3}$$", "D) Indefinido"], correctAnswer: "B" },
+    	{ question: "187. La suma de las raíces de la ecuación $$2x^2-4x-6=0$$ es:", options: ["A) 2", "B) -2", "C) 4", "D) -4"], correctAnswer: "A" },
+    	{ question: "188. Si el volumen de una caja cúbica es 27, la longitud de su arista es:", options: ["A) 3", "B) 9", "C) 6", "D) 27"], correctAnswer: "A" },
+    	{ question: "189. La probabilidad de que al lanzar 3 monedas se obtengan 3 caras es:", options: ["A) 1/2", "B) 1/4", "C) 1/8", "D) 1/16"], correctAnswer: "C" },
+    	{ question: "190. La ecuación de la recta perpendicular a $$y = 3x$$ que pasa por el origen es:", options: ["A) $$y=3x$$", "B) $$y=-3x$$", "C) $$y=-\\frac{1}{3}x$$", "D) $$y=\\frac{1}{3}x$$"], correctAnswer: "C" },
+    	{ question: "191. El valor de $$10^{-2}$$ es:", options: ["A) 100", "B) 0.1", "C) 0.01", "D) -100"], correctAnswer: "C" },
+    	{ question: "192. Si la distancia entre $$(x,2)$$ y $$(3,5)$$ es 5, los posibles valores de $$x$$ son:", options: ["A) 3 y 6", "B) 0 y 6", "C) -1 y 7", "D) 3 y 7"], correctAnswer: "C" },
+    	{ question: "193. El resultado de $$\\log_{10}(100) + \\log_{10}(10)$$ es:", options: ["A) 2", "B) 3", "C) 1000", "D) 110"], correctAnswer: "B" },
+    	{ question: "194. La solución de la inecuación $$|x-2| < 3$$ es:", options: ["A) $$x>5$$ o $$x<-1$$", "B) $$-1 < x < 5$$", "C) $$x<-1$$", "D) $$x>5$$"], correctAnswer: "B" },
+    	{ question: "195. El área de un triángulo equilátero de lado 2 es:", options: ["A) 4", "B) $$\\sqrt{3}$$", "C) 3", "D) $$2\\sqrt{3}$$"], correctAnswer: "B" },
+    	{ question: "196. El valor de $$\\sin(90°) + \\cos(90°)$$ es:", options: ["A) 0", "B) 1", "C) 2", "D) -1"], correctAnswer: "B" },
+    	{ question: "197. El resultado de $$2^x = 1/4$$ es:", options: ["A) 2", "B) -2", "C) 4", "D) -4"], correctAnswer: "B" },
+    	{ question: "198. La mediana de {2, 2, 3, 5, 8, 9} es:", options: ["A) 3", "B) 4", "C) 5", "D) 4.5"], correctAnswer: "D" },
+    	{ question: "199. El área de un romboide con base 5 y altura 4 es:", options: ["A) 10", "B) 15", "C) 20", "D) 40"], correctAnswer: "C" },
+    	{ question: "200. Si $$f(x)=x-3$$, ¿cuál es la intersección con el eje y?", options: ["A) $$(3,0)$$", "B) $$(-3,0)$$", "C) $$(0,3)$$", "D) $$(0,-3)$$"], correctAnswer: "D" },
+    	{ question: "201. La factorización de $$x^2+2x+1$$ es:", options: ["A) $$(x+1)^2$$", "B) $$(x-1)^2$$", "C) $$(x+1)(x-1)$$", "D) $$x(x+2)+1$$"], correctAnswer: "A" },
+    	{ question: "202. El resultado de $$ \\sqrt{3} + 2\\sqrt{3} - \\sqrt{3} $$ es:", options: ["A) 0", "B) $$\\sqrt{3}$$", "C) $$2\\sqrt{3}$$", "D) $$3\\sqrt{3}$$"], correctAnswer: "C" },
+    	{ question: "203. La ecuación de la circunferencia con centro en $$(0,0)$$ y radio 5 es:", options: ["A) $$x^2+y^2=5$$", "B) $$x^2+y^2=25$$", "C) $$(x-5)^2+y^2=5$$", "D) $$x^2+(y-5)^2=25$$"], correctAnswer: "B" },
+    	{ question: "204. La pendiente de la recta $$2x+4y=8$$ es:", options: ["A) 2", "B) 4", "C) -1/2", "D) 1/2"], correctAnswer: "C" },
+    	{ question: "205. ¿Cuál es el valor de $$10\\% + 20\\% - 5\\%$$ de 100?", options: ["A) 25", "B) 15", "C) 5", "D) 10"], correctAnswer: "A" },
+    	{ question: "206. Si $$f(x)=x^2$$ y $$g(x)=x+1$$, entonces $$(f \\circ g)(2)$$ es:", options: ["A) 4", "B) 9", "C) 16", "D) 25"], correctAnswer: "B" },
+    	{ question: "207. La solución de $$3x - 5 = 7$$ es:", options: ["A) 4", "B) 5", "C) 6", "D) 12"], correctAnswer: "A" },
+    	{ question: "208. El resultado de $$\\log(10000)$$ es:", options: ["A) 2", "B) 3", "C) 4", "D) 5"], correctAnswer: "C" },
+    	{ question: "209. El volumen de un cono con radio 5 y altura 9 es:", options: ["A) $$75\\pi$$", "B) $$225\\pi$$", "C) $$45\\pi$$", "D) $$100\\pi$$"], correctAnswer: "A" },
+    	{ question: "210. La solución de la inecuación $$ -2x < 6 $$ es:", options: ["A) $$x < -3$$", "B) $$x > -3$$", "C) $$x < 3$$", "D) $$x > 3$$"], correctAnswer: "B" },
+    	{ question: "211. La probabilidad de sacar un número impar de un dado es:", options: ["A) 1/6", "B) 1/3", "C) 1/2", "D) 2/3"], correctAnswer: "C" },
+    	{ question: "212. La suma de los ángulos internos de un hexágono es:", options: ["A) 360°", "B) 540°", "C) 720°", "D) 900°"], correctAnswer: "C" },
+   	{ question: "213. Si se invierten $1000 con un interés compuesto del 5% anual durante 2 años, el capital final es:", options: ["A) $1100", "B) $1102.50", "C) $1050", "D) $1200"], correctAnswer: "B" },
+  	{ question: "214. La pendiente de la recta que une los puntos $$(1,1)$$ y $$(2,3)$$ es:", options: ["A) 1", "B) 2", "C) -1", "D) -2"], correctAnswer: "B" },
+    	{ question: "215. Si el perímetro de un triángulo equilátero es 21, la longitud de su lado es:", options: ["A) 3", "B) 7", "C) 10.5", "D) 21"], correctAnswer: "B" },
+    	{ question: "216. El resultado de $$ \\sqrt{100} \\cdot \\sqrt{4} $$ es:", options: ["A) 10", "B) 20", "C) 40", "D) 200"], correctAnswer: "B" },
+    	{ question: "217. La solución de la ecuación $$ x^2+4=0 $$ en los números complejos es:", options: ["A) $$±2$$", "B) $$±2i$$", "C) $$±4$$", "D) $$±4i$$"], correctAnswer: "B" },
+    	{ question: "218. La mediana del conjunto {10, 20, 30, 40} es:", options: ["A) 25", "B) 20", "C) 30", "D) 10"], correctAnswer: "A" },
+    	{ question: "219. Si $$f(x)=x^2-1$$, la intersección con el eje x es:", options: ["A) $$(1,0)$$", "B) $$(-1,0)$$", "C) $$(±1,0)$$", "D) $$(0,1)$$"], correctAnswer: "C" },
+    	{ question: "220. El resultado de $$\\log_2(16/2)$$ es:", options: ["A) 3", "B) 4", "C) 5", "D) 8"], correctAnswer: "A" },
+    	{ question: "221. La solución de la ecuación $$ 4x+2=2x+8 $$ es:", options: ["A) 1", "B) 2", "C) 3", "D) 4"], correctAnswer: "C" },
+    	{ question: "222. El área de un círculo con diámetro 8 es:", options: ["A) $$4\\pi$$", "B) $$8\\pi$$", "C) $$16\\pi$$", "D) $$64\\pi$$"], correctAnswer: "C" },
+    	{ question: "223. El valor de $$i^{2023}$$ es:", options: ["A) 1", "B) -1", "C) i", "D) -i"], correctAnswer: "D" },
+    	{ question: "224. La mediana de los números 1, 1, 1, 5, 8, 9 es:", options: ["A) 1", "B) 5", "C) 1, 5", "D) 3"], correctAnswer: "D" },
+    	{ question: "225. Si $$x/2 = 5$$, entonces $$x$$ es:", options: ["A) 2.5", "B) 5", "C) 10", "D) 20"], correctAnswer: "C" },
+    	{ question: "226. El resultado de $$(a+b)(a-b)$$ es:", options: ["A) $$a^2-b^2$$", "B) $$a^2+b^2$$", "C) $$(a-b)^2$$", "D) $$(a+b)^2$$"], correctAnswer: "A" },
+    	{ question: "227. La solución de $$|x-1|=-3$$ es:", options: ["A) 4", "B) -2", "C) $$x=4$$ o $$x=-2$$", "D) No tiene solución real"], correctAnswer: "D" },
+    	{ question: "228. El volumen de un prisma rectangular con largo 5, ancho 4 y alto 3 es:", options: ["A) 12", "B) 20", "C) 60", "D) 30"], correctAnswer: "C" },
+    	{ question: "229. El resultado de $$\\frac{x^2-1}{x+1}$$ es:", options: ["A) $$x+1$$", "B) $$x-1$$", "C) $$(x-1)^2$$", "D) $$x^2$$"], correctAnswer: "B" },
+    	{ question: "230. ¿Cuál es el 10% de 20% de 1000?", options: ["A) 20", "B) 200", "C) 100", "D) 2000"], correctAnswer: "A" },
+    	{ question: "231. El valor de $$\\tan(90°)$$ es:", options: ["A) 0", "B) 1", "C) -1", "D) Indefinido"], correctAnswer: "D" },
+    	{ question: "232. La ecuación de la recta paralela a $$y=2x+5$$ que pasa por $$(1,1)$$ es:", options: ["A) $$y=2x-1$$", "B) $$y=2x+1$$", "C) $$y=-2x+3$$", "D) $$y=x$$"], correctAnswer: "A" },
+    	{ question: "233. La probabilidad de obtener un 3 en un dado es:", options: ["A) 1/6", "B) 1/3", "C) 1/2", "D) 3/6"], correctAnswer: "A" },
+    	{ question: "234. La factorización de $$x^2+5x+6$$ es:", options: ["A) $$(x+2)(x+3)$$", "B) $$(x-2)(x-3)$$", "C) $$(x+1)(x+6)$$", "D) $$(x-1)(x-6)$$"], correctAnswer: "A" },
+    	{ question: "235. El resultado de $$\\frac{2}{5} + \\frac{3}{10}$$ es:", options: ["A) 1/2", "B) 7/10", "C) 5/15", "D) 6/10"], correctAnswer: "B" },
+    	{ question: "236. Si el área de un círculo es $$49\\pi$$, su radio es:", options: ["A) 7", "B) 14", "C) 49", "D) 98"], correctAnswer: "A" },
+    	{ question: "237. El valor de $$\\sin(0°)$$ es:", options: ["A) 0", "B) 1", "C) -1", "D) 0.5"], correctAnswer: "A" },
+    	{ question: "238. La solución de la ecuación $$x^2-10x+25=0$$ es:", options: ["A) 5", "B) -5", "C) $$x=5$$ o $$x=-5$$", "D) No tiene solución real"], correctAnswer: "A" },
+    	{ question: "239. El resultado de $$\\log_2(2)$$ es:", options: ["A) 0", "B) 1", "C) 2", "D) 4"], correctAnswer: "B" },
+    	{ question: "240. El 40% de 80 es:", options: ["A) 20", "B) 32", "C) 40", "D) 50"], correctAnswer: "B" },
+    	{ question: "241. El valor de $$\\frac{2x^2+4x}{2x}$$ es:", options: ["A) $$x+2$$", "B) $$x+4$$", "C) $$x^2+2$$", "D) $$2x+4$$"], correctAnswer: "A" },
+    	{ question: "242. La ecuación de la recta que pasa por $$(1,2)$$ y $$(2,4)$$ es:", options: ["A) $$y=2x$$", "B) $$y=2x+1$$", "C) $$y=-2x+4$$", "D) $$y=x+1$$"], correctAnswer: "A" },
+    	{ question: "243. La moda del conjunto {10, 15, 10, 20, 15, 10} es:", options: ["A) 10", "B) 15", "C) 20", "D) No tiene moda"], correctAnswer: "A" },
+    	{ question: "244. Si el radio de una circunferencia se triplica, su perímetro aumenta en un factor de:", options: ["A) 3", "B) 6", "C) 9", "D) 1/3"], correctAnswer: "A" },
+    	{ question: "245. La solución de la ecuación $$10^{x-3}=100$$ es:", options: ["A) 3", "B) 5", "C) 1", "D) 2"], correctAnswer: "B" },
+    	{ question: "246. El valor de $$i^7$$ es:", options: ["A) 1", "B) -1", "C) i", "D) -i"], correctAnswer: "D" },
+    	{ question: "247. Si $$f(x) = x+2$$ y $$g(x) = 3x$$, entonces $$(f \\circ g)(x)$$ es:", options: ["A) $$3x+2$$", "B) $$3x+6$$", "C) $$x+2$$", "D) $$x+6$$"], correctAnswer: "A" },
+    	{ question: "248. La media aritmética de los números 2, 4, 6, 8 es:", options: ["A) 5", "B) 4", "C) 6", "D) 20"], correctAnswer: "A" },
+    	{ question: "249. El volumen de un cilindro con radio 1 y altura 10 es:", options: ["A) $$10\\pi$$", "B) $$5\\pi$$", "C) $$100\\pi$$", "D) 10"], correctAnswer: "A" },
+    	{ question: "250. La solución de la ecuación $$4x-3 = 9$$ es:", options: ["A) 2", "B) 3", "C) 4", "D) 12"], correctAnswer: "B" },
+    	{ question: "251. El resultado de $$\\sqrt{9+16}$$ es:", options: ["A) 5", "B) 7", "C) 25", "D) 12"], correctAnswer: "A" },
+    	{ question: "252. Si $$a^n \\cdot a^m = a^p$$, entonces $$p$$ es:", options: ["A) $$n+m$$", "B) $$n-m$$", "C) $$n \\cdot m$$", "D) $$n/m$$"], correctAnswer: "A" },
+    	{ question: "253. El valor de $$\\log_{3}(1/9)$$ es:", options: ["A) 2", "B) -2", "C) 3", "D) -3"], correctAnswer: "B" },
+    	{ question: "254. La ecuación de la parábola $$x=y^2$$ tiene su vértice en:", options: ["A) $$(0,0)$$", "B) $$(1,0)$$", "C) $$(0,1)$$", "D) $$(-1,0)$$"], correctAnswer: "A" },
+    	{ question: "255. La probabilidad de que al lanzar un dado se obtenga un número primo es:", options: ["A) 1/6", "B) 1/3", "C) 1/2", "D) 2/3"], correctAnswer: "C" },
+    	{ question: "256. El resultado de $$\\sqrt{75}$$ es:", options: ["A) $$5\\sqrt{3}$$", "B) $$3\\sqrt{5}$$", "C) $$25\\sqrt{3}$$", "D) $$5\\sqrt{15}$$"], correctAnswer: "A" },
+    	{ question: "257. El 75% de 400 es:", options: ["A) 100", "B) 200", "C) 300", "D) 350"], correctAnswer: "C" },
+    	{ question: "258. Si $$f(x)=x^2+2x$$, entonces $$f(-1)$$ es:", options: ["A) -1", "B) 1", "C) 0", "D) 3"], correctAnswer: "A" },
+    	{ question: "259. La solución del sistema $$x-y=1$$ y $$x+y=5$$ es:", options: ["A) $$(3,2)$$", "B) $$(2,3)$$", "C) $$(4,1)$$", "D) $$(1,4)$$"], correctAnswer: "A" },
+    	{ question: "260. El valor de $$i^2$$ es:", options: ["A) 1", "B) -1", "C) i", "D) -i"], correctAnswer: "B" },
+    	{ question: "261. El volumen de un cubo de arista 2 es:", options: ["A) 4", "B) 8", "C) 16", "D) 6"], correctAnswer: "B" },
+    	{ question: "262. La media de los números 1, 1, 1, 1, 10 es:", options: ["A) 1", "B) 2", "C) 3", "D) 10"], correctAnswer: "B" },
+    	{ question: "263. La pendiente de una recta horizontal es:", options: ["A) 1", "B) -1", "C) 0", "D) Indefinida"], correctAnswer: "C" },
+    	{ question: "264. La solución de $$2x+4 \\le 10$$ es:", options: ["A) $$x \\le 3$$", "B) $$x \\ge 3$$", "C) $$x \\le 7$$", "D) $$x \\ge 7$$"], correctAnswer: "A" },
+    	{ question: "265. El resultado de $$\\frac{x^2+x-2}{x+2}$$ es:", options: ["A) $$x+1$$", "B) $$x-1$$", "C) $$x-2$$", "D) $$x+2$$"], correctAnswer: "B" },
+    	{ question: "266. Si se lanza una moneda y un dado, la probabilidad de obtener sello y un número mayor que 4 es:", options: ["A) 1/12", "B) 1/6", "C) 1/4", "D) 1/3"], correctAnswer: "B" },
+    	{ question: "267. La ecuación de la recta que pasa por los puntos $$(0,0)$$ y $$(2,4)$$ es:", options: ["A) $$y=2x$$", "B) $$y=x$$", "C) $$y=4x$$", "D) $$y=-2x$$"], correctAnswer: "A" },
+    	{ question: "268. El valor de $$3! - 2!$$ es:", options: ["A) 1", "B) 3", "C) 4", "D) 5"], correctAnswer: "C" },
+    	{ question: "269. Si $$x^2=25$$, los posibles valores de $$x$$ son:", options: ["A) 5", "B) -5", "C) $$±5$$", "D) 25"], correctAnswer: "C" },
+    	{ question: "270. La solución de $$|x-5|=2$$ es:", options: ["A) $$x=7$$ o $$x=3$$", "B) $$x=7$$", "C) $$x=3$$", "D) No tiene solución"], correctAnswer: "A" },
+    	{ question: "271. El resultado de $$\\frac{x^2-4}{x-2}$$ es:", options: ["A) $$x+2$$", "B) $$x-2$$", "C) 2", "D) x"], correctAnswer: "A" },
+    	{ question: "272. Si el volumen de un cubo es 8, la longitud de su arista es:", options: ["A) 2", "B) 4", "C) 8", "D) 16"], correctAnswer: "A" },
+    	{ question: "273. El 25% de 200 es:", options: ["A) 25", "B) 50", "C) 100", "D) 150"], correctAnswer: "B" },
+    	{ question: "274. La moda del conjunto {1, 5, 2, 8, 3, 5} es:", options: ["A) 5", "B) 2", "C) 3", "D) 8"], correctAnswer: "A" },
+    	{ question: "275. El valor de $$\\log_2(1)$$ es:", options: ["A) 1", "B) 0", "C) 2", "D) 1/2"], correctAnswer: "B" },
+    	{ question: "276. Si $$f(x)=2x+1$$, la intersección con el eje x es:", options: ["A) $$(1,0)$$", "B) $$(-1/2,0)$$", "C) $$(0,1)$$", "D) $$(1/2,0)$$"], correctAnswer: "B" },
+    	{ question: "277. La solución de la ecuación $$x^2+2x-3=0$$ es:", options: ["A) $$x=1$$ o $$x=-3$$", "B) $$x=-1$$ o $$x=3$$", "C) $$x=1$$ o $$x=3$$", "D) $$x=-1$$ o $$x=-3$$"], correctAnswer: "A" },
+    	{ question: "278. El área de un rectángulo con lados de 6 cm y 8 cm es:", options: ["A) 14 cm²", "B) 28 cm²", "C) 48 cm²", "D) 96 cm²"], correctAnswer: "C" },
+    	{ question: "279. La pendiente de la recta $$3x-y=5$$ es:", options: ["A) 3", "B) -3", "C) 5", "D) -5"], correctAnswer: "A" },
+    	{ question: "280. El resultado de $$(x-3)^2$$ es:", options: ["A) $$x^2-9$$", "B) $$x^2+9$$", "C) $$x^2-6x+9$$", "D) $$x^2+6x+9$$"], correctAnswer: "C" },
+    	{ question: "281. La solución de $$2^{x-1}=4$$ es:", options: ["A) 1", "B) 2", "C) 3", "D) 4"], correctAnswer: "C" },
+    	{ question: "282. La distancia entre el origen y el punto $$(1,1)$$ es:", options: ["A) 1", "B) 2", "C) $$\\sqrt{2}$$", "D) 1/2"], correctAnswer: "C" },
+    	{ question: "283. La mediana de los números 5, 2, 8 es:", options: ["A) 2", "B) 5", "C) 8", "D) 15"], correctAnswer: "B" },
+    	{ question: "284. El resultado de $$\\frac{x^2+2x-3}{x-1}$$ es:", options: ["A) $$x+3$$", "B) $$x-3$$", "C) $$x+1$$", "D) $$x-1$$"], correctAnswer: "A" },
+    	{ question: "285. El valor de $$ \\sqrt{12} + \\sqrt{3} $$ es:", options: ["A) $$\\sqrt{15}$$", "B) $$3\\sqrt{3}$$", "C) $$4\\sqrt{3}$$", "D) $$5\\sqrt{3}$$"], correctAnswer: "B" },
+    	{ question: "286. El área de un trapecio con bases 5 y 7 y altura 4 es:", options: ["A) 12", "B) 24", "C) 48", "D) 35"], correctAnswer: "B" },
+    	{ question: "287. La probabilidad de que al lanzar dos dados, la suma sea 2 es:", options: ["A) 1/36", "B) 1/18", "C) 1/12", "D) 1/6"], correctAnswer: "A" },
+    	{ question: "288. La solución de la ecuación $$5x = 0$$ es:", options: ["A) 0", "B) 1", "C) 5", "D) No tiene solución"], correctAnswer: "A" },
+    	{ question: "289. El resultado de $$i^{41}$$ es:", options: ["A) 1", "B) -1", "C) i", "D) -i"], correctAnswer: "C" },
+    	{ question: "290. La factorización de $$x^2-7x+12$$ es:", options: ["A) $$(x-3)(x-4)$$", "B) $$(x+3)(x+4)$$", "C) $$(x-3)(x+4)$$", "D) $$(x+3)(x-4)$$"], correctAnswer: "A" },
+    	{ question: "291. El valor de $$\\cos(60°)$$ es:", options: ["A) 1/2", "B) $$\\sqrt{3}/2$$", "C) $$\\sqrt{2}/2$$", "D) 1"], correctAnswer: "A" },
+    	{ question: "292. Si $$f(x)=3x-1$$ y $$g(x)=x^2$$, entonces $$(g \\circ f)(x)$$ es:", options: ["A) $$3x^2-1$$", "B) $$(3x-1)^2$$", "C) $$9x^2-6x+1$$", "D) $$9x^2+1$$"], correctAnswer: "B" },
+    	{ question: "293. La media aritmética de los números 1, 2, 3, 4, 5, 6 es:", options: ["A) 3", "B) 3.5", "C) 4", "D) 21"], correctAnswer: "B" },
+    	{ question: "294. El resultado de $$\\frac{x^5y^3}{xy^2}$$ es:", options: ["A) $$x^4y$$", "B) $$x^6y^5$$", "C) $$x^4y^5$$", "D) $$xy$$"], correctAnswer: "A" },
+    	{ question: "295. El área de un rombo con diagonales de 4 cm y 6 cm es:", options: ["A) 10 cm²", "B) 12 cm²", "C) 24 cm²", "D) 40 cm²"], correctAnswer: "B" },
+    	{ question: "296. Si un número se aumenta en un 10% y luego se reduce en un 10%, el resultado es:", options: ["A) El mismo número", "B) 1% más", "C) 1% menos", "D) 10% menos"], correctAnswer: "C" },
+    	{ question: "297. La solución de la ecuación $$2^{x+1}=8$$ es:", options: ["A) 1", "B) 2", "C) 3", "D) 4"], correctAnswer: "B" },
+    	{ question: "298. El valor de $$\\log_{10}(0.01)$$ es:", options: ["A) -1", "B) -2", "C) 2", "D) 100"], correctAnswer: "B" },
+    	{ question: "299. La distancia entre los puntos $$(0,0)$$ y $$(3,-4)$$ es:", options: ["A) 3", "B) 4", "C) 5", "D) 7"], correctAnswer: "C" },
+    	{ question: "300. Si el radio de una esfera se reduce a la mitad, su volumen se reduce en un factor de:", options: ["A) 1/2", "B) 1/4", "C) 1/8", "D) 1/16"], correctAnswer: "C" },
+    	{ question: "301. La factorización de $$x^2-81$$ es:", options: ["A) $$(x-9)^2$$", "B) $$(x+9)^2$$", "C) $$(x-9)(x+9)$$", "D) $$(x-3)(x-27)$$"], correctAnswer: "C" },
+    	{ question: "302. El valor de $$i^{3}$$ es:", options: ["A) 1", "B) -1", "C) i", "D) -i"], correctAnswer: "D" },
+    	{ question: "303. La solución de la inecuación $$2x-3 < 5$$ es:", options: ["A) $$x<4$$", "B) $$x>4$$", "C) $$x<8$$", "D) $$x>8$$"], correctAnswer: "A" },
+    	{ question: "304. La ecuación de la recta perpendicular a $$y = -x+2$$ que pasa por el punto $$(1,3)$$ es:", options: ["A) $$y=x+2$$", "B) $$y=-x+4$$", "C) $$y=x-2$$", "D) $$y=-x+3$$"], correctAnswer: "A" },
+    	{ question: "305. El volumen de un cilindro con radio 2 y altura 5 es:", options: ["A) $$10\\pi$$", "B) $$20\\pi$$", "C) $$25\\pi$$", "D) $$50\\pi$$"], correctAnswer: "B" },
+    	{ question: "306. La mediana del conjunto {2, 2, 2, 2, 8} es:", options: ["A) 2", "B) 8", "C) 4", "D) 5"], correctAnswer: "A" },
+    	{ question: "307. La solución del sistema $$3x+y=7$$ y $$x+y=3$$ es:", options: ["A) $$(2,1)$$", "B) $$(1,2)$$", "C) $$(3,0)$$", "D) $$(0,3)$$"], correctAnswer: "A" },
+    	{ question: "308. El 80% del 25% de 200 es:", options: ["A) 40", "B) 80", "C) 160", "D) 50"], correctAnswer: "A" },
+    	{ question: "309. La ecuación de la circunferencia con centro en $$(1,-1)$$ y radio 3 es:", options: ["A) $$(x-1)^2+(y+1)^2=3$$", "B) $$(x+1)^2+(y-1)^2=3$$", "C) $$(x-1)^2+(y+1)^2=9$$", "D) $$(x+1)^2+(y-1)^2=9$$"], correctAnswer: "C" },
+    	{ question: "310. El valor de $$\\sin(180°)$$ es:", options: ["A) 1", "B) -1", "C) 0", "D) 0.5"], correctAnswer: "C" },
+    	{ question: "311. La factorización de $$x^2+7x+10$$ es:", options: ["A) $$(x+2)(x+5)$$", "B) $$(x-2)(x-5)$$", "C) $$(x+1)(x+10)$$", "D) $$(x-1)(x-10)$$"], correctAnswer: "A" },
+    	{ question: "312. La solución de $$2^{2x}=16$$ es:", options: ["A) 1", "B) 2", "C) 3", "D) 4"], correctAnswer: "B" },
+    	{ question: "313. La pendiente de la recta $$y=-5x$$ es:", options: ["A) 5", "B) -5", "C) 1", "D) -1"], correctAnswer: "B" },
+    	{ question: "314. La probabilidad de que al lanzar dos dados, la suma sea menor o igual a 3 es:", options: ["A) 1/36", "B) 1/18", "C) 1/12", "D) 1/6"], correctAnswer: "C" },
+    	{ question: "315. El área de un círculo circunscrito en un cuadrado de lado 4 es:", options: ["A) $$16\\pi$$", "B) $$8\\pi$$", "C) $$4\\pi$$", "D) $$2\\pi$$"], correctAnswer: "B" },
+    	{ question: "316. El resultado de $$\\log_{5}(25)$$ es:", options: ["A) 1", "B) 2", "C) 5", "D) 10"], correctAnswer: "B" },
+    	{ question: "317. La solución de la ecuación $$x^2-x-6=0$$ es:", options: ["A) $$x=3, x=-2$$", "B) $$x=-3, x=2$$", "C) $$x=3, x=2$$", "D) $$x=-3, x=-2$$"], correctAnswer: "A" },
+    	{ question: "318. El valor de $$i^{2025}$$ es:", options: ["A) 1", "B) -1", "C) i", "D) -i"], correctAnswer: "C" },
+    	{ question: "319. Si $$f(x)=x^3$$, la intersección con el eje y es:", options: ["A) $$(1,0)$$", "B) $$(0,1)$$", "C) $$(0,0)$$", "D) $$(-1,0)$$"], correctAnswer: "C" },
+    	{ question: "320. La mediana de los números 1, 3, 5, 7, 9, 11 es:", options: ["A) 5", "B) 6", "C) 7", "D) 8"], correctAnswer: "B" },
+    	{ question: "321. La solución de la inecuación $$3(x-1) \\ge 9$$ es:", options: ["A) $$x \\ge 4$$", "B) $$x \\le 4$$", "C) $$x \\ge 3$$", "D) $$x \\le 3$$"], correctAnswer: "A" },
+    	{ question: "322. El resultado de $$\\sqrt{81} / \\sqrt{9}$$ es:", options: ["A) 3", "B) 9", "C) 1", "D) 27"], correctAnswer: "A" },
+    	{ question: "323. La distancia entre $$(1,2)$$ y $$(4,6)$$ es:", options: ["A) 3", "B) 4", "C) 5", "D) 7"], correctAnswer: "C" },
+    	{ question: "324. El 10% de un número es 5. ¿Cuál es el número?", options: ["A) 50", "B) 25", "C) 10", "D) 500"], correctAnswer: "A" },
+    	{ question: "325. El volumen de una pirámide con base cuadrada de lado 6 y altura 5 es:", options: ["A) 30", "B) 60", "C) 90", "D) 120"], correctAnswer: "B" },
+    	{ question: "326. La ecuación de la recta que pasa por $$(2,1)$$ y es paralela a $$y=-2x+5$$ es:", options: ["A) $$y=-2x+5$$", "B) $$y=2x-3$$", "C) $$y=-2x+1$$", "D) $$y=-2x+3$$"], correctAnswer: "D" },
+    	{ question: "327. El resultado de $$(2x-1)^2$$ es:", options: ["A) $$4x^2-1$$", "B) $$4x^2+1$$", "C) $$4x^2-4x+1$$", "D) $$2x^2-4x+1$$"], correctAnswer: "C" },
+    	{ question: "328. El valor de $$\\log_{10}(1/1000)$$ es:", options: ["A) -3", "B) -2", "C) -1", "D) 3"], correctAnswer: "A" },
+    	{ question: "329. Si $$f(x)=2x+1$$, ¿cuál es el valor de $$x$$ cuando $$f(x)=7$$?", options: ["A) 1", "B) 2", "C) 3", "D) 4"], correctAnswer: "C" },
+    	{ question: "330. El perímetro de un círculo con radio 7 es:", options: ["A) $$7\\pi$$", "B) $$14\\pi$$", "C) $$49\\pi$$", "D) $$21\\pi$$"], correctAnswer: "B" },
+    	{ question: "331. El resultado de $$\\sqrt{18} - \\sqrt{8}$$ es:", options: ["A) $$\\sqrt{10}$$", "B) $$\\sqrt{2}$$", "C) $$2\\sqrt{2}$$", "D) $$3\\sqrt{2}$$"], correctAnswer: "B" },
+    	{ question: "332. La solución de la ecuación $$x^2=36$$ es:", options: ["A) $$6$$", "B) $$-6$$", "C) $$±6$$", "D) $$18$$"], correctAnswer: "C" },
+    	{ question: "333. La probabilidad de que al lanzar un dado se obtenga un número menor que 3 es:", options: ["A) 1/6", "B) 1/3", "C) 1/2", "D) 2/3"], correctAnswer: "B" },
+    	{ question: "334. El 50% de 50 es:", options: ["A) 10", "B) 25", "C) 50", "D) 100"], correctAnswer: "B" },
+    	{ question: "335. La ecuación de la hipérbola con vértices en $$(±2, 0)$$ y asíntotas $$y=±2x$$ es:", options: ["A) $$\\frac{x^2}{4}-\\frac{y^2}{16}=1$$", "B) $$\\frac{x^2}{16}-\\frac{y^2}{4}=1$$", "C) $$\\frac{x^2}{4}-\\frac{y^2}{2}=1$$", "D) $$\\frac{y^2}{4}-\\frac{x^2}{16}=1$$"], correctAnswer: "A" },
+    	{ question: "336. La moda del conjunto {1, 5, 2, 8, 3} es:", options: ["A) 1", "B) 2", "C) 5", "D) No tiene moda"], correctAnswer: "D" },
+    	{ question: "337. Si $$a^{10} / a^5 = a^p$$, entonces $$p$$ es:", options: ["A) 2", "B) 5", "C) 15", "D) 50"], correctAnswer: "B" },
+    	{ question: "338. El valor de $$\\tan(0°)$$ es:", options: ["A) 0", "B) 1", "C) -1", "D) Indefinido"], correctAnswer: "A" },
+    	{ question: "339. La solución de $$x^2+4x+4=0$$ es:", options: ["A) 2", "B) -2", "C) $$±2$$", "D) No tiene solución"], correctAnswer: "B" },
+    	{ question: "340. La media aritmética de los números 1, 2, 3, 4, 5 es:", options: ["A) 3", "B) 3.5", "C) 4", "D) 15"], correctAnswer: "A" },
+    	{ question: "341. La factorización de $$x^3-1$$ es:", options: ["A) $$(x-1)(x^2+x+1)$$", "B) $$(x-1)^3$$", "C) $$(x-1)(x^2+1)$$", "D) $$(x+1)(x^2-x+1)$$"], correctAnswer: "A" },
+    	{ question: "342. La ecuación de la recta que pasa por los puntos $$(2,5)$$ y $$(2,10)$$ es:", options: ["A) $$y=2x$$", "B) $$x=2$$", "C) $$y=5$$", "D) $$y=10$$"], correctAnswer: "B" },
+    	{ question: "343. El valor de $$i^{43}$$ es:", options: ["A) 1", "B) -1", "C) i", "D) -i"], correctAnswer: "D" },
+    	{ question: "344. El resultado de $$\\frac{x+2}{x^2+3x+2}$$ es:", options: ["A) $$\\frac{1}{x+1}$$", "B) $$x+1$$", "C) $$\\frac{1}{x+2}$$", "D) $$x+2$$"], correctAnswer: "A" },
+    	{ question: "345. La distancia entre $$(1,1)$$ y $$(1,5)$$ es:", options: ["A) 2", "B) 3", "C) 4", "D) 5"], correctAnswer: "C" },
+    	{ question: "346. El valor de $$ \\cos(0°) + \\sin(0°) $$ es:", options: ["A) 0", "B) 1", "C) -1", "D) 2"], correctAnswer: "B" },
+    	{ question: "347. El área de un cuadrado de diagonal 10 es:", options: ["A) 50", "B) 100", "C) 25", "D) 10"], correctAnswer: "A" },
+    	{ question: "348. El 20% de un número es 20. ¿Cuál es el número?", options: ["A) 10", "B) 20", "C) 100", "D) 200"], correctAnswer: "C" },
+    	{ question: "349. La solución de la ecuación $$ \\log_2(x-1) = 3 $$ es:", options: ["A) 4", "B) 7", "C) 8", "D) 9"], correctAnswer: "D" },
+    	{ question: "350. La mediana de {1, 2, 3, 4, 5, 6, 7} es:", options: ["A) 3", "B) 4", "C) 5", "D) 7"], correctAnswer: "B" },
+    	{ question: "351. El resultado de $$2^3 \\cdot 2^2$$ es:", options: ["A) $$2^5$$", "B) $$2^6$$", "C) $$4^5$$", "D) $$4^6$$"], correctAnswer: "A" },
+    	{ question: "352. Si $$f(x)=x^2$$, la intersección con el eje y es:", options: ["A) $$(1,0)$$", "B) $$(0,1)$$", "C) $$(0,0)$$", "D) $$(1,1)$$"], correctAnswer: "C" },
+    	{ question: "353. La solución de la ecuación $$5(x+2)=15$$ es:", options: ["A) 1", "B) 2", "C) 3", "D) 5"], correctAnswer: "A" },
+    	{ question: "354. La probabilidad de que al lanzar dos dados, la suma sea 13 es:", options: ["A) 1/36", "B) 1/12", "C) 0", "D) 1"], correctAnswer: "C" },
+    	{ question: "355. El valor de $$i^{42}$$ es:", options: ["A) 1", "B) -1", "C) i", "D) -i"], correctAnswer: "B" },
+    	{ question: "356. El área de un triángulo con base 6 y altura 4 es:", options: ["A) 12", "B) 18", "C) 24", "D) 10"], correctAnswer: "A" },
+    	{ question: "357. El 1% de 1000 es:", options: ["A) 1", "B) 10", "C) 100", "D) 1000"], correctAnswer: "B" },
+    	{ question: "358. La mediana de los números 1, 1, 5, 5, 5, 10 es:", options: ["A) 1", "B) 5", "C) 3", "D) 6"], correctAnswer: "B" },
+    	{ question: "359. La solución de $$x^2-1=0$$ es:", options: ["A) 1", "B) -1", "C) $$±1$$", "D) 0"], correctAnswer: "C" },
+    	{ question: "360. El volumen de un cono con radio 3 y altura 3 es:", options: ["A) $$9\\pi$$", "B) $$12\\pi$$", "C) $$3\\pi$$", "D) $$27\\pi$$"], correctAnswer: "A" },
+    	{ question: "361. La pendiente de la recta $$x+y=10$$ es:", options: ["A) 1", "B) -1", "C) 10", "D) -10"], correctAnswer: "B" },
+    	{ question: "362. El resultado de $$\\sqrt[3]{-8}$$ es:", options: ["A) -2", "B) 2", "C) -4", "D) 4"], correctAnswer: "A" },
+    	{ question: "363. La solución de la inecuación $$-x+1 > 3$$ es:", options: ["A) $$x > 2$$", "B) $$x < 2$$", "C) $$x > -2$$", "D) $$x < -2$$"], correctAnswer: "D" },
+    	{ question: "364. El área de un romboide con base 8 y altura 5 es:", options: ["A) 13", "B) 20", "C) 40", "D) 65"], correctAnswer: "C" },
+    	{ question: "365. Si $$f(x)=x-1$$ y $$g(x)=x+1$$, entonces $$(f \\cdot g)(x)$$ es:", options: ["A) $$x^2-1$$", "B) $$x^2+1$$", "C) $$x-1$$", "D) $$x+1$$"], correctAnswer: "A" },
+    	{ question: "366. La probabilidad de sacar un número impar y mayor que 3 en un dado es:", options: ["A) 1/6", "B) 1/3", "C) 1/2", "D) 2/3"], correctAnswer: "A" },
+    	{ question: "367. El valor de $$ \\sin^2(30°) + \\cos^2(30°) $$ es:", options: ["A) 1", "B) 0.5", "C) 0", "D) 2"], correctAnswer: "A" },
+    	{ question: "368. El 70% de 50 es:", options: ["A) 7", "B) 14", "C) 35", "D) 50"], correctAnswer: "C" },
+    	{ question: "369. La ecuación de la recta que pasa por los puntos $$(1,1)$$ y $$(3,5)$$ es:", options: ["A) $$y=2x-1$$", "B) $$y=2x+1$$", "C) $$y=-2x+3$$", "D) $$y=x$$"], correctAnswer: "A" },
+    	{ question: "370. El resultado de $$\\log_2(32) - \\log_2(8)$$ es:", options: ["A) 2", "B) 3", "C) 4", "D) 8"], correctAnswer: "A" },
+    	{ question: "371. La solución de la ecuación $$ x^2+5x+6=0 $$ es:", options: ["A) $$x=-2, x=-3$$", "B) $$x=2, x=3$$", "C) $$x=2, x=-3$$", "D) $$x=-2, x=3$$"], correctAnswer: "A" },
+    	{ question: "372. La distancia entre el punto $$(3,0)$$ y el origen es:", options: ["A) 3", "B) 0", "C) 1", "D) -3"], correctAnswer: "A" },
+    	{ question: "373. La mediana de los números 1, 1, 1, 1, 1, 1, 10 es:", options: ["A) 1", "B) 10", "C) 5.5", "D) 6.5"], correctAnswer: "A" },
+    	{ question: "374. Si $$f(x)=x-2$$, entonces $$f^{-1}(x)$$ es:", options: ["A) $$x+2$$", "B) $$x-2$$", "C) $$\\frac{1}{x+2}$$", "D) $$\\frac{1}{x-2}$$"], correctAnswer: "A" },
+    	{ question: "375. La solución del sistema $$x+y=10$$ y $$x-y=2$$ es:", options: ["A) $$(6,4)$$", "B) $$(4,6)$$", "C) $$(5,5)$$", "D) $$(8,2)$$"], correctAnswer: "A" },
+    	{ question: "376. El 30% del 20% de 500 es:", options: ["A) 30", "B) 60", "C) 100", "D) 150"], correctAnswer: "A" },
+    	{ question: "377. El valor de $$ \\frac{2^{5}}{2^{3}} $$ es:", options: ["A) 4", "B) 2", "C) 8", "D) 16"], correctAnswer: "A" },
+    	{ question: "378. La ecuación de la parábola con vértice en $$(0,0)$$ y foco en $$(0,4)$$ es:", options: ["A) $$x^2 = 16y$$", "B) $$y^2=16x$$", "C) $$x^2 = 4y$$", "D) $$y^2=4x$$"], correctAnswer: "A" },
+    	{ question: "379. El área de un triángulo equilátero de lado 4 es:", options: ["A) $$4\\sqrt{3}$$", "B) $$2\\sqrt{3}$$", "C) 8", "D) 16"], correctAnswer: "A" },
+    	{ question: "380. El valor de $$i^{44}$$ es:", options: ["A) 1", "B) -1", "C) i", "D) -i"], correctAnswer: "A" },
+    	{ question: "381. La solución de la ecuación $$ \\log_3(x) = 2 $$ es:", options: ["A) 2", "B) 3", "C) 6", "D) 9"], correctAnswer: "D" },
+    	{ question: "382. El volumen de un cono con radio 2 y altura 6 es:", options: ["A) $$8\\pi$$", "B) $$24\\pi$$", "C) $$12\\pi$$", "D) $$4\\pi$$"], correctAnswer: "A" },
+    	{ question: "383. La solución de la inecuación $$ 5x > 15 $$ es:", options: ["A) $$x>3$$", "B) $$x<3$$", "C) $$x>10$$", "D) $$x<10$$"], correctAnswer: "A" },
+    	{ question: "384. La distancia entre $$(0,3)$$ y $$(4,0)$$ es:", options: ["A) 3", "B) 4", "C) 5", "D) 7"], correctAnswer: "C" },
+    	{ question: "385. La media aritmética de los números 10, 20, 30 es:", options: ["A) 20", "B) 30", "C) 10", "D) 60"], correctAnswer: "A" },
+    	{ question: "386. El resultado de $$\\sqrt{7} \\cdot \\sqrt{7}$$ es:", options: ["A) 7", "B) 14", "C) 49", "D) $$\\sqrt{14}$$"], correctAnswer: "A" },
+    	{ question: "387. La probabilidad de que al lanzar un dado se obtenga un número compuesto es:", options: ["A) 1/6", "B) 1/3", "C) 1/2", "D) 2/3"], correctAnswer: "B" },
+    	{ question: "388. La solución de la ecuación $$ 2x+1 = 5 $$ es:", options: ["A) 1", "B) 2", "C) 3", "D) 4"], correctAnswer: "B" },
+    	{ question: "389. El 5% de 200 es:", options: ["A) 5", "B) 10", "C) 20", "D) 50"], correctAnswer: "B" },
+    	{ question: "390. La ecuación de la recta que pasa por los puntos $$(1,2)$$ y $$(3,2)$$ es:", options: ["A) $$x=1$$", "B) $$y=2$$", "C) $$y=2x$$", "D) $$y=x$$"], correctAnswer: "B" },
+    	{ question: "391. El resultado de $$\\frac{1}{x} + \\frac{1}{y}$$ es:", options: ["A) $$\\frac{2}{x+y}$$", "B) $$\\frac{x+y}{xy}$$", "C) $$\\frac{x-y}{xy}$$", "D) $$\\frac{xy}{x+y}$$"], correctAnswer: "B" },
+    	{ question: "392. La mediana de {10, 20, 30, 40, 50} es:", options: ["A) 20", "B) 30", "C) 40", "D) 50"], correctAnswer: "B" },
+    	{ question: "393. La solución de la ecuación $$ \\log_2(x+3) = 4 $$ es:", options: ["A) 13", "B) 16", "C) 1", "D) 12"], correctAnswer: "A" },
+    	{ question: "394. El valor de $$ \\cos(90°) $$ es:", options: ["A) 0", "B) 1", "C) -1", "D) 0.5"], correctAnswer: "A" },
+    	{ question: "395. La probabilidad de que al lanzar dos monedas se obtenga al menos una cara es:", options: ["A) 1/4", "B) 1/2", "C) 3/4", "D) 1"], correctAnswer: "C" },
+    	{ question: "396. El área de un círculo con radio 10 es:", options: ["A) $$10\\pi$$", "B) $$20\\pi$$", "C) $$100\\pi$$", "D) $$200\\pi$$"], correctAnswer: "C" },
+    	{ question: "397. La solución de $$ |x+1|=4 $$ es:", options: ["A) $$x=3, x=-5$$", "B) $$x=3, x=5$$", "C) $$x=-3, x=-5$$", "D) $$x=3$$"], correctAnswer: "A" },
+    	{ question: "398. La mediana de {10, 5, 20, 15, 25} es:", options: ["A) 15", "B) 10", "C) 20", "D) 25"], correctAnswer: "A" },
+    	{ question: "399. El 20% de un número es 50. ¿Cuál es el número?", options: ["A) 10", "B) 100", "C) 250", "D) 500"], correctAnswer: "C" },
+                { question: "400. La ecuación de la circunferencia con centro en $$(0,0)$$ y radio 3 es:", options: ["A) $$x^2+y^2=3$$", "B) $$x^2+y^2=9$$", "C) $$(x-3)^2+y^2=9$$", "D) $$x^2+(y-3)^2=9$$"], correctAnswer: "B" }
+        ];
+
+        const questionsToLoad = 50; // Define la cantidad de preguntas a cargar
+        // Se actualiza el valor del timer a 8400 segundos, que es 2.2 horas
+        let timer = 8400; 
+        let timerInterval;
+        let isQuizSubmitted = false;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function renderQuiz() {
+            const quizForm = document.getElementById('quiz-form');
+            const shuffledQuestions = shuffle([...allQuestions]);
+            
+            // Selecciona las primeras 'questionsToLoad' preguntas del array barajado
+            const currentQuestions = shuffledQuestions.slice(0, questionsToLoad);
+
+            quizForm.innerHTML = currentQuestions.map((q, index) => `
+                <div class="question-card" id="question-${index}">
+                    <div class="question-title">${index + 1}. ${q.question}</div>
+                    <div class="options-list" data-correct-answer="${q.correctAnswer}">
+                        ${q.options.map(option => `
+                            <label class="block">
+                                <input type="radio" name="q${index}" value="${option.charAt(0)}">
+                                ${option}
+                            </label>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+            
+            // Guarda las preguntas actuales para la revisión
+            window.currentQuestions = currentQuestions;
+            
+            // Inicia el cronómetro
+            startTimer();
+        }
+
+        function updateTimerDisplay() {
+            // Se actualiza la lógica para calcular horas, minutos y segundos
+            const hours = Math.floor(timer / 3600);
+            const minutes = Math.floor((timer % 3600) / 60);
+            const seconds = timer % 60;
+            
+            // Se actualiza el formato del tiempo
+            const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            document.getElementById('timer-display').textContent = formattedTime;
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timer--;
+                updateTimerDisplay();
+                if (timer <= 0 && !isQuizSubmitted) {
+                    clearInterval(timerInterval);
+                    checkAnswers("¡Tiempo finalizado!");
+                }
+            }, 1000);
+        }
+
+        function checkAnswers(message) {
+            if (isQuizSubmitted) return;
+            isQuizSubmitted = true;
+            
+            let correctCount = 0;
+            const quizForm = document.getElementById('quiz-form');
+            const formElements = quizForm.elements;
+            const resultsDiv = document.getElementById('results');
+
+            clearInterval(timerInterval);
+
+            window.currentQuestions.forEach((q, index) => {
+                const questionCard = document.getElementById(`question-${index}`);
+                const selectedOption = formElements[`q${index}`]?.value;
+                const optionsList = questionCard.querySelector('.options-list');
+                const allLabels = optionsList.querySelectorAll('label');
+
+                questionCard.classList.remove('correct', 'incorrect');
+                allLabels.forEach(label => label.classList.remove('correct-checkmark'));
+
+                if (selectedOption === q.correctAnswer) {
+                    correctCount++;
+                    questionCard.classList.add('correct');
+                } else {
+                    questionCard.classList.add('incorrect');
+                    const correctLabel = Array.from(allLabels).find(label => label.textContent.trim().startsWith(q.correctAnswer + ')'));
+                    if (correctLabel) {
+                        correctLabel.classList.add('correct-checkmark');
+                    }
+                }
+            });
+
+            const totalQuestions = window.currentQuestions.length;
+            const paesScore = Math.round((correctCount / totalQuestions) * 1000);
+
+            resultsDiv.innerHTML = `
+                <h2 class="text-2xl font-bold mb-4">Resultados</h2>
+                <p class="text-lg">${message}</p>
+                <p class="text-lg">Respuestas correctas: ${correctCount} de ${totalQuestions}</p>
+                <p class="text-3xl font-bold mt-4">Puntaje: ${paesScore} puntos</p>
+            `;
+            resultsDiv.classList.remove('hidden');
+        }
+
+        document.addEventListener('DOMContentLoaded', renderQuiz);
+        document.getElementById('submit-btn').addEventListener('click', () => {
+            checkAnswers("¡Respuestas revisadas manualmente!");
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Ensayo de Historia PAES - El Historiador Online</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Tipografía y base */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(120deg, #f093fb 0%, #f5576c 100%);
+            color: #fff;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: white !important;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .logo-img {
+            height: 100px;
+            width: auto;
+        }
+
+        .logo a {
+            text-decoration: none;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #ffffffdd;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffeb3b;
+        }
+
+        /* Hero principal */
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #f5576c, #a155b9);
+            color: white;
+            border-radius: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-primary {
+            background-color: white;
+            color: #f5576c;
+            padding: 0.8rem 1.6rem;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* Sección de tarjetas */
+        main {
+            padding: 3rem 1rem;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        /* New card style for each question to match the provided CSS */
+        .question-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 1.2rem;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3), 0 0 10px rgba(255,255,255,0.1);
+            padding: 2rem;
+            width: min(100%, 420px);
+            text-align: center;
+            color: #fff;
+            transition: transform 0.3s ease;
+            flex: 1 1 100px;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .question-title {
+            font-weight: 600;
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+        
+        .options-list label {
+            display: block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #fff;
+        }
+        
+        .options-list label:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .options-list input[type="radio"] {
+            margin-right: 0.75rem;
+        }
+        
+        /* Submit button updated to match the btn-primary style */
+        .btn-submit {
+            background-color: white;
+            color: #f5576c;
+            padding: 0.8rem 1.6rem;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: background-color 0.3s;
+            display: block;
+            width: fit-content;
+            margin: 2rem auto 0;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-submit:hover {
+            background-color: #f0f0f0;
+        }
+        
+        .results-section {
+            padding: 2rem;
+            border-top: 2px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            margin-top: 2rem;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 1.2rem;
+        }
+        
+        .correct {
+            background-color: #d1f7c4 !important; /* Green for correct answers */
+            color: #333 !important; /* Adjust text color for contrast */
+        }
+        
+        .incorrect {
+            background-color: #f7d1d1 !important; /* Red for incorrect answers */
+            color: #333 !important; /* Adjust text color for contrast */
+        }
+        
+        .correct-answer-highlight {
+            background-color: #81c784 !important; /* A slightly darker green to highlight the correct answer in case of wrong selection */
+            color: #333 !important;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: rgba(0, 0, 0, 0.15);
+            font-size: 0.95rem;
+            color: #fff;
+            margin-top: 3rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                align-items: flex-end;
+            }
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="#">
+                    <img src="static/img/logo.png" alt="El Historiador Online" class="logo-img">
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="cursos.html">Cursos</a></li>
+                <li><a href="nosotros.html">Nosotros</a></li>
+                <li><a href="profesores.html">Profesores</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Ensayo de Historia Universal</h1>
+            <p>Pon a prueba tus conocimientos sobre las grandes civilizaciones, eventos y procesos históricos que han marcado el mundo, con 65 preguntas.</p>
+        </section>
+
+        <section class="quiz-container">
+            <form id="quiz-form">
+            </form>
+            <button type="button" id="submit-btn" class="btn-submit">Revisar Respuestas</button>
+            <div id="results" class="results-section hidden">
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 El Historiador Online®</p>
+    </footer>
+
+    <script>
+        // Use an array of objects to store questions, options, and correct answers
+        const questions = [
+            // Sección 1: Historia Antigua (Preguntas 1-15)
+            { question: "1. ¿Qué civilización antigua es conocida por la invención de la escritura cuneiforme?", options: ["A) Egipto", "B) Mesopotamia", "C) Grecia", "D) Roma", "E) China"], correctAnswer: "B" },
+            { question: "2. La democracia, como sistema de gobierno, tuvo sus orígenes en la ciudad-estado de:", options: ["A) Esparta", "B) Atenas", "C) Tebas", "D) Corinto", "E) Micenas"], correctAnswer: "B" },
+            { question: "3. ¿Quién fue el emperador romano que legalizó el cristianismo con el Edicto de Milán en el año 313 d.C.?", options: ["A) Nerón", "B) Augusto", "C) Constantino I", "D) Diocleciano", "E) Trajano"], correctAnswer: "C" },
+            { question: "4. ¿Cuál de los siguientes logros no pertenece a la civilización egipcia?", options: ["A) La construcción de las pirámides", "B) El desarrollo de la escritura jeroglífica", "C) La invención del papiro", "D) La creación de la rueda y el arado", "E) El sistema de irrigación del Nilo"], correctAnswer: "D" },
+            { question: "5. ¿Qué evento marcó el final de la República Romana y el inicio del Imperio?", options: ["A) La muerte de Julio César", "B) La Batalla de Accio", "C) El asesinato de Cicerón", "D) La caída de Cartago", "E) El Edicto de Caracalla"], correctAnswer: "B" },
+            { question: "6. La Gran Muralla China se construyó principalmente para:", options: ["A) Servir como ruta comercial", "B) Evitar inundaciones", "C) Defenderse de las invasiones de pueblos del norte", "D) Delimitar las fronteras de China", "E) Unir las diferentes provincias"], correctAnswer: "C" },
+            { question: "7. ¿Qué figura histórica es conocida por ser el primer rey de Israel?", options: ["A) David", "B) Salomón", "C) Saúl", "D) Moisés", "E) Abraham"], correctAnswer: "C" },
+            { question: "8. El Código de Hammurabi es una de las primeras colecciones de leyes escritas de la historia y pertenece a:", options: ["A) Los asirios", "B) Los babilónicos", "C) Los sumerios", "D) Los persas", "E) Los hititas"], correctAnswer: "B" },
+            { question: "9. ¿Cuál fue el principal legado de los fenicios?", options: ["A) La filosofía", "B) La democracia", "C) La invención del alfabeto", "D) La construcción de pirámides", "E) El sistema de números romanos"], correctAnswer: "C" },
+            { question: "10. La civilización del Valle del Indo se desarrolló en la actual:", options: ["A) Egipto", "B) Irán", "C) China", "D) India y Pakistán", "E) Turquía"], correctAnswer: "D" },
+            { question: "11. ¿Qué deporte formaba parte de los antiguos Juegos Olímpicos en Grecia?", options: ["A) El fútbol", "B) La maratón", "C) El baloncesto", "D) El boxeo", "E) El salto con pértiga"], correctAnswer: "D" },
+            { question: "12. La Batalla de las Termópilas fue un enfrentamiento clave en las Guerras Médicas entre:", options: ["A) Griegos y romanos", "B) Griegos y persas", "C) Griegos y macedonios", "D) Romanos y cartagineses", "E) Egipcios y persas"], correctAnswer: "B" },
+            { question: "13. ¿Qué figura es considerada la fundadora del cristianismo?", options: ["A) Pedro", "B) Jesús de Nazaret", "C) Pablo de Tarso", "D) Constantino", "E) San Agustín"], correctAnswer: "B" },
+            { question: "14. La expansión del Imperio Romano se detuvo en el siglo II d.C. bajo el reinado de:", options: ["A) Nerón", "B) Augusto", "C) Trajano", "D) Marco Aurelio", "E) Adriano"], correctAnswer: "C" },
+            { question: "15. ¿Qué río fue fundamental para el desarrollo de la civilización egipcia?", options: ["A) El Éufrates", "B) El Tigris", "C) El Ganges", "D) El Nilo", "E) El Danubio"], correctAnswer: "D" },
+
+            // Sección 2: Edad Media (Preguntas 16-30)
+            { question: "16. ¿Qué evento marcó tradicionalmente el fin de la Edad Media y el comienzo de la Edad Moderna?", options: ["A) La caída del Imperio Romano de Occidente", "B) La llegada de Colón a América", "C) La toma de Constantinopla por los otomanos", "D) La invención de la imprenta", "E) La Peste Negra"], correctAnswer: "C" },
+            { question: "17. El sistema económico y social predominante en la Europa medieval fue:", options: ["A) El capitalismo", "B) El socialismo", "C) El feudalismo", "D) El mercantilismo", "E) El comunismo"], correctAnswer: "C" },
+            { question: "18. ¿Cuál fue el principal objetivo de las Cruzadas?", options: ["A) La unificación de Europa", "B) La recuperación de Tierra Santa", "C) La expansión del Imperio Bizantino", "D) La evangelización de Asia", "E) La lucha contra los vikingos"], correctAnswer: "B" },
+            { question: "19. ¿Cuál fue el principal factor que contribuyó al colapso del Imperio Romano de Occidente?", options: ["A) Las invasiones bárbaras", "B) La decadencia económica", "C) Las luchas internas", "D) La expansión del cristianismo", "E) Todas las anteriores"], correctAnswer: "E" },
+            { question: "20. La Reconquista española fue el proceso de expulsión de los:", options: ["A) Vikingos", "B) Mongoles", "C) Musulmanes", "D) Francos", "E) Ingleses"], correctAnswer: "C" },
+            { question: "21. ¿Qué fue el Cisma de Oriente y Occidente?", options: ["A) Una guerra entre Francia e Inglaterra", "B) La división del Imperio Romano", "C) La división entre la Iglesia Católica y la Ortodoxa", "D) Un conflicto entre el Papa y el Emperador", "E) Un cisma dentro del protestantismo"], correctAnswer: "C" },
+            { question: "22. El Imperio Bizantino, heredero del Imperio Romano de Oriente, tuvo su capital en:", options: ["A) Roma", "B) Atenas", "C) Constantinopla", "D) Alejandría", "E) Damasco"], correctAnswer: "C" },
+            { question: "23. ¿Quién fue el líder militar que unificó a los mongoles y creó el Imperio Mongol?", options: ["A) Atila", "B) Genghis Khan", "C) Kublai Khan", "D) Tamerlán", "E) Ogodei"], correctAnswer: "B" },
+            { question: "24. El Renacimiento, que comenzó en Italia, fue un movimiento que buscaba revivir:", options: ["A) El arte bizantino", "B) Las ideas medievales", "C) La cultura clásica grecorromana", "D) La filosofía oriental", "E) El poder de los monarcas"], correctAnswer: "C" },
+            { question: "25. La Peste Negra, que asoló Europa en el siglo XIV, se originó en:", options: ["A) África", "B) América", "C) Asia Central", "D) Escandinavia", "E) El norte de Europa"], correctAnswer: "C" },
+            { question: "26. ¿Qué figura histórica es conocida como el \"último cruzado\" y rey de Inglaterra?", options: ["A) Ricardo Corazón de León", "B) Juan I", "C) Enrique II", "D) Eduardo I", "E) Alfredo el Grande"], correctAnswer: "A" },
+            { question: "27. La invención de la imprenta por Johannes Gutenberg facilitó:", options: ["A) La expansión del comercio", "B) La difusión de la Reforma", "C) El descubrimiento de América", "D) La construcción de catedrales", "E) El fin de la servidumbre"], correctAnswer: "B" },
+            { question: "28. La Guerra de los Cien Años se libró principalmente entre:", options: ["A) Francia y España", "B) Inglaterra y Francia", "C) Francia y Alemania", "D) Inglaterra y Escocia", "E) España y Portugal"], correctAnswer: "B" },
+            { question: "29. El Gran Incendio de Roma en el año 64 d.C. ocurrió durante el reinado de:", options: ["A) Nerón", "B) Calígula", "C) Vespasiano", "D) Tiberio", "E) Claudio"], correctAnswer: "A" },
+            { question: "30. ¿Qué se conoce como el Siglo de Oro español?", options: ["A) Un período de riqueza económica", "B) Un período de gran desarrollo cultural y artístico", "C) La época de la conquista de América", "D) El reinado de los Reyes Católicos", "E) El período de las guerras de religión"], correctAnswer: "B" },
+
+            // Sección 3: Edad Moderna y la Era de las Revoluciones (Preguntas 31-45)
+            { question: "31. ¿Qué personaje es considerado el padre de la Reforma Protestante?", options: ["A) Juan Calvino", "B) Enrique VIII", "C) Martín Lutero", "D) Erasmo de Rotterdam", "E) Tomás Moro"], correctAnswer: "C" },
+            { question: "32. La Revolución Francesa de 1789 culminó con la ejecución de:", options: ["A) Luis XIV", "B) Luis XVI", "C) Napoleón Bonaparte", "D) Robespierre", "E) María Antonieta"], correctAnswer: "B" },
+            { question: "33. La Ilustración fue un movimiento intelectual que defendió:", options: ["A) El absolutismo monárquico", "B) La supremacía de la Iglesia", "C) La razón y el conocimiento científico", "D) El retorno a los valores medievales", "E) El mercantilismo"], correctAnswer: "C" },
+            { question: "34. ¿Qué evento marcó el inicio de la Era de los Descubrimientos?", options: ["A) La invención de la brújula", "B) La invención de la imprenta", "C) La llegada de Colón a América", "D) La conquista de Granada", "E) La caída de Constantinopla"], correctAnswer: "C" },
+            { question: "35. ¿Cuál fue una de las principales causas de la Guerra de los Treinta Años?", options: ["A) Un conflicto comercial", "B) Una disputa dinástica", "C) Las tensiones religiosas entre católicos y protestantes", "D) Un enfrentamiento colonial", "E) Un conflicto por el control del Mediterráneo"], correctAnswer: "C" },
+            { question: "36. La Revolución Gloriosa en Inglaterra (1688) llevó a la instauración de una:", options: ["A) Monarquía absoluta", "B) Dictadura militar", "C) República parlamentaria", "D) Monarquía constitucional", "E) Anarquía"], correctAnswer: "D" },
+            { question: "37. ¿Qué figura militar y política se proclamó emperador de Francia en 1804?", options: ["A) Luis XVI", "B) Maximilien Robespierre", "C) Napoleón Bonaparte", "D) Otto von Bismarck", "E) Carlos V"], correctAnswer: "C" },
+            { question: "38. La Guerra de Independencia de los Estados Unidos comenzó con la:", options: ["A) Declaración de Independencia", "B) Masacre de Boston", "C) Batalla de Saratoga", "D) Batalla de Lexington y Concord", "E) Firma del Tratado de París"], correctAnswer: "D" },
+            { question: "39. El movimiento cultural del Romanticismo se caracterizó por:", options: ["A) La primacía de la razón y el orden", "B) El énfasis en la emoción y la individualidad", "C) La imitación del arte clásico", "D) El realismo social", "E) La crítica a la religión"], correctAnswer: "B" },
+            { question: "40. ¿Qué se conoce como 'el Siglo de las Luces'?", options: ["A) La Edad Media", "B) El Renacimiento", "C) La Ilustración", "D) El Romanticismo", "E) La Edad de Oro"], correctAnswer: "C" },
+            { question: "41. La colonización de América por España y Portugal fue impulsada por la búsqueda de:", options: ["A) Nuevas rutas comerciales", "B) Especias y seda", "C) Oro y plata", "D) Mano de obra", "E) Todas las anteriores"], correctAnswer: "E" },
+            { question: "42. ¿Qué batalla se considera el final de la era napoleónica?", options: ["A) Batalla de Austerlitz", "B) Batalla de Borodinó", "C) Batalla de Leipzig", "D) Batalla de Waterloo", "E) Batalla de Trafalgar"], correctAnswer: "D" },
+            { question: "43. El proceso de unificación de Alemania en el siglo XIX fue liderado por:", options: ["A) Francia", "B) Prusia", "C) Austria", "D) El Imperio Otomano", "E) Italia"], correctAnswer: "B" },
+            { question: "44. ¿Qué pensador fue uno de los principales teóricos del socialismo científico?", options: ["A) Adam Smith", "B) John Locke", "C) Karl Marx", "D) Jean-Jacques Rousseau", "E) Montesquieu"], correctAnswer: "C" },
+            { question: "45. El movimiento de independencia en América del Sur fue liderado por figuras como:", options: ["A) George Washington", "B) Benito Juárez", "C) Simón Bolívar y José de San Martín", "D) Francisco Villa", "E) Túpac Amaru II"], correctAnswer: "C" },
+
+            // Sección 4: Siglo XX y el Mundo Contemporáneo (Preguntas 46-65)
+            { question: "46. ¿Cuál fue la principal causa de la Primera Guerra Mundial?", options: ["A) La Guerra Civil Española", "B) El asesinato del archiduque Francisco Fernando", "C) La crisis económica de 1929", "D) El ascenso del fascismo en Italia", "E) La Revolución Rusa"], correctAnswer: "B" },
+            { question: "47. La Segunda Guerra Mundial finalizó en el año:", options: ["A) 1939", "B) 1941", "C) 1945", "D) 1950", "E) 1962"], correctAnswer: "C" },
+            { question: "48. ¿Qué país no formó parte del Eje durante la Segunda Guerra Mundial?", options: ["A) Alemania", "B) Japón", "C) Italia", "D) España", "E) Rumania"], correctAnswer: "D" },
+            { question: "49. La Guerra Fría se caracterizó por ser un enfrentamiento ideológico entre:", options: ["A) El fascismo y el comunismo", "B) El capitalismo y el comunismo", "C) El liberalismo y el socialismo", "D) El feudalismo y el capitalismo", "E) El imperialismo y el socialismo"], correctAnswer: "B" },
+            { question: "50. ¿Cuál de los siguientes líderes es conocido por su papel en la lucha contra el apartheid en Sudáfrica?", options: ["A) Martin Luther King Jr.", "B) Nelson Mandela", "C) Fidel Castro", "D) Mahatma Gandhi", "E) Winston Churchill"], correctAnswer: "B" },
+            { question: "51. ¿Qué tratado dio origen a la Unión Europea?", options: ["A) Tratado de Versalles", "B) Tratado de Maastricht", "C) Tratado de Roma", "D) Tratado de París", "E) Tratado de Lisboa"], correctAnswer: "B" },
+            { question: "52. ¿Qué evento se considera el inicio de la Gran Depresión?", options: ["A) El fin de la Primera Guerra Mundial", "B) La caída de la Bolsa de Nueva York en 1929", "C) El inicio de la Segunda Guerra Mundial", "D) La crisis del petróleo de 1973", "E) La Guerra de Vietnam"], correctAnswer: "B" },
+            { question: "53. La Revolución Rusa de 1917 derrocó a la monarquía y estableció un gobierno:", options: ["A) Comunista", "B) Democrático", "C) Fascista", "D) Republicano", "E) Anarquista"], correctAnswer: "A" },
+            { question: "54. ¿Qué conflicto es conocido como la 'Guerra de las Galaxias' por su programa de defensa con misiles espaciales?", options: ["A) La Guerra de Vietnam", "B) La Guerra de Corea", "C) La Guerra del Golfo", "D) La Guerra Fría", "E) La Guerra de Afganistán"], correctAnswer: "D" },
+            { question: "55. El Holocausto fue el genocidio de la población judía de Europa por el régimen:", options: ["A) Soviético", "B) Fascista", "C) Comunista", "D) Nazi", "E) Imperialista"], correctAnswer: "D" },
+            { question: "56. La Caída del Muro de Berlín en 1989 simbolizó:", options: ["A) El fin de la Segunda Guerra Mundial", "B) El colapso de la Unión Soviética", "C) La unificación de Alemania", "D) El fin de la Guerra Fría", "E) La independencia de los países bálticos"], correctAnswer: "D" },
+            { question: "57. ¿Qué organización internacional se creó después de la Segunda Guerra Mundial con el objetivo de mantener la paz y la seguridad mundial?", options: ["A) La Liga de las Naciones", "B) La OTAN", "C) Las Naciones Unidas", "D) La Cruz Roja", "E) La Unión Europea"], correctAnswer: "C" },
+            { question: "58. La descolonización en Asia y África después de la Segunda Guerra Mundial fue motivada por:", options: ["A) La debilidad de las potencias europeas", "B) El surgimiento de movimientos nacionalistas", "C) La influencia de la Guerra Fría", "D) Todas las anteriores", "E) Ninguna de las anteriores"], correctAnswer: "D" },
+            { question: "59. ¿Quién fue el primer presidente de los Estados Unidos?", options: ["A) Abraham Lincoln", "B) George Washington", "C) Thomas Jefferson", "D) Franklin D. Roosevelt", "E) John Adams"], correctAnswer: "B" },
+            { question: "60. La Guerra de Vietnam enfrentó a:", options: ["A) Estados Unidos y Corea del Norte", "B) La Unión Soviética y Alemania", "C) Estados Unidos y Vietnam del Norte", "D) Francia y Vietnam del Sur", "E) China y Taiwán"], correctAnswer: "C" },
+            { question: "61. ¿Qué se conoce como 'la Perestroika' en la Unión Soviética?", options: ["A) Un movimiento de protesta", "B) Una reforma económica y política", "C) Una guerra civil", "D) Un programa militar", "E) Un acuerdo de paz"], correctAnswer: "B" },
+            { question: "62. El genocidio de Ruanda de 1994 fue un conflicto entre los grupos étnicos:", options: ["A) Hutu y Tutsi", "B) Serbios y Bosnios", "C) Croatas y Serbios", "D) Chechenos y Rusos", "E) Somalíes y Etíopes"], correctAnswer: "A" },
+            { question: "63. El concepto de 'Globalización' se refiere a:", options: ["A) La expansión del Imperio Romano", "B) La interconexión económica, cultural y política a nivel mundial", "C) La creación de grandes imperios", "D) La unificación de Europa", "E) La expansión de la tecnología digital"], correctAnswer: "B" },
+            { question: "64. ¿Qué evento se considera el inicio de la 'guerra contra el terrorismo' en el siglo XXI?", options: ["A) La Guerra de Irak", "B) Los ataques del 11 de septiembre de 2001", "C) La Guerra de Afganistán", "D) La Guerra del Golfo", "E) La invasión de Kuwait"], correctAnswer: "B" },
+            { question: "65. ¿Qué país se independizó de la Unión Soviética en 1991, siendo uno de los principales impulsores del fin de la URSS?", options: ["A) Lituania", "B) Polonia", "C) Hungría", "D) República Checa", "E) Ucrania"], correctAnswer: "E" },
+        ];
+
+        // Get elements from the DOM
+        const quizForm = document.getElementById('quiz-form');
+        const submitButton = document.getElementById('submit-btn');
+        const resultsDiv = document.getElementById('results');
+
+        // Function to render the quiz questions
+        function renderQuiz() {
+            quizForm.innerHTML = questions.map((q, index) => `
+                <div class="question-card" id="question-${index}">
+                    <div class="question-title">${q.question}</div>
+                    <div class="options-list" data-correct-answer="${q.correctAnswer}">
+                        ${q.options.map(option => `
+                            <label class="block">
+                                <input type="radio" name="q${index}" value="${option.charAt(0)}">
+                                ${option}
+                            </label>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Function to check the answers and calculate the score
+        function checkAnswers(event) {
+            let correctCount = 0;
+            const formElements = quizForm.elements;
+
+            questions.forEach((q, index) => {
+                const questionCard = document.getElementById(`question-${index}`);
+                const selectedOption = formElements[`q${index}`]?.value;
+                const optionsList = questionCard.querySelector('.options-list');
+
+                questionCard.classList.remove('correct', 'incorrect');
+                
+                const allLabels = optionsList.querySelectorAll('label');
+                allLabels.forEach(label => label.classList.remove('correct-answer-highlight'));
+
+                if (selectedOption === q.correctAnswer) {
+                    correctCount++;
+                    questionCard.classList.add('correct');
+                } else {
+                    questionCard.classList.add('incorrect');
+                    const correctLabel = Array.from(allLabels).find(label => label.textContent.trim().startsWith(q.correctAnswer + ')'));
+                    if (correctLabel) {
+                        correctLabel.classList.add('correct-answer-highlight');
+                    }
+                }
+            });
+
+            // Calculate the score on a 1000-point scale
+            const totalQuestions = questions.length;
+            const paesScore = Math.round((correctCount / totalQuestions) * 1000);
+
+            // Display results
+            resultsDiv.innerHTML = `
+                <h2 class="text-2xl font-bold mb-4">Resultado del Ensayo de Historia</h2>
+                <p class="text-xl">Respuestas correctas: ${correctCount} de ${totalQuestions}</p>
+                <p class="text-xl">Puntaje estimado (escala PAES): ${paesScore} puntos</p>
+                <p class="text-lg mt-4">¡Revisa tus respuestas marcadas en verde y rojo!</p>
+            `;
+            resultsDiv.classList.remove('hidden');
+        }
+
+        // Add event listener to the submit button
+        submitButton.addEventListener('click', checkAnswers);
+
+        // Initial rendering of the quiz when the page loads
+        document.addEventListener('DOMContentLoaded', renderQuiz);
+    </script>
+</body>
+</html>

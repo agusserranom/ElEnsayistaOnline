@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ensayo de Matemáticas PAES M2 - El Ensayista Online</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Tipografía y base */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(120deg, #f093fb 0%, #f5576c 100%);
+            color: #fff;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: white !important;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .logo-img {
+            height: 100px;
+            width: auto;
+        }
+
+        .logo a {
+            text-decoration: none;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #ffffffdd;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffeb3b;
+        }
+
+        /* Hero principal */
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #007BFF, #00C6FF);
+            color: white;
+            border-radius: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-primary {
+            background-color: white;
+            color: #007BFF;
+            padding: 0.8rem 1.6rem;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* Sección de tarjetas */
+        main {
+            padding: 3rem 1rem;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .question-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 1.2rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3), 0 0 10px rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            width: min(100%, 420px);
+            text-align: center;
+            color: #fff;
+            transition: transform 0.3s ease;
+            flex: 1 1 100px;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .question-title {
+            font-weight: 600;
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .options-list label {
+            display: block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #fff;
+            position: relative;
+        }
+
+        .options-list label:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .options-list input[type="radio"] {
+            margin-right: 0.75rem;
+        }
+
+        .btn-submit {
+            background-color: white;
+            color: #007BFF;
+            padding: 0.8rem 1.6rem;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+            display: block;
+            width: fit-content;
+            margin: 2rem auto 0;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-submit:hover {
+            background-color: #f0f0f0;
+        }
+
+        .results-section {
+            padding: 2rem;
+            border-top: 2px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            margin-top: 2rem;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 1.2rem;
+        }
+
+        .correct {
+            background-color: #d1f7c4 !important;
+            color: #333 !important;
+        }
+
+        .incorrect {
+            background-color: #f7d1d1 !important;
+            color: #333 !important;
+        }
+
+        /* New styles for the checkmark */
+        .correct-checkmark {
+            position: relative;
+            background-color: transparent !important; /* Keep background clean */
+            padding-right: 2.5rem; /* Make space for the icon */
+        }
+        
+        .correct-checkmark::after {
+            content: '✓';
+            color: #4CAF50; /* Green checkmark */
+            font-size: 1.5rem;
+            font-weight: bold;
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: rgba(0, 0, 0, 0.15);
+            font-size: 0.95rem;
+            color: #fff;
+            margin-top: 3rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                align-items: flex-end;
+            }
+
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="#">
+                    <img src="static/img/logo.png" alt="El Ensayista Online" class="logo-img" />
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="cursos.html">Cursos</a></li>
+                <li><a href="nosotros.html">Nosotros</a></li>
+                <li><a href="profesores.html">Profesores</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Ensayo de Matemáticas PAES M2</h1>
+            <p>Pon a prueba tus conocimientos con 65 preguntas de los ejes temáticos de la PAES M2.</p>
+        </section>
+
+        <section class="quiz-container">
+            <form id="quiz-form">
+            </form>
+            <button type="button" id="submit-btn" class="btn-submit">Revisar Respuestas</button>
+            <div id="results" class="results-section hidden">
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 El Ensayista Online®</p>
+    </footer>
+
+    <script>
+        const questions = [
+            // Eje: Números
+            { question: "1. ¿Cuál de las siguientes afirmaciones es siempre verdadera para los números reales?", options: ["A) La suma de dos números irracionales es siempre irracional.", "B) El producto de dos números racionales es siempre irracional.", "C) La resta de un número racional y uno irracional es siempre irracional.", "D) La división de dos números irracionales es siempre irracional.", "E) La suma de dos números enteros es siempre un número natural."], correctAnswer: "C" },
+            { question: "2. Si $x$ es un número real tal que $x^2 = 5$, entonces $x$ es un número:", options: ["A) Racional", "B) Entero", "C) Natural", "D) Irracional", "E) Imaginario"], correctAnswer: "D" },
+            { question: "3. La expresión $ \\frac{\\sqrt{20}}{\\sqrt{5}} $ es igual a:", options: ["A) $\\sqrt{4}$", "B) 2", "C) $\\sqrt{15}$", "D) 4", "E) 5"], correctAnswer: "B" },
+            { question: "4. ¿Cuál es el resultado de $(0,2)^3$?", options: ["A) 0,8", "B) 0,08", "C) 0,008", "D) 0,6", "E) 0,06"], correctAnswer: "C" },
+            { question: "5. Si $ \\log_{2}(x) = 3 $, ¿cuál es el valor de $x$?", options: ["A) 6", "B) 8", "C) 9", "D) $\\frac{3}{2}$", "E) $\\frac{2}{3}$"], correctAnswer: "B" },
+            { question: "6. El 12% del 50% de 200 es:", options: ["A) 10", "B) 12", "C) 24", "D) 60", "E) 120"], correctAnswer: "B" },
+            { question: "7. ¿Cuál es el valor de $ \\frac{2}{3} + \\frac{1}{6} $?", options: ["A) $\\frac{3}{9}$", "B) $\\frac{1}{2}$", "C) $\\frac{5}{6}$", "D) $\\frac{3}{6}$", "E) 1"], correctAnswer: "C" },
+            { question: "8. El resultado de $2^x \cdot 4^x$ es:", options: ["A) $6^x$", "B) $8^x$", "C) $2^{3x}$", "D) $4^{2x}$", "E) $2^{2x}$"], correctAnswer: "C" },
+            { question: "9. La notación científica de 45.000.000 es:", options: ["A) $4,5 \\times 10^6$", "B) $45 \\times 10^6$", "C) $4,5 \\times 10^7$", "D) $45 \\times 10^7$", "E) $0,45 \\times 10^8$"], correctAnswer: "C" },
+            { question: "10. ¿Cuál de los siguientes números es el mayor?", options: ["A) $\\frac{2}{3}$", "B) 0,67", "C) 0,66", "D) $\\frac{1}{2}$", "E) $0,65$"], correctAnswer: "B" },
+
+            // Eje: Álgebra y Funciones
+            { question: "11. La solución de la ecuación $2x - 3 = 7$ es:", options: ["A) $x=2$", "B) $x=3$", "C) $x=4$", "D) $x=5$", "E) $x=6$"], correctAnswer: "D" },
+            { question: "12. La expresión $(a-b)^2 - a^2$ es igual a:", options: ["A) $-b^2$", "B) $b^2$", "C) $-2ab + b^2$", "D) $2ab - b^2$", "E) $2ab + b^2$"], correctAnswer: "C" },
+            { question: "13. ¿Cuál es el valor de $x$ en la ecuación $ \\frac{x}{2} + 1 = 5 $?", options: ["A) 4", "B) 6", "C) 8", "D) 10", "E) 12"], correctAnswer: "C" },
+            { question: "14. La pendiente de la recta que pasa por los puntos $(1, 3)$ y $(3, 7)$ es:", options: ["A) 1", "B) 2", "C) 3", "D) 4", "E) -2"], correctAnswer: "B" },
+            { question: "15. La parábola $y = x^2 - 4$ corta al eje $y$ en:", options: ["A) $(0, 4)$", "B) $(0, -4)$", "C) $(4, 0)$", "D) $(-4, 0)$", "E) No lo corta"], correctAnswer: "B" },
+            { question: "16. La solución del sistema de ecuaciones $x+y=10$ y $2x-y=5$ es:", options: ["A) $x=5, y=5$", "B) $x=3, y=7$", "C) $x=7, y=3$", "D) $x=4, y=6$", "E) $x=6, y=4$"], correctAnswer: "A" },
+            { question: "17. El dominio de la función $f(x) = \\frac{1}{x-2}$ es:", options: ["A) Todos los reales", "B) Reales, excepto 0", "C) Reales, excepto 2", "D) Reales mayores que 2", "E) Reales menores que 2"], correctAnswer: "C" },
+            { question: "18. ¿Cuál es la factorización completa de $x^2 - 5x + 6$?", options: ["A) $(x+2)(x+3)$", "B) $(x-2)(x+3)$", "C) $(x-2)(x-3)$", "D) $(x+2)(x-3)$", "E) $(x-1)(x-6)$"], correctAnswer: "C" },
+            { question: "19. El vértice de la parábola $y = (x-1)^2 + 3$ es:", options: ["A) $(1, 3)$", "B) $(-1, 3)$", "C) $(1, -3)$", "D) $(3, 1)$", "E) $(-3, -1)$"], correctAnswer: "A" },
+            { question: "20. Si $f(x) = 3x - 1$ y $g(x) = x^2$, ¿cuál es el valor de $f(g(2))$?", options: ["A) 5", "B) 6", "C) 8", "D) 11", "E) 35"], correctAnswer: "D" },
+            { question: "21. El conjunto solución de la inecuación $4x - 1 > 7$ es:", options: ["A) $x > 2$", "B) $x < 2$", "C) $x > 8$", "D) $x < 8$", "E) $x > \\frac{7}{4}$"], correctAnswer: "A" },
+            { question: "22. La inversa de la función $f(x) = 2x - 4$ es:", options: ["A) $f^{-1}(x) = 4x-2$", "B) $f^{-1}(x) = \\frac{x+4}{2}$", "C) $f^{-1}(x) = 2x+4$", "D) $f^{-1}(x) = \\frac{x-4}{2}$", "E) $f^{-1}(x) = x+2$"], correctAnswer: "B" },
+            { question: "23. ¿Cuál de las siguientes funciones representa una función cuadrática?", options: ["A) $f(x) = 2x+1$", "B) $f(x) = x^3$", "C) $f(x) = 5x^2 - x$", "D) $f(x) = \\frac{1}{x}$", "E) $f(x) = |x|$"], correctAnswer: "C" },
+            { question: "24. El valor de $ (x+y)(x-y) $ es:", options: ["A) $x^2-y^2$", "B) $x^2+y^2$", "C) $x^2-2xy+y^2$", "D) $x^2+2xy+y^2$", "E) $2x-2y$"], correctAnswer: "A" },
+            { question: "25. La solución de la ecuación $x^2 - 4x + 4 = 0$ es:", options: ["A) 2 y -2", "B) Solo 2", "C) Solo -2", "D) 4", "E) No tiene solución real"], correctAnswer: "B" },
+            { question: "26. Si $x = 2$, ¿cuál es el valor de $x^3 - 3x^2 + 2x$?", options: ["A) 0", "B) 2", "C) 4", "D) 8", "E) -4"], correctAnswer: "A" },
+            { question: "27. La expresión $ \\frac{x^2+2x}{x+2} $ se simplifica a:", options: ["A) $x+1$", "B) $x$", "C) 2", "D) $x+2$", "E) $x^2$"], correctAnswer: "B" },
+
+            // Eje: Geometría
+            { question: "28. El área de un triángulo equilátero de lado 6 cm es:", options: ["A) $18 \\text{ cm}^2$", "B) $9\\sqrt{3} \\text{ cm}^2$", "C) $36 \\text{ cm}^2$", "D) $12\\sqrt{3} \\text{ cm}^2$", "E) $18\\sqrt{3} \\text{ cm}^2$"], correctAnswer: "B" },
+            { question: "29. ¿Cuál es el volumen de un cilindro con radio 3 cm y altura 5 cm?", options: ["A) $15\\pi \\text{ cm}^3$", "B) $30\\pi \\text{ cm}^3$", "C) $45\\pi \\text{ cm}^3$", "D) $90\\pi \\text{ cm}^3$", "E) $25\\pi \\text{ cm}^3$"], correctAnswer: "C" },
+            { question: "30. La distancia entre el origen $(0,0)$ y el punto $(3,4)$ es:", options: ["A) 3", "B) 4", "C) 5", "D) 7", "E) 25"], correctAnswer: "C" },
+            { question: "31. ¿Qué tipo de transformación isómétrica cambia la orientación de la figura?", options: ["A) Traslación", "B) Rotación", "C) Reflexión", "D) Homotecia", "E) Isometría"], correctAnswer: "C" },
+            { question: "32. El área de un trapecio con bases de 6 cm y 10 cm, y altura de 4 cm es:", options: ["A) $16 \\text{ cm}^2$", "B) $32 \\text{ cm}^2$", "C) $64 \\text{ cm}^2$", "D) $40 \\text{ cm}^2$", "E) $80 \\text{ cm}^2$"], correctAnswer: "B" },
+            { question: "33. La suma de los ángulos interiores de un polígono regular de 5 lados (pentágono) es:", options: ["A) $360^\\circ$", "B) $540^\\circ$", "C) $720^\\circ$", "D) $900^\\circ$", "E) $180^\\circ$"], correctAnswer: "B" },
+            { question: "34. Si dos triángulos son semejantes con una razón de 2:1, ¿cuál es la razón de sus áreas?", options: ["A) 2:1", "B) 4:1", "C) 8:1", "D) 1:2", "E) 1:4"], correctAnswer: "B" },
+            { question: "35. La fórmula de la superficie de una esfera con radio $r$ es:", options: ["A) $\\frac{4}{3}\\pi r^3$", "B) $4\\pi r^2$", "C) $2\\pi r$", "D) $\\pi r^2$", "E) $2\\pi r h$"], correctAnswer: "B" },
+            { question: "36. En un triángulo rectángulo, si los catetos miden 5 cm y 12 cm, ¿cuánto mide la hipotenusa?", options: ["A) 13 cm", "B) 15 cm", "C) 17 cm", "D) 144 cm", "E) 169 cm"], correctAnswer: "A" },
+            { question: "37. El centro de una circunferencia con ecuación $(x-2)^2 + (y+3)^2 = 9$ es:", options: ["A) $(2, 3)$", "B) $(-2, 3)$", "C) $(2, -3)$", "D) $(-2, -3)$", "E) $(0, 0)$"], correctAnswer: "C" },
+            { question: "38. ¿Cuál es el perímetro de un hexágono regular de lado 5 cm?", options: ["A) 25 cm", "B) 30 cm", "C) 35 cm", "D) 40 cm", "E) 50 cm"], correctAnswer: "B" },
+            { question: "39. El volumen de una pirámide con base cuadrada de lado 6 cm y altura 8 cm es:", options: ["A) $48 \\text{ cm}^3$", "B) $96 \\text{ cm}^3$", "C) $144 \\text{ cm}^3$", "D) $192 \\text{ cm}^3$", "E) $288 \\text{ cm}^3$"], correctAnswer: "B" },
+            { question: "40. Si una homotecia tiene razón $k = 3$, ¿cómo afecta al área de una figura?", options: ["A) El área se triplica.", "B) El área se reduce a la tercera parte.", "C) El área se multiplica por 9.", "D) El área se multiplica por 6.", "E) El área no cambia."], correctAnswer: "C" },
+            { question: "41. La ecuación de la recta que pasa por $(0,0)$ y tiene pendiente 2 es:", options: ["A) $y = x+2$", "B) $y = 2x$", "C) $x = 2y$", "D) $y = -2x$", "E) $y = x-2$"], correctAnswer: "B" },
+
+            // Eje: Probabilidad y Estadística
+            { question: "42. En un grupo de 10 estudiantes, 4 son hombres y 6 son mujeres. Si se escogen 2 al azar, ¿cuál es la probabilidad de que ambos sean mujeres?", options: ["A) $\\frac{6}{10}$", "B) $\\frac{3}{5}$", "C) $\\frac{1}{3}$", "D) $\\frac{1}{4}$", "E) $\\frac{1}{2}$"], correctAnswer: "C" },
+            { question: "43. La media de los datos {5, 8, 10, 15, 12} es:", options: ["A) 10", "B) 10,2", "C) 12", "D) 50", "E) 11"], correctAnswer: "A" },
+            { question: "44. Se lanzan dos dados cúbicos. ¿Cuál es la probabilidad de que la suma de sus caras sea 7?", options: ["A) $\\frac{1}{6}$", "B) $\\frac{2}{12}$", "C) $\\frac{1}{36}$", "D) $\\frac{7}{36}$", "E) $\\frac{6}{36}$"], correctAnswer: "A" },
+            { question: "45. La mediana del conjunto de datos {2, 5, 1, 8, 4, 3, 6} es:", options: ["A) 3", "B) 4", "C) 5", "D) 4.5", "E) 2"], correctAnswer: "B" },
+            { question: "46. La desviación estándar de un conjunto de datos mide:", options: ["A) La tendencia central", "B) La moda", "C) La dispersión de los datos respecto a la media", "D) El valor máximo", "E) La mediana"], correctAnswer: "C" },
+            { question: "47. Si se elige al azar una carta de una baraja de 52 cartas, ¿cuál es la probabilidad de que sea un As de corazones?", options: ["A) $\\frac{1}{4}$", "B) $\\frac{1}{13}$", "C) $\\frac{1}{52}$", "D) $\\frac{4}{52}$", "E) $\\frac{1}{26}$"], correctAnswer: "C" },
+            { question: "48. En un diagrama de caja y bigotes, la línea central de la caja representa:", options: ["A) El promedio", "B) La mediana", "C) La moda", "D) El primer cuartil", "E) El tercer cuartil"], correctAnswer: "B" },
+            { question: "49. Si la probabilidad de que llueva es de 0,3 y la probabilidad de que haga sol es de 0,6, ¿cuál es la probabilidad de que llueva y haga sol al mismo tiempo?", options: ["A) 0,9", "B) 0,18", "C) 0", "D) 0,3", "E) 0,6"], correctAnswer: "C" },
+            { question: "50. ¿Cuál de los siguientes gráficos es más adecuado para representar datos cualitativos?", options: ["A) Histograma", "B) Polígono de frecuencia", "C) Gráfico de barras", "D) Gráfico de dispersión", "E) Diagrama de caja"], correctAnswer: "C" },
+            { question: "51. La moda del conjunto de datos {1, 2, 2, 3, 4, 4, 4, 5} es:", options: ["A) 1", "B) 2", "C) 3", "D) 4", "E) 5"], correctAnswer: "D" },
+            { question: "52. ¿Cuál es la probabilidad de sacar un número mayor que 4 en el lanzamiento de un dado de 6 caras?", options: ["A) $\\frac{1}{6}$", "B) $\\frac{2}{6}$", "C) $\\frac{3}{6}$", "D) $\\frac{4}{6}$", "E) $\\frac{5}{6}$"], correctAnswer: "B" },
+            { question: "53. La varianza de un conjunto de datos es 9. ¿Cuál es su desviación estándar?", options: ["A) 3", "B) $\\sqrt{9}$", "C) 81", "D) 9", "E) 4.5"], correctAnswer: "A" },
+            { question: "54. En un evento independiente, la probabilidad de que A ocurra y B ocurra es P(A) x P(B). ¿Cómo se llama a esta regla?", options: ["A) Regla de la adición", "B) Regla de la multiplicación", "C) Regla del complemento", "D) Regla de Bayes", "E) Regla de la permutación"], correctAnswer: "B" },
+
+            // Problemas de la PAES (Integración de conceptos)
+            { question: "55. Si $f(x) = x^2 - 1$ y $g(x) = x+1$, ¿cuál es el valor de $ \\frac{f(x)}{g(x)} $ para $x \\neq -1$?", options: ["A) $x+1$", "B) $x-1$", "C) $x$", "D) $1$", "E) $x^2-1$"], correctAnswer: "B" },
+            { question: "56. El 20% de un número es 50. ¿Cuál es el 40% del mismo número?", options: ["A) 25", "B) 50", "C) 100", "D) 200", "E) 250"], correctAnswer: "C" },
+            { question: "57. Un cono tiene radio $r$ y altura $h$. Si el radio se duplica y la altura se mantiene, ¿qué sucede con el volumen?", options: ["A) Se duplica", "B) Se triplica", "C) Se cuadruplica", "D) Se reduce a la mitad", "E) No cambia"], correctAnswer: "C" },
+            { question: "58. El valor de $ \\log_{3}(27) + \\log_{2}(8) $ es:", options: ["A) 5", "B) 6", "C) 9", "D) 35", "E) 12"], correctAnswer: "B" },
+            { question: "59. Un padre tiene el doble de la edad de su hijo. Si la suma de sus edades es 60 años, ¿cuántos años tiene el hijo?", options: ["A) 15", "B) 20", "C) 30", "D) 40", "E) 60"], correctAnswer: "B" },
+            { question: "60. La expresión $ (x^2y^3)^2 $ es igual a:", options: ["A) $x^4y^6$", "B) $x^2y^5$", "C) $x^4y^5$", "D) $x^4y^9$", "E) $2x^2y^3$"], correctAnswer: "A" },
+            { question: "61. ¿Cuál es el área de un círculo inscrito en un cuadrado de lado 10 cm?", options: ["A) $100\\pi \\text{ cm}^2$", "B) $50\\pi \\text{ cm}^2$", "C) $25\\pi \\text{ cm}^2$", "D) $10\\pi \\text{ cm}^2$", "E) $20\\pi \\text{ cm}^2$"], correctAnswer: "C" },
+            { question: "62. Se tienen 5 pelotas rojas y 5 pelotas azules en una caja. ¿Cuál es la probabilidad de sacar 2 pelotas rojas sin reposición?", options: ["A) $\\frac{5}{10} \\cdot \\frac{5}{10}$", "B) $\\frac{5}{10} \\cdot \\frac{4}{9}$", "C) $\\frac{5}{10} + \\frac{4}{9}$", "D) $\\frac{1}{2}$", "E) $\\frac{1}{10}$"], correctAnswer: "B" },
+            { question: "63. Si $3^{2x} = 81$, ¿cuál es el valor de $x$?", options: ["A) 1", "B) 2", "C) 3", "D) 4", "E) 5"], correctAnswer: "B" },
+            { question: "64. La mediatriz de un segmento es una recta que lo:", options: ["A) Divide en dos partes iguales", "B) Pasa por su punto medio y es perpendicular", "C) Es paralela", "D) Lo corta en un punto cualquiera", "E) Pasa por sus extremos"], correctAnswer: "B" },
+            { question: "65. ¿Cuál es la moda del conjunto de datos {10, 15, 20, 15, 10, 20, 15}?", options: ["A) 10", "B) 15", "C) 20", "D) 10 y 15", "E) 15 y 20"], correctAnswer: "B" }
+        ];
+
+        function renderQuiz() {
+            const quizForm = document.getElementById('quiz-form');
+            quizForm.innerHTML = questions.map((q, index) => `
+                <div class="question-card" id="question-${index}">
+                    <div class="question-title">${q.question}</div>
+                    <div class="options-list" data-correct-answer="${q.correctAnswer}">
+                        ${q.options.map(option => `
+                            <label class="block">
+                                <input type="radio" name="q${index}" value="${option.charAt(0)}">
+                                ${option}
+                            </label>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function checkAnswers() {
+            let correctCount = 0;
+            const quizForm = document.getElementById('quiz-form');
+            const formElements = quizForm.elements;
+            const resultsDiv = document.getElementById('results');
+
+            questions.forEach((q, index) => {
+                const questionCard = document.getElementById(`question-${index}`);
+                const selectedOption = formElements[`q${index}`].value;
+                const optionsList = questionCard.querySelector('.options-list');
+                const allLabels = optionsList.querySelectorAll('label');
+
+                // Remove previous classes
+                questionCard.classList.remove('correct', 'incorrect');
+                allLabels.forEach(label => label.classList.remove('correct-checkmark'));
+
+                if (selectedOption === q.correctAnswer) {
+                    correctCount++;
+                    questionCard.classList.add('correct');
+                } else {
+                    questionCard.classList.add('incorrect');
+                    const correctLabel = Array.from(allLabels).find(label => label.textContent.trim().startsWith(q.correctAnswer + ')'));
+                    if (correctLabel) {
+                        correctLabel.classList.add('correct-checkmark');
+                    }
+                }
+            });
+
+            const totalQuestions = questions.length;
+            const paesScore = Math.round((correctCount / totalQuestions) * 1000);
+
+            resultsDiv.innerHTML = `
+                <h2 class="text-2xl font-bold mb-4">Resultados</h2>
+                <p class="text-lg">Respuestas correctas: ${correctCount} de ${totalQuestions}</p>
+                <p class="text-3xl font-bold mt-4">Puntaje: ${paesScore} puntos</p>
+            `;
+            resultsDiv.classList.remove('hidden');
+        }
+
+        document.addEventListener('DOMContentLoaded', renderQuiz);
+        document.getElementById('submit-btn').addEventListener('click', checkAnswers);
+    </script>
+</body>
+</html>

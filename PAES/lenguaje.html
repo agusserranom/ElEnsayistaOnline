@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Ensayo de Lenguaje PAES - El Ensayista Online</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Tipografía y base */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(120deg, #f093fb 0%, #f5576c 100%);
+            color: #fff;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: white !important;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .logo-img {
+            height: 100px;
+            width: auto;
+        }
+
+        .logo a {
+            text-decoration: none;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #ffffffdd;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffeb3b;
+        }
+
+        /* Hero principal */
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #007BFF, #00C6FF);
+            color: white;
+            border-radius: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-primary {
+            background-color: white;
+            color: #007BFF;
+            padding: 0.8rem 1.6rem;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* Sección de tarjetas */
+        main {
+            padding: 3rem 1rem;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        /* New card style for each question to match the provided CSS */
+        .question-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 1.2rem;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3), 0 0 10px rgba(255,255,255,0.1);
+            padding: 2rem;
+            width: min(100%, 420px);
+            text-align: center;
+            color: #fff;
+            transition: transform 0.3s ease;
+            flex: 1 1 100px;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .question-title {
+            font-weight: 600;
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+        
+        .options-list label {
+            display: block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #fff;
+        }
+        
+        .options-list label:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .options-list input[type="radio"] {
+            margin-right: 0.75rem;
+        }
+        
+        /* Submit button updated to match the btn-primary style */
+        .btn-submit {
+            background-color: white;
+            color: #007BFF;
+            padding: 0.8rem 1.6rem;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: background-color 0.3s;
+            display: block;
+            width: fit-content;
+            margin: 2rem auto 0;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-submit:hover {
+            background-color: #f0f0f0;
+        }
+        
+        .results-section {
+            padding: 2rem;
+            border-top: 2px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            margin-top: 2rem;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 1.2rem;
+        }
+        
+        .correct {
+            background-color: #d1f7c4 !important; /* Green for correct answers */
+            color: #333 !important; /* Adjust text color for contrast */
+        }
+        
+        .incorrect {
+            background-color: #f7d1d1 !important; /* Red for incorrect answers */
+            color: #333 !important; /* Adjust text color for contrast */
+        }
+        
+        .correct-answer-highlight {
+            background-color: #81c784 !important; /* A slightly darker green to highlight the correct answer in case of wrong selection */
+            color: #333 !important;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: rgba(0, 0, 0, 0.15);
+            font-size: 0.95rem;
+            color: #fff;
+            margin-top: 3rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                align-items: flex-end;
+            }
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        /* Removed grid style from main as it's not applicable to the quiz layout */
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="#">
+                    <img src="static/img/logo.png" alt="El Ensayista Online" class="logo-img">
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="cursos.html">Cursos</a></li>
+                <li><a href="nosotros.html">Nosotros</a></li>
+                <li><a href="profesores.html">Profesores</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Ensayo de Lenguaje PAES</h1>
+            <p>Pon a prueba tus conocimientos con 65 preguntas de comprensión lectora, vocabulario y gramática.</p>
+        </section>
+
+        <section class="quiz-container">
+            <form id="quiz-form">
+                </form>
+            <button type="button" id="submit-btn" class="btn-submit">Revisar Respuestas</button>
+            <div id="results" class="results-section hidden">
+                </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 El Ensayista Online®</p>
+    </footer>
+
+    <script>
+        // Use an array of objects to store questions, options, and correct answers
+        const questions = [
+            // Comprensión Lectora (basada en el texto siguiente para preguntas 1-5)
+            // Texto: El gran silencio
+            // "El gran silencio es una condición del alma que se experimenta cuando el mundo exterior, en su incesante rumor de voces, se vuelve una distracción insoportable. No es la ausencia de sonido, sino la búsqueda activa de un espacio interno donde las ideas y los sentimientos puedan florecer sin el asedio constante de lo efímero. Es un retiro consciente, una suerte de meditación laica, que permite reconectar con lo esencial."
+            { question: "1. ¿Cuál es el significado de 'incesante' en el contexto del primer párrafo?", options: ["A) Continuo", "B) Molesto", "C) Fuerte", "D) Intermitente", "E) Distante"], correctAnswer: "A" },
+            { question: "2. La metáfora 'El mundo exterior... se vuelve una distracción insoportable' implica que:", options: ["A) Las personas buscan aislarse socialmente.", "B) El ruido exterior es físicamente doloroso.", "C) La vida moderna está llena de estímulos que impiden la introspección.", "D) El silencio es una forma de protesta.", "E) El ser humano tiene miedo al bullicio."], correctAnswer: "C" },
+            { question: "3. La frase 'meditación laica' se refiere a una práctica que:", options: ["A) Tiene un origen religioso.", "B) Busca la conexión espiritual.", "C) Se realiza de manera individual.", "D) No está vinculada a creencias religiosas.", "E) Es un rito formal."], correctAnswer: "D" },
+            { question: "4. ¿Cuál es la idea principal del texto?", options: ["A) La importancia de la soledad para la salud mental.", "B) El silencio como un estado de reflexión y conexión interna.", "C) La diferencia entre ruido y silencio.", "D) El impacto negativo de la tecnología en el ser humano.", "E) La necesidad de practicar meditación diariamente."], correctAnswer: "B" },
+            { question: "5. La expresión 'el asedio constante de lo efímero' hace referencia a:", options: ["A) La agresión física del ruido.", "B) La presión de los demás por comunicarse.", "C) La sobrecarga de información irrelevante.", "D) El cansancio provocado por el trabajo.", "E) La incapacidad de concentrarse en una sola cosa."], correctAnswer: "C" },
+
+            // Vocabulario Contextual
+            { question: "6. En la frase 'Su carácter afable le permitía entablar amistades con facilidad', la palabra **afable** significa:", options: ["A) Tímido", "B) Cortés", "C) Gruñón", "D) Amistoso", "E) Sincero"], correctAnswer: "D" },
+            { question: "7. En el contexto 'El dictamen del juez fue inapelable', la palabra **inapelable** significa:", options: ["A) Flexible", "B) Justo", "C) Definitivo", "D) Discutible", "E) Injusto"], correctAnswer: "C" },
+            { question: "8. En 'La crisis económica es un fenómeno coyuntural', la palabra **coyuntural** se refiere a:", options: ["A) Ocasional", "B) Global", "C) Grave", "D) Permanente", "E) Histórico"], correctAnswer: "A" },
+            { question: "9. En la expresión 'El político esgrimió un argumento falaz', la palabra **falaz** significa:", options: ["A) Veraz", "B) Contundente", "C) Engañoso", "D) Complejo", "E) Inconcluso"], correctAnswer: "C" },
+            { question: "10. 'El informe era prolijo en detalles técnicos'. La palabra **prolijo** se entiende como:", options: ["A) Abundante", "B) Escaso", "C) Confuso", "D) Incorrecto", "E) Breve"], correctAnswer: "A" },
+            { question: "11. 'Su actitud taciturna no le ayudaba en las reuniones sociales'. El término **taciturna** significa:", options: ["A) Charlatana", "B) Alegre", "C) Silenciosa", "D) Exagerada", "E) Amigable"], correctAnswer: "C" },
+            { question: "12. 'El investigador fue meticuloso en la recolección de datos'. La palabra **meticuloso** significa:", options: ["A) Desordenado", "B) Descuidado", "C) Preciso", "D) Acelerado", "E) Impaciente"], correctAnswer: "C" },
+            { question: "13. 'La noticia generó un gran revuelo en la opinión pública'. **Revuelo** se refiere a:", options: ["A) Calma", "B) Indiferencia", "C) Confusión", "D) Entusiasmo", "E) Agitación"], correctAnswer: "E" },
+            { question: "14. 'La obra de arte era una réplica exacta del original'. **Réplica** significa:", options: ["A) Original", "B) Copia", "C) Interpretación", "D) Falsificación", "E) Recreación"], correctAnswer: "B" },
+            { question: "15. 'Su postura era enigmática e incomprensible'. **Enigmática** significa:", options: ["A) Transparente", "B) Misteriosa", "C) Simple", "D) Lógica", "E) Abierta"], correctAnswer: "B" },
+
+            // Tipos de Texto y Funciones del Lenguaje
+            { question: "16. ¿Cuál es el propósito principal de un texto expositivo?", options: ["A) Persuadir al lector", "B) Explicar un tema de forma objetiva", "C) Narrar una historia", "D) Expresar sentimientos", "E) Dar instrucciones"], correctAnswer: "B" },
+            { question: "17. Una carta formal de reclamo utiliza principalmente la función del lenguaje:", options: ["A) Poética", "B) Referencial", "C) Expresiva", "D) Apelativa", "E) Fática"], correctAnswer: "D" },
+            { question: "18. El género discursivo de un manual de instrucciones es:", options: ["A) Argumentativo", "B) Narrativo", "C) Descriptivo", "D) Instructivo", "E) Expositivo"], correctAnswer: "D" },
+            { question: "19. Si un texto busca convencer al lector de una postura, su función del lenguaje es:", options: ["A) Expresiva", "B) Referencial", "C) Apelativa", "D) Metalingüística", "E) Poética"], correctAnswer: "C" },
+            { question: "20. La noticia de un periódico es un ejemplo de texto:", options: ["A) Narrativo y subjetivo", "B) Expositivo y objetivo", "C) Argumentativo y persuasivo", "D) Instructivo y descriptivo", "E) Lírico y expresivo"], correctAnswer: "B" },
+
+            // Gramática y Puntuación
+            { question: "21. ¿En qué oración la coma está usada correctamente?", options: ["A) El, perro de mi vecino, es grande.", "B) Compramos, pan, leche, y huevos.", "C) Cuando llegues a casa, avísame.", "D) El mar azul, y el cielo claro, me calmaron.", "E) Los estudiantes, resolvieron el problema."], correctAnswer: "C" },
+            { question: "22. La palabra **policía** lleva tilde porque es:", options: ["A) Aguda", "B) Grave", "C) Esdrújula", "D) Sobresdrújula", "E) Bisílaba"], correctAnswer: "B" },
+            { question: "23. En la frase 'Quiero que me digas **si** vienes', el 'si' no lleva tilde porque:", options: ["A) Es un adverbio de afirmación.", "B) Es una conjunción condicional.", "C) Es un pronombre personal.", "D) Es un sustantivo.", "E) Es una interjección."], correctAnswer: "B" },
+            { question: "24. El uso de los dos puntos (:) es adecuado para:", options: ["A) Separar oraciones.", "B) Introducir una enumeración o una cita.", "C) Indicar una pausa breve.", "D) Concluir un párrafo.", "E) Conectar ideas opuestas."], correctAnswer: "B" },
+            { question: "25. En la oración 'Yo **se** que no mientes', el 'se' debería llevar tilde (sé) porque:", options: ["A) Es una forma del verbo 'ser'.", "B) Es un pronombre reflexivo.", "C) Es una forma del verbo 'saber'.", "D) Es un adverbio.", "E) Es una preposición."], correctAnswer: "C" },
+
+            // Más Comprensión Lectora (texto para preguntas 26-30)
+            // Texto: Las ciudades invisibles
+            // "De un país en el que solo se cultivan los árboles genealógicos, el viajero debe esperarse ciudades sin paredes y sin cimientos, con calles tan efímeras como las amistades, casas construidas con las hojas de los árboles caídos, y jardines sembrados con el olvido de los muertos. En esta ciudad, los ciudadanos viven en los recuerdos de sus antepasados, y el futuro es una repetición constante del pasado."
+            { question: "26. La expresión 'ciudades sin paredes y sin cimientos' sugiere una sociedad:", options: ["A) Insegura y vulnerable.", "B) Desorganizada y caótica.", "C) Sin bases sólidas ni identidad propia.", "D) Abierta y comunitaria.", "E) Pobre y subdesarrollada."], correctAnswer: "C" },
+            { question: "27. La metáfora 'calles tan efímeras como las amistades' implica que en esa ciudad las relaciones sociales son:", options: ["A) Duraderas y fuertes.", "B) Cortas y superficiales.", "C) Basadas en la conveniencia.", "D) Profundas y significativas.", "E) Inexistentes."], correctAnswer: "B" },
+            { question: "28. La idea de que 'los ciudadanos viven en los recuerdos de sus antepasados' significa que:", options: ["A) Las personas no construyen su propia identidad.", "B) Las personas se basan en la experiencia ajena.", "C) La tradición es el valor más importante.", "D) La sociedad es incapaz de innovar.", "E) Todas las anteriores."], correctAnswer: "E" },
+            { question: "29. El tema central del fragmento es:", options: ["A) La importancia de la memoria histórica.", "B) La crítica a una sociedad que vive de su pasado.", "C) Una descripción utópica de una ciudad.", "D) Un relato de fantasía para niños.", "E) Un estudio sociológico sobre la identidad."], correctAnswer: "B" },
+            { question: "30. La paradoja en el texto se evidencia en que:", options: ["A) Las casas están hechas de hojas.", "B) Los jardines son sembrados con olvido.", "C) El futuro es una repetición constante del pasado.", "D) El viajero espera ciudades sin paredes.", "E) El país solo cultiva árboles genealógicos."], correctAnswer: "C" },
+
+            // Continuación de Comprensión Lectora (basada en el texto para preguntas 31-35)
+            // Texto: Un nuevo amanecer
+            // "El amanecer no es un espectáculo para los ojos, sino para la mente. Es el momento en que el mundo, aún cubierto por el manto de la noche, comienza a respirar de nuevo, liberando los sueños y las esperanzas que el sol de ayer había secado. Es la oportunidad de reescribir la página, de inventar un nuevo yo, libre de las cadenas del tiempo y de la memoria."
+            { question: "31. ¿Qué figura literaria se utiliza en la frase 'el mundo... comienza a respirar de nuevo'?", options: ["A) Símil", "B) Metáfora", "C) Hipérbole", "D) Personificación", "E) Sinestesia"], correctAnswer: "D" },
+            { question: "32. El texto compara el amanecer con:", options: ["A) Una oportunidad de renovación.", "B) El final del día anterior.", "C) Un espectáculo visual.", "D) Un suceso astronómico.", "E) El comienzo de la rutina."], correctAnswer: "A" },
+            { question: "33. La expresión 'libre de las cadenas del tiempo y de la memoria' sugiere que el amanecer permite:", options: ["A) Olvidar el pasado.", "B) Viajar en el tiempo.", "C) Ignorar los recuerdos del día anterior.", "D) Empezar de cero.", "E) Reflexionar sobre el futuro."], correctAnswer: "D" },
+            { question: "34. El propósito del autor es:", options: ["A) Describir un paisaje matutino.", "B) Analizar las funciones del sol.", "C) Convencer de la importancia de la meditación.", "D) Expresar una idea subjetiva sobre el amanecer.", "E) Narrar un suceso cotidiano."], correctAnswer: "D" },
+            { question: "35. ¿Cuál es el tono del fragmento?", options: ["A) Melancólico y nostálgico", "B) Pesimista y oscuro", "C) Inspirador y optimista", "D) Indiferente y objetivo", "E) Cauteloso y reflexivo"], correctAnswer: "C" },
+
+            // Figuras Retóricas
+            { question: "36. 'La noche nos abraza con su manto oscuro' es un ejemplo de:", options: ["A) Hipérbole", "B) Símil", "C) Personificación", "D) Anáfora", "E) Metáfora"], correctAnswer: "C" },
+            { question: "37. 'Tus ojos son dos luceros' es un ejemplo de:", options: ["A) Símil", "B) Hipérbole", "C) Metonimia", "D) Metáfora", "E) Sinécdoque"], correctAnswer: "D" },
+            { question: "38. 'Caminó una eternidad para llegar a la tienda' es un ejemplo de:", options: ["A) Personificación", "B) Hipérbole", "C) Metáfora", "D) Símil", "E) Eufemismo"], correctAnswer: "B" },
+            { question: "39. 'La vida es como un río que fluye' es un ejemplo de:", options: ["A) Metáfora", "B) Símil", "C) Personificación", "D) Hipérbole", "E) Anáfora"], correctAnswer: "B" },
+            { question: "40. 'Lo vi en persona, en carne y hueso' es un ejemplo de:", options: ["A) Antítesis", "B) Pleonasmo", "C) Oxímoron", "D) Elipsis", "E) Hipérbaton"], correctAnswer: "B" },
+            
+            // Lógica y Argumentación
+            { question: "41. La premisa 'Todos los mamíferos tienen sangre caliente. La ballena tiene sangre caliente' para concluir 'Por lo tanto, la ballena es un mamífero' es un ejemplo de:", options: ["A) Razonamiento deductivo", "B) Razonamiento inductivo", "C) Falacia", "D) Argumento de autoridad", "E) Generalización"], correctAnswer: "C" },
+            { question: "42. Un argumento que se basa en la opinión de un experto es un razonamiento por:", options: ["A) Causalidad", "B) Analogía", "C) Autoridad", "D) Generalización", "E) Inducción"], correctAnswer: "C" },
+            { question: "43. La afirmación 'El 90% de los estudiantes de este colegio son responsables' es una premisa de un razonamiento:", options: ["A) Deductivo", "B) Inductivo", "C) Causal", "D) Analógico", "E) Descriptivo"], correctAnswer: "B" },
+            { question: "44. Un texto que utiliza datos estadísticos para apoyar una idea utiliza un razonamiento:", options: ["A) Por generalización", "B) Por autoridad", "C) Por analogía", "D) Por causalidad", "E) Por definición"], correctAnswer: "A" },
+            { question: "45. ¿Cuál de las siguientes es una falacia ad hominem?", options: ["A) 'No votes por él porque es un mal padre.'", "B) 'La mayoría de la gente piensa que es lo correcto.'", "C) 'Si comes un dulce, querrás comer toda la caja.'", "D) 'Se ha hecho así siempre, por lo tanto, es lo correcto.'", "E) 'Si no estás de acuerdo conmigo, estás en contra.'"], correctAnswer: "A" },
+            
+            // Más Comprensión Lectora (texto para preguntas 46-50)
+            // Texto: El tiempo
+            // "El tiempo es una ilusión. Solo existe el presente, este instante fugaz que se nos escapa de las manos. El pasado es un recuerdo, un fantasma que nos persigue. El futuro es una fantasía, un sueño que no podemos alcanzar. Vivir en el pasado es la nostalgia, vivir en el futuro es la ansiedad. Solo en el presente hallamos la paz, esa rara y escurridiza paz que tantos anhelan."
+            { question: "46. El texto presenta una visión del tiempo como:", options: ["A) Algo lineal y progresivo.", "B) Una construcción mental y subjetiva.", "C) Una entidad real y medible.", "D) Un fenómeno físico y observable.", "E) Un ciclo constante."], correctAnswer: "B" },
+            { question: "47. La expresión 'fantasma que nos persigue' se refiere a que el pasado:", options: ["A) No se puede olvidar fácilmente.", "B) Es una entidad sobrenatural.", "C) Regresa constantemente a la vida.", "D) Es un enemigo de la mente.", "E) Es una invención de la imaginación."], correctAnswer: "A" },
+            { question: "48. Según el texto, la ansiedad es el resultado de vivir en:", options: ["A) El pasado.", "B) El presente.", "C) El futuro.", "D) Los recuerdos.", "E) La fantasía."], correctAnswer: "C" },
+            { question: "49. La idea central del texto es:", options: ["A) La importancia de dejar el pasado atrás.", "B) La dificultad de vivir en el presente.", "C) La naturaleza ilusoria del tiempo.", "D) El significado de la paz interior.", "E) La relación entre tiempo y emociones."], correctAnswer: "C" },
+            { question: "50. El término 'escurridiza' en el último párrafo se refiere a que la paz es:", options: ["A) Fácil de alcanzar.", "B) Difícil de mantener.", "C) Un estado temporal.", "D) Una ilusión.", "E) Algo intangible."], correctAnswer: "B" },
+
+            // Sintaxis y Ortografía
+            { question: "51. ¿Qué oración contiene un error de concordancia?", options: ["A) El perro y el gato juegan.", "B) Los estudiantes, la profesora y el director llegó.", "C) La casa, los autos y el jardín son bonitos.", "D) Mi padre y mi madre salieron.", "E) La mesa y las sillas estaban sucias."], correctAnswer: "B" },
+            { question: "52. ¿Cuál de las siguientes palabras está escrita correctamente?", options: ["A) Exuberante", "B) Exhuberante", "C) Exuberante", "D) Exhuberante", "E) Exuberante"], correctAnswer: "C" },
+            { question: "53. La palabra 'además' lleva tilde porque es:", options: ["A) Aguda terminada en 's'.", "B) Grave terminada en 's'.", "C) Esdrújula.", "D) Una palabra compuesta.", "E) Un adverbio de modo."], correctAnswer: "A" },
+            { question: "54. ¿En qué oración el pronombre 'que' está mal utilizado?", options: ["A) El libro que compré es bueno.", "B) La casa en que vivimos.", "C) El hombre con que hablé es mi padre.", "D) No sé que pasará.", "E) El problema que me preocupa."], correctAnswer: "D" },
+            { question: "55. ¿Cuál es el error de puntuación en la frase 'Corrí, y salté.'?", options: ["A) La coma antes de la 'y'.", "B) El punto al final.", "C) La ausencia de punto y coma.", "D) La ausencia de un sujeto.", "E) No hay error de puntuación."], correctAnswer: "A" },
+            
+            // Lectura de Texto Mixto (Preguntas 56-60)
+            // Texto: La publicidad
+            // "La publicidad, en su esencia, no vende productos, sino ideas. Nos seduce con promesas de felicidad, éxito o estatus social, construyendo un universo simbólico que vincula el producto con un estilo de vida aspiracional. Utiliza estrategias argumentativas y apelativas para persuadir, transformando la necesidad objetiva del consumidor en un deseo subjetivo, a menudo inconsciente. Por ello, una de sus principales características es su capacidad de adaptación a las tendencias culturales, adoptando discursos que resuenen con las inquietudes y aspiraciones de un público en constante cambio."
+            { question: "56. La idea principal del texto es que la publicidad:", options: ["A) Vende productos de forma engañosa.", "B) Es un reflejo de las tendencias culturales.", "C) Se centra en persuadir al consumidor apelando a sus deseos.", "D) Es un mal necesario en la sociedad moderna.", "E) Debe ser regulada para evitar la manipulación."], correctAnswer: "C" },
+            { question: "57. Según el texto, la publicidad no se enfoca en:", options: ["A) El estatus social.", "B) La felicidad.", "C) La necesidad objetiva.", "D) Las ideas.", "E) El estilo de vida aspiracional."], correctAnswer: "C" },
+            { question: "58. La palabra **aspiracional** en el texto se refiere a un estilo de vida que:", options: ["A) Es fácil de conseguir.", "B) Ya ha sido logrado por el consumidor.", "C) Genera envidia en los demás.", "D) Se desea y se aspira a alcanzar.", "E) Es inalcanzable para la mayoría."], correctAnswer: "D" },
+            { question: "59. La frase 'la publicidad... construye un universo simbólico' significa que:", options: ["A) Crea un mundo de fantasía.", "B) Asocia productos con significados culturales.", "C) Muestra los símbolos de la sociedad.", "D) Usa metáforas en sus anuncios.", "E) Refleja la realidad de los consumidores."], correctAnswer: "B" },
+            { question: "60. La función del lenguaje predominante en la publicidad, según el texto, es:", options: ["A) Referencial", "B) Expresiva", "C) Poética", "D) Apelativa", "E) Metalingüística"], correctAnswer: "D" },
+
+            // Más Comprensión Lectora (Preguntas 61-65)
+            // Texto: De la noche a la mañana
+            // "El hombre no puede vivir sin un ideal. No importa si es la libertad, el amor, el poder, o la acumulación de la riqueza; lo que importa es que su vida tenga un norte, una dirección. Si ese norte se pierde, el hombre se convierte en un vagabundo sin destino, un barco a la deriva en un océano de incertidumbre. Y, en ese estado de vacío, la desesperación es el único puerto de llegada."
+            { question: "61. El autor establece una analogía entre el ideal de vida de una persona y:", options: ["A) Un barco a la deriva.", "B) Un vagabundo sin destino.", "C) Un puerto de llegada.", "D) Un norte, una dirección.", "E) Un océano de incertidumbre."], correctAnswer: "D" },
+            { question: "62. El texto sostiene que sin un ideal, la vida de una persona se vuelve:", options: ["A) Plena y feliz.", "B) Un camino de auto-descubrimiento.", "C) Vacía y sin rumbo.", "D) Una búsqueda constante de la verdad.", "E) Un viaje sin fin."], correctAnswer: "C" },
+            { question: "63. La expresión 'vagabundo sin destino' es una metáfora para describir a alguien:", options: ["A) Que viaja sin un plan.", "B) Que no tiene un propósito en la vida.", "C) Que se siente perdido en una ciudad.", "D) Que huye de la realidad.", "E) Que vive sin hogar."], correctAnswer: "B" },
+            { question: "64. La relación entre 'vacío' y 'desesperación' es de:", options: ["A) Causa-efecto.", "B) Analogía.", "C) Oposición.", "D) Semejanza.", "E) Sinonimia."], correctAnswer: "A" },
+            { question: "65. ¿Cuál es el tono predominante en el fragmento?", options: ["A) Optimista", "B) Melancólico", "C) Didáctico", "D) Crítico", "E) Pesimista"], correctAnswer: "E" }
+        ];
+
+        // Get elements from the DOM
+        const quizForm = document.getElementById('quiz-form');
+        const submitButton = document.getElementById('submit-btn');
+        const resultsDiv = document.getElementById('results');
+
+        // Function to render the quiz questions
+        function renderQuiz() {
+            // Map over the questions array to create HTML for each question
+            quizForm.innerHTML = questions.map((q, index) => `
+                <div class="question-card" id="question-${index}">
+                    <div class="question-title">${q.question}</div>
+                    <div class="options-list" data-correct-answer="${q.correctAnswer}">
+                        ${q.options.map(option => `
+                            <label class="block">
+                                <input type="radio" name="q${index}" value="${option.charAt(0)}">
+                                ${option}
+                            </label>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Function to check the answers and calculate the score
+        function checkAnswers(event) {
+            let correctCount = 0;
+            const formElements = quizForm.elements;
+
+            questions.forEach((q, index) => {
+                const questionCard = document.getElementById(`question-${index}`);
+                const selectedOption = formElements[`q${index}`].value;
+                const optionsList = questionCard.querySelector('.options-list');
+
+                // Remove previous classes for re-testing
+                questionCard.classList.remove('correct', 'incorrect');
+                
+                // Find all labels to clear previous highlights
+                const allLabels = optionsList.querySelectorAll('label');
+                allLabels.forEach(label => label.classList.remove('correct-answer-highlight'));
+
+                // Check if the selected answer is correct
+                if (selectedOption === q.correctAnswer) {
+                    correctCount++;
+                    questionCard.classList.add('correct');
+                } else {
+                    questionCard.classList.add('incorrect');
+                    // Find and highlight the correct answer
+                    const correctLabel = Array.from(allLabels).find(label => label.textContent.trim().startsWith(q.correctAnswer + ')'));
+                    if (correctLabel) {
+                        correctLabel.classList.add('correct-answer-highlight');
+                    }
+                }
+            });
+
+            // Calculate the score on a 1000-point scale
+            const totalQuestions = questions.length;
+            const paesScore = Math.round((correctCount / totalQuestions) * 1000);
+
+            // Display results
+            resultsDiv.innerHTML = `
+                <h2 class="text-2xl font-bold mb-4">Resultados</h2>
+                <p class="text-lg">Respuestas correctas: ${correctCount} de ${totalQuestions}</p>
+                <p class="text-3xl font-bold mt-4">Puntaje: ${paesScore} puntos</p>
+            `;
+            // Show the results section
+            resultsDiv.classList.remove('hidden');
+        }
+
+        // Add event listeners
+        document.addEventListener('DOMContentLoaded', renderQuiz);
+        submitButton.addEventListener('click', checkAnswers);
+    </script>
+</body>
+</html>

@@ -1,0 +1,223 @@
+/* Tipografía y base */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Outfit', sans-serif;
+    background: linear-gradient(120deg, #f093fb 0%, #f5576c 100%);
+    color: #fff;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: white !important;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1rem 2rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.logo-img {
+    height: 100px;
+    width: auto;
+}
+
+.logo a {
+    text-decoration: none;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #ffffffdd;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #ffeb3b;
+}
+
+/* Hero principal */
+.hero {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #007BFF, #00C6FF);
+    color: white;
+    border-radius: 1rem;
+    margin-bottom: 3rem;
+}
+
+.hero h1 {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+    /* El color ya está definido arriba con !important */
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.btn-primary {
+    background-color: white;
+    color: #007BFF;
+    padding: 0.8rem 1.6rem;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #f0f0f0;
+}
+
+/* Sección de tarjetas */
+main {
+    padding: 3rem 1rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.grid {
+    display: flex;
+    gap: 2rem;
+    margin-top: 3rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 1.2rem;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3), 0 0 10px rgba(255,255,255,0.1);
+    padding: 2rem;
+    width: min(100%, 420px);
+    text-align: center;
+    color: #fff;
+    transition: transform 0.3s ease;
+    flex: 1 1 100px; /* Para que las tarjetas se adapten mejor */
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card h2 {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    color: #ffeb3b;
+}
+
+.btn-link {
+    display: inline-block;
+    margin-top: 1rem;
+    color: #007BFF;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.btn-link:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.15);
+    font-size: 0.95rem;
+    color: #fff;
+    margin-top: 3rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .nav-links {
+        flex-direction: column;
+        align-items: flex-end;
+    }
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .grid {
+        flex-direction: column;
+    }
+}
+/* Formulario de Contacto */
+.contact-form {
+    margin-top: 2rem;
+    padding: 1rem; /* Añade un padding para que no se pegue a los bordes en móvil */
+}
+
+.form {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    max-width: 600px;
+    margin: 0 auto;
+    /* Usar flexbox para un mejor control del espaciado */
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* Agrega espacio entre los elementos del formulario */
+}
+
+.form label {
+    display: block;
+    margin-bottom: -0.5rem; /* Ajusta el margen si el gap ya maneja el espacio */
+    font-weight: 600;
+    color: #333;
+}
+
+.form input,
+.form textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    color: #333; /* Añade color de texto para que sea legible en el fondo blanco */
+}
+
+.form textarea {
+    resize: vertical; /* Permite redimensionar solo verticalmente */
+}
+
+/* Estilo para el botón dentro del formulario */
+.form .btn-primary {
+    background-color: #007BFF;
+    color: white;
+    padding: 0.8rem 1.6rem;
+    border: none;
+    border-radius: 999px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: background-color 0.3s;
+    text-decoration: none; /* Asegura que el botón no tenga subrayado */
+}
+
+.form .btn-primary:hover {
+    background-color: #0056b3;
+}
